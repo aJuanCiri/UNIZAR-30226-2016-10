@@ -1,0 +1,2 @@
+Esto es un fichero de prueba.
+Fin del fichero de prueba.
