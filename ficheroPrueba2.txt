@@ -1,2 +1,0 @@
-Esto es un fichero de prueba MODIFICADO.
-Fin del fichero de prueba.
