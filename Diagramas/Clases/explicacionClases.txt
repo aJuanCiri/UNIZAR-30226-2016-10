@@ -1,0 +1,35 @@
+La principal idea de esta implementación es la de tener una clase núcleo llamada "Sistema" que tendrá instancias
+de las conexiones con la base de datos, del usuario que ha iniciado sesión en el dispositivo y de otras cuestiones.
+
+Para trabajar con las bases de datos, se han creado varias clases, la primera es GestorDB, la cual esta todavía
+en desarrollo, su funcionalidad será la de hacer todo el trabajo de conectarse con la base de datos y demás,
+de manera que se puedan mandar las consultas y gestionar los resultados a través de ella.
+
+Luego según el tipo de dato hay varias clases para conectar con la base de datos, esta la clase DBUsuario,
+cuya función es la de encapsular en varios métodos las consultas que van a hacer tareas como crear un usuario
+nuevo, solicitar la información del usuario, modificar datos del usuario,.. Lo mismo con DBPelicula, a través de esta
+se podrá solicitar la información de la película, crear una nueva, o actualizar algún dato.
+
+Ambas tienen un método "gestInformacion" que devuelve un objeto que encapsula toda la información, puede ser
+un objeto de tipo Usuario o de tipo Pelicula, la principal idea es que no haya que hacer una consulta para
+cada atributo. Por ejemplo, pocas veces se pedirá solo un campo de información sobre una película, casi siempre
+en una pantalla habrá varios atributos mostrandose, entonces, es muchos más eficiente "sacrificar" un poco
+de memoria del dispositivo y guardar toda la información sobre la película mientras se muestra por pantalla,
+que ir pidiendo campo a campo.
+
+Las clases Pelicula y Usuario solo sirven para eso, para encapsular información, la idea es que se puedan
+completar con una única consulta, así que a partir de la respuesta se deberán poder crear.
+
+DBCollection permite hacer consultas sobre la colección del usuario que está usando el dispositivo,
+al igual que las otras clases, esta también encapsulará consultas sql a la base de datos.
+
+Toda la información de las clases anteriores termina en la clase Sistema, la cual está conectada con
+la interfaz gráfica. En principio debería haber tantas actividades como pantallas vaya a haber, en
+este caso se ha creado una de ejemplo llamada Interfaz_PantallaPrincipal con los métodos básicos.
+La "idea", es que desde esas actividades/interfaces, se pueda solicitar información a "sistema", el cual
+a su vez acudirá a las clases que encapsulan el código SQL, las cuales utilizarán los encapsuladores
+"Usuario" y "pelicula" para tramitar dicha información, y realizarán las consultas a través de la clase
+GestorDB.
+
+El diagrama todavía esta bastante incompleto, pero es una base sobre la que se puede empezar a trabajar, conforme
+se vaya implementando se irá actualizando.
