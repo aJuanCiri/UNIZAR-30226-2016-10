@@ -1,0 +1,8 @@
+DROP TABLE Es;
+DROP TABLE Dirigida;
+DROP TABLE Vista;
+DROP TABLE Pendiente;
+DROP TABLE Categoria;
+DROP TABLE Publico;
+DROP TABLE Pelicula;
+DROP TABLE Usuario;
