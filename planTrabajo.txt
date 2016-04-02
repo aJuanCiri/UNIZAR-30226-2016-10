@@ -1,0 +1,50 @@
+Se han creado las clases que se ven representadas en el diagrama de clases, la idea es
+que sigais ese diagrama todos para que todo encaje después.
+
+El principal objetivo de esta semana es dejar resuelta toda la gestión interna de la aplicación,
+de manera que cuando funcione, y nos pongamos con el diseño y el desarrollo de interfaces,
+para saber que contenido hay que poner en un texto concreto solo haya que hacer una invocación
+de tipo:
+Pelicula pelicula = sistema.getPelicula(id);
+Para después poder usar los métodos del encapsulador: pelicula.getTitulo(), ...
+Y así, no preocuparnos de la gestión interna, sino solo de donde colocarlo.
+
+A lo largo del código hay información en comentarios para ayudar a que os hagais una idea de
+lo que debería haber en esas clases o funciones, pero todas las clases estan incompletas.
+
+PLAN DE TRABAJO:
+
+Álvaro y Jorge: Como encargados de la base de datos, tenéis que repartiros el trabajo entre los
+dos para hacer las siguientes tareas:
+- Hacer funcionar la clase GestorDB que se encarga de toda la conectividad con Oracle y
+  de devolver los resultados, o realizar las consultas que se le pasen.
+- Completar con el código SQL o código java, las clases DBPelicula y DBUsuario.
+
+Javier y Guille:
+- Completar la clase Sistema de manera que se puedan realizar todas las operaciones desde otras
+  clases, sin necesidad de ver o tocar nada de la implementación o de sql.
+- Hacer que los resultados se muestren por pantalla, con el fin de probar que todo lo anterior
+  mencionado funcione bien, esto no es hacer la interface de la aplicación, sino una pantalla
+  de "pruebas" donde evaluar cada función hecha.
+
+Como vais a hacer parte del trabajo de la semana de "pruebas", la semana de pruebas, que yo estaré,
+trabajaremos en la interface y en hacer que todo lo desarrollado encaje correctamente.
+  
+
+Información adicional:
+Todo lo que se explica a continuación, se hace dando por hecho que se dispone de Android Studio,
+en otros gestores desconozco como se va a ver cada cosa.
+
+En las interfaces aparecen menús que actúan como plantilla para luego meter los nuestros,
+las formas de modificarlos se explican a continuación:
+
+Para modificar el contenido del menú lateral (el izquierdo), ir a:
+menu>activity_pantalla_principal_drawer.xml
+Ahi se pueden modificar los iconos y menús que hay.
+Si se quiere modificar la información de la cabecera de ese menú:
+layout>nav_header_pantalla_principal.xml
+
+LoginActivity es un template de AndroidStudio para gestionar el asunto de la pantalla de login,
+no se tiene porque usar esa plantilla, solo se pone para que le echéis un vistazo, al igual
+que la clase PantallaPrincipal donde aparece el emulador al encenderse, también es reemplazable.
+
