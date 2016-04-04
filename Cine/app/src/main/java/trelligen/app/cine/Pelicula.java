@@ -7,17 +7,27 @@ public class Pelicula {
     private int id;
     private String titulo;
     private String fecha;
+    private String director;
     private String sinopsis;
-    private int duración;
-    private double valoración;
+    private int duracion;
+    private double valoracion;
     private String categoria;
     private String publico;
 
 	/*
 	* Constructor de un objeto película.
 	*/
-    public Pelicula(){
-
+    public Pelicula(int id, String titulo, String fecha, String director, String sinopsis, int duracion,
+                    double valoracion, String categoria, String publico){
+        this.id = id;
+        this.titulo = titulo;
+        this.fecha = fecha;
+        this.director = director;
+        this.sinopsis = sinopsis;
+        this.duracion = duracion;
+        this.valoracion = valoracion;
+        this.categoria = categoria;
+        this.publico = publico;
     }
 
 	/*
@@ -33,7 +43,14 @@ public class Pelicula {
     public String getFecha(){
         return fecha;
     }
-	
+
+    /*
+	* Método que devuelve el director de una película.
+	*/
+    public String getDirector(){
+        return director;
+    }
+
 	/*
 	* Método que devuelve la sinopsis de una película.
 	*/
