@@ -1,35 +1,53 @@
 package trelligen.app.cine;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * Conecta con la base de datos, realiza consultas y devuelve resultados
  */
 public class GestorDB implements Runnable {
+    private String configuracion = "oracle.properties";
     //Se define el nombre y la clave de usuario de la base de datos.
-    private String pass="*";
-    private String usr="*";
+    private String pass;
+    private String usr;
     //Se define la url de la base a la que se quiere conectar.
-    private String url ="jdbc:oracle:thin:@hendrix-oracle.cps.unizar.es:1521:vicious";
+    private String url;
     //String que contiene el texto de consultas a realizar
     private String consulta;
     //Referencia la conexion con la Base de Datos
     private Connection conex;
     //Contendra los resultados devueltos por las consultas
     private ResultSet rst;
+    private final int CONSULTA = 1;
+    private final int CONEXION = 0;
+    private final int UPDATE = 2;
     //Indica si se va a realizar una consulta o se va realizar la conexion
     private int accion = 1;
 
-    public GestorDB() {}
+    public GestorDB() {
+        Properties propiedades = new Properties();
+        try {
+            FileInputStream fichero = new FileInputStream(configuracion);
+            propiedades.load(fichero);
+            url = propiedades.getProperty("basedatos");
+            usr = propiedades.getProperty("usuario");
+            pass = propiedades.getProperty("contrasena");
+        } catch (Exception e) {
+
+        }
+        getConex();
+    }
 
     /**
      * Conecta con la base de datos.
      */
     public void getConex() {
-        accion = 1;
+        accion = CONEXION;
         try {
             Thread t = new Thread(this);
             t.start();
@@ -44,7 +62,7 @@ public class GestorDB implements Runnable {
      */
     public ResultSet getRst(String consulta) {
         this.consulta = consulta;
-        accion = 0;
+        accion = CONSULTA;
         try {
                 Thread t = new Thread(this);
                 t.start();
@@ -60,7 +78,7 @@ public class GestorDB implements Runnable {
      */
     public boolean realiza(String consulta) {
         this.consulta = consulta;
-        accion = 3;
+        accion = UPDATE;
         try {
             Thread t = new Thread(this);
             t.start();
@@ -75,7 +93,7 @@ public class GestorDB implements Runnable {
      * Conecta o realiza una consulta a la base de datos en funcion de [accion].
      */
     public void run() {
-        if(accion == 0) {
+        if(accion == CONSULTA) {
             try {
                 //Se realiza la consulta.
                 Statement stmt = conex.createStatement();
@@ -83,7 +101,7 @@ public class GestorDB implements Runnable {
             } catch (Exception e) {
 
             }
-        } else if(accion == 1) {
+        } else if(accion == CONEXION) {
             //Se define el driver que se va a utilizar.
             String driver = "oracle.jdbc.driver.OracleDriver";
             try {
@@ -93,7 +111,7 @@ public class GestorDB implements Runnable {
             } catch (Exception e) {
                 e.toString();
             }
-        } else if (accion == 3) {
+        } else if (accion == UPDATE) {
             try {
                 //Se realiza la consulta.
                 Statement stmt = conex.createStatement();
