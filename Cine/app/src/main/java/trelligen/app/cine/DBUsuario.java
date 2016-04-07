@@ -6,8 +6,8 @@ package trelligen.app.cine;
 public class DBUsuario {
     private GestorDB gestordb;
 
-    public DBUsuario(){
-        gestordb = new GestorDB();
+    public DBUsuario(GestorDB gestordb){
+        this.gestordb = gestordb;
     }
 
     public boolean checkLogin(String mail, String password){
@@ -35,6 +35,6 @@ public class DBUsuario {
 	}
 	
 	public boolean borrarUsuario(String mail){
-	
+	    return false;
 	}
 }

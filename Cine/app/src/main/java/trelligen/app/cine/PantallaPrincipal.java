@@ -15,10 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button iniciar_sesion;
+    Button test_bd;
+    TextView test_text;
     Sistema sistema;
 
     @Override
@@ -31,10 +34,20 @@ public class PantallaPrincipal extends AppCompatActivity
         iniciar_sesion = (Button) findViewById(R.id.button);
         iniciar_sesion.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View vw){
+            public void onClick(View vw) {
                 startActivity(new Intent(PantallaPrincipal.this, LoginActivity.class));
             }
         });
+
+        //Código de prueba para la bd
+        test_bd = (Button) findViewById(R.id.test_bd);
+        test_bd.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View vw){
+                test_bd();
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,6 +60,16 @@ public class PantallaPrincipal extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    //Prueba la BD
+    public void test_bd(){
+        //PARTE INTERNA
+        Sistema sistema = new Sistema(getApplicationContext());
+        Pelicula pelicula = sistema.getPelicula(1);
+        //PARTE INTERFAZ
+        test_text = (TextView) findViewById(R.id.test_text);
+        test_text.setText(pelicula.getTitulo());
     }
 
     @Override

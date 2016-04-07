@@ -1,5 +1,7 @@
 package trelligen.app.cine;
 
+import android.util.Log;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -26,6 +28,11 @@ public class DBPelicula {
 				"d.publico=pub.nombre";
 		//Obtiene el resultado de la consulta
         ResultSet resultado = gestordb.getRst(consulta);
+        if(resultado!=null){
+            Log.d("PRUEBA", "no es null");
+        }else{
+            Log.d("PRUEBA", "Null");
+        }
 		try {
 			resultado.next();
 			//Encapsula la informacion en la clase Pelicula.
@@ -35,6 +42,7 @@ public class DBPelicula {
 					resultado.getDouble("p.valoracion"), resultado.getString("c.nombre"),
 					resultado.getString("pub.nombre"));
 		} catch(Exception e) {
+			e.printStackTrace();
 			//Si ocurre un error devuelve null.
 			return null;
 		}

@@ -6,7 +6,7 @@ package trelligen.app.cine;
 public class Usuario {
     private String email;
     private String nick;
-    private int fecha_nacimiento;
+    private String fecha_nacimiento;
 
 	/*
 	* Constructor de un objeto usuario.

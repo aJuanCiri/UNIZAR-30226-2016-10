@@ -1,6 +1,9 @@
 package trelligen.app.cine;
 
-import java.io.FileInputStream;
+import android.content.Context;
+import android.util.Log;
+
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,35 +13,26 @@ import java.util.Properties;
 /**
  * Conecta con la base de datos, realiza consultas y devuelve resultados
  */
-public class GestorDB implements Runnable {
+public class GestorDB{
+    private Context context;
     private String configuracion = "oracle.properties";
-    //Se define el nombre y la clave de usuario de la base de datos.
-    private String pass;
-    private String usr;
-    //Se define la url de la base a la que se quiere conectar.
-    private String url;
-    //String que contiene el texto de consultas a realizar
-    private String consulta;
-    //Referencia la conexion con la Base de Datos
-    private Connection conex;
-    //Contendra los resultados devueltos por las consultas
-    private ResultSet rst;
-    private final int CONSULTA = 1;
-    private final int CONEXION = 0;
-    private final int UPDATE = 2;
-    //Indica si se va a realizar una consulta o se va realizar la conexion
-    private int accion = 1;
+    //Se define el nombre y la clave de usuario de la base de datos y la @basededatos
+    private String pass,usr,url;
+    private final int CONSULTA=1,CONEXION=0,UPDATE=2;
+    datosCompartidosGestorDB datos;
 
-    public GestorDB() {
+    public GestorDB(Context context) {
+        this.context = context;
         Properties propiedades = new Properties();
         try {
-            FileInputStream fichero = new FileInputStream(configuracion);
+            InputStream fichero =  context.getAssets().open(configuracion);
             propiedades.load(fichero);
             url = propiedades.getProperty("basedatos");
             usr = propiedades.getProperty("usuario");
             pass = propiedades.getProperty("contrasena");
+            datos = new datosCompartidosGestorDB(url,usr,pass);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         getConex();
     }
@@ -47,9 +41,9 @@ public class GestorDB implements Runnable {
      * Conecta con la base de datos.
      */
     public void getConex() {
-        accion = CONEXION;
+        datos.setAccion(CONEXION);
         try {
-            Thread t = new Thread(this);
+            Thread t = new Thread(new procesoBD(datos));
             t.start();
             t.join();
         } catch (Exception e) {
@@ -61,64 +55,32 @@ public class GestorDB implements Runnable {
      * Devuelve el resultado de la consulta [consulta].
      */
     public ResultSet getRst(String consulta) {
-        this.consulta = consulta;
-        accion = CONSULTA;
+        datos.setConsulta(consulta);
+        datos.setAccion(CONSULTA);
         try {
-                Thread t = new Thread(this);
+            Thread t = new Thread(new procesoBD(datos));
                 t.start();
                 t.join();
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
-        return rst;
+        return datos.getRst();
     }
 
     /**
      * Realiza acciones que no son consultas.
      */
     public boolean realiza(String consulta) {
-        this.consulta = consulta;
-        accion = UPDATE;
+        datos.setConsulta(consulta);
+        datos.setAccion(UPDATE);
         try {
-            Thread t = new Thread(this);
+            Thread t = new Thread(new procesoBD(datos));
             t.start();
             t.join();
         } catch (Exception e) {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Conecta o realiza una consulta a la base de datos en funcion de [accion].
-     */
-    public void run() {
-        if(accion == CONSULTA) {
-            try {
-                //Se realiza la consulta.
-                Statement stmt = conex.createStatement();
-                rst = stmt.executeQuery(consulta);
-            } catch (Exception e) {
-
-            }
-        } else if(accion == CONEXION) {
-            //Se define el driver que se va a utilizar.
-            String driver = "oracle.jdbc.driver.OracleDriver";
-            try {
-                //Se conecta a la base mediante el driver.
-                Class.forName(driver).newInstance();
-                conex= DriverManager.getConnection(url, usr, pass);
-            } catch (Exception e) {
-                e.toString();
-            }
-        } else if (accion == UPDATE) {
-            try {
-                //Se realiza la consulta.
-                Statement stmt = conex.createStatement();
-                stmt.executeUpdate(consulta);
-            } catch (Exception e) {
-
-            }
-        }
     }
 }

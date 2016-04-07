@@ -1,5 +1,7 @@
 package trelligen.app.cine;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 /**
@@ -7,18 +9,19 @@ import java.util.ArrayList;
  * a la parte interna del sistema, trata información de los usuarios, películas, colecciones,...
  */
 public class Sistema {
-    //private DBUsuario dbusuario;
     private DBPelicula dbpelicula;
-   // private Usuario usuario;
+    private DBUsuario dbusuario;
+    private Usuario usuario;
     private GestorDB gestordb;
 
 	/*
 	* Constructor de un objeto sistema.
 	*/
-    public Sistema(){
-        gestordb = new GestorDB();
-        dbusuario = new DBUsuario(gestordb);
+    public Sistema(Context context){
+        gestordb = new GestorDB(context);
+        /*dbusuario = new DBUsuario(gestordb);*/
         dbpelicula = new DBPelicula(gestordb);
+        dbusuario = new DBUsuario(gestordb);
     }
     public boolean login (String mail, String password){
         boolean loginOK =  dbusuario.checkLogin(mail,password);
@@ -87,7 +90,7 @@ public class Sistema {
 	/*
 	* Método que crea un nuevo usuario.
 	*/
-    public boolean newUser(String mail, String pass, String nick, String nacimiento){
+    /*public boolean newUser(String mail, String pass, String nick, String nacimiento){
         return dbusuario.newUser(mail,pass,nick,nacimiento);
-    }
+    }*/
 }
