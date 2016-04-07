@@ -7,16 +7,18 @@ import java.util.ArrayList;
  * a la parte interna del sistema, trata información de los usuarios, películas, colecciones,...
  */
 public class Sistema {
-    private DBUsuario dbusuario;
+    //private DBUsuario dbusuario;
     private DBPelicula dbpelicula;
-    private Usuario usuario;
+   // private Usuario usuario;
+    private GestorDB gestordb;
 
 	/*
 	* Constructor de un objeto sistema.
 	*/
     public Sistema(){
-        dbusuario = new DBUsuario();
-        dbpelicula = new DBPelicula();
+        gestordb = new GestorDB();
+        dbusuario = new DBUsuario(gestordb);
+        dbpelicula = new DBPelicula(gestordb);
     }
     public boolean login (String mail, String password){
         boolean loginOK =  dbusuario.checkLogin(mail,password);
@@ -45,9 +47,10 @@ public class Sistema {
 	* Método que devuelve una lista con las películas que coinciden
 	* con unos ciertos parámetros.
 	*/
-    public ArrayList<Pelicula> buscarPeliculas(String titulo, int fecha,
-												String categoria, String publico, int valoracion){
-        return dbpelicula.buscarPeliculas(titulo,fecha,categoria,publico,valoracion);
+    public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha,
+												String director,String sinopsis,int duracion,
+                                               String categoria,double valoracion, String publico){
+        return dbpelicula.buscarPeliculas(titulo,fecha,director, sinopsis,duracion,valoracion,categoria,publico);
     }
 
 	/*
@@ -74,9 +77,11 @@ public class Sistema {
 	/*
 	* Método que crea una nueva película.
 	*/
-    public boolean nuevaPelicula(String titulo, String fecha,
-									String sinopsis, String duracion, double valoracion){
-        return dbpelicula.nuevaPelicula(titulo,fecha,sinopsis,duracion,valoracion);
+    public boolean nuevaPelicula(int id, String titulo, String fecha,
+									String director, String sinopsis,
+                                 int duracion, double valoracion, String categoria, String publico){
+        return dbpelicula.nuevaPelicula(id,titulo,fecha, director,sinopsis,duracion,valoracion,
+                categoria, publico);
     }
 
 	/*

@@ -98,8 +98,12 @@ public class DBPelicula {
 	 */
 	public boolean nuevaPelicula(int id, String titulo, String fecha,String director, String sinopsis, int duracion,
 												double valoracion, String categoria, String publico){
-		return gestordb.realiza("INSERT INTO Pelicula VALUES ("+id+", '"+fecha+"', '"+director+"', '" +
-				sinopsis+"', "+duracion+", "+valoracion+", '"+categoria+"', '"+publico+"')");
+		boolean peli = gestordb.realiza("INSERT INTO Pelicula VALUES ("+id+", '"+fecha+"', '"+director+"', '" +
+				sinopsis+"', "+duracion+", "+valoracion+")");
+		boolean cat = gestordb.realiza("INSERT INTO Es VALUES ("+id+", "+categoria+")");
+		boolean pub = gestordb.realiza("INSERT INTO Dirigiada VALUES ("+id+", "+publico+")");
+
+		return peli && cat && pub;
 	}
 
 	/**
@@ -163,7 +167,10 @@ public class DBPelicula {
 	 * Elimina una pelicula de la base de datos.
 	 */
 	public boolean eliminarPelicula(int id){
-		return gestordb.realiza("DELETE FROM Pelicula WHERE id="+id);
+		boolean cat = gestordb.realiza("DELETE FROM Es WHERE pelicula="+id);
+		boolean pub = gestordb.realiza("DELETE FROM Dirigida WHERE pelicula="+id);
+		boolean peli = gestordb.realiza("DELETE FROM Pelicula WHERE id="+id);
+		return cat && pub && peli;
 	}
 
 	/**
