@@ -23,28 +23,23 @@ public class DBPelicula {
 		//Consulta a realizar
         String consulta = "SELECT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
 				"p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
-				"Categoria c, Publico pub, Dirigida d, Es e WHERE p.id = "+id+" AND " +
+				"Categoria c, Publico pub, Dirigida d, Es e WHERE p.id="+id+" AND " +
 				"p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre";
 		//Obtiene el resultado de la consulta
         ResultSet resultado = gestordb.getRst(consulta);
-        if(resultado!=null){
-            Log.d("PRUEBA", "no es null");
-        }else{
-            Log.d("PRUEBA", "Null");
-        }
 		try {
 			resultado.next();
 			//Encapsula la informacion en la clase Pelicula.
-			pelicula = new Pelicula(resultado.getInt("p.id"),resultado.getString("p.titulo"),
-					resultado.getString("p.fecha"), resultado.getString("p.director"),
-					resultado.getString("p.sinopsis"), resultado.getInt("p.duracion"),
-					resultado.getDouble("p.valoracion"), resultado.getString("c.nombre"),
-					resultado.getString("pub.nombre"));
+			pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
+					resultado.getString(3), resultado.getString(4),
+					resultado.getString(7), resultado.getInt(5),
+					resultado.getDouble(6), resultado.getString(8),
+					resultado.getString(9));
+
 		} catch(Exception e) {
-			e.printStackTrace();
+			Log.d("RST","Error al obtener el datos");
 			//Si ocurre un error devuelve null.
-			return null;
 		}
 		//Devuelve la pelicula.
         return pelicula;
@@ -117,7 +112,7 @@ public class DBPelicula {
 	/**
 	 * Devuelve una lista con peliculas que cumplan las condiciones de los parametros.
 	 */
-	public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha, String director,
+	/*public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha, String director,
 											   String sinopsis, Integer duracion,
 											Double valoracion, String categoria, String publico){
 		//Comprueba que parametros son validos y construye la consulta.
@@ -169,7 +164,7 @@ public class DBPelicula {
 		}
 		//Devuelve la lista de peliculas.
 		return array;
-	}
+	}*/
 
 	/**
 	 * Elimina una pelicula de la base de datos.
@@ -184,7 +179,7 @@ public class DBPelicula {
 	/**
 	 * Obtiene todas las peliculas almacenadas en la base de datos.
 	 */
-	public ArrayList<Pelicula> obtenerTodas(){
+	/*public ArrayList<Pelicula> obtenerTodas(){
 		//Realiza la consulta.
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
@@ -208,5 +203,5 @@ public class DBPelicula {
 		}
 		//Devuelve el array.
 		return array;
-	}
+	}*/
 }

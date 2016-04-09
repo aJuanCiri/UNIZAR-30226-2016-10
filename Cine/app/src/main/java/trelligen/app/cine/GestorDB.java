@@ -30,7 +30,8 @@ public class GestorDB{
             url = propiedades.getProperty("basedatos");
             usr = propiedades.getProperty("usuario");
             pass = propiedades.getProperty("contrasena");
-            datos = new datosCompartidosGestorDB(url,usr,pass);
+            datos = new datosCompartidosGestorDB(
+                    "jdbc:oracle:thin:@hendrix-oracle.cps.unizar.es:1521:vicious","a679184","hola1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +48,7 @@ public class GestorDB{
             t.start();
             t.join();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -62,8 +63,7 @@ public class GestorDB{
                 t.start();
                 t.join();
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+
         }
         return datos.getRst();
     }
@@ -79,6 +79,7 @@ public class GestorDB{
             t.start();
             t.join();
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
