@@ -7,28 +7,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:text="Login vía e-mail"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        android:paddingRight="50dp"
-        android:paddingLeft="10dp"
-        android:layout_below="@+id/facebook"
-        android:layout_alignLeft="@+id/facebook"
-        android:layout_alignStart="@+id/facebook" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/facebook"
-        android:background="@drawable/login"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email"
@@ -37,7 +15,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="E-mail" />
+        android:hint="E-mail"
+        android:selectAllOnFocus="false" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -46,20 +25,21 @@
         android:ems="10"
         android:id="@+id/pass"
         android:layout_below="@+id/email"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Password" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/no_pass"
+        android:layout_alignEnd="@+id/no_pass"
+        android:hint="password" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="INICIAR SESIÓN"
         android:id="@+id/ini_sesion"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="42dp"
-        android:layout_alignRight="@+id/facebook"
-        android:layout_alignEnd="@+id/email"
+        android:layout_alignRight="@+id/no_cuenta"
+        android:layout_alignEnd="@+id/no_cuenta"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -71,18 +51,31 @@
         android:textStyle="bold"
         android:textSize="15dp"
         android:layout_above="@+id/ini_sesion"
-        android:layout_alignRight="@+id/facebook"
-        android:layout_alignEnd="@+id/facebook" />
+        android:layout_alignRight="@+id/no_pass"
+        android:layout_alignEnd="@+id/no_pass"
+        android:clickable="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Has olvidado la contraseña?"
         android:id="@+id/no_pass"
-        android:layout_above="@+id/no_cuenta"
-        android:layout_alignRight="@+id/no_cuenta"
-        android:layout_alignEnd="@+id/no_cuenta"
         android:textStyle="bold"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:layout_above="@+id/no_cuenta"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar Sesión"
+        android:id="@+id/textView2"
+        android:textStyle="bold"
+        android:textSize="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
 
 </RelativeLayout>
