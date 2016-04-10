@@ -112,8 +112,8 @@ public class DBPelicula {
 	/**
 	 * Devuelve una lista con peliculas que cumplan las condiciones de los parametros.
 	 */
-	/*public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha, String director,
-											   String sinopsis, Integer duracion,
+	public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha, String director,
+											   Integer duracion,
 											Double valoracion, String categoria, String publico){
 		//Comprueba que parametros son validos y construye la consulta.
 		String condiciones = "";
@@ -125,9 +125,6 @@ public class DBPelicula {
 		}
 		if(director!=null) {
 			condiciones = condiciones+" AND director=" + director;
-		}
-		if(sinopsis!=null) {
-			condiciones = condiciones+" AND sinopsis=" + sinopsis;
 		}
 		if(duracion!=null) {
 			condiciones = condiciones+" AND duracion=" + duracion;
@@ -152,11 +149,11 @@ public class DBPelicula {
 		try {
 			//Añade las consultas al array.
 			while(resultado.next()) {
-				array.add(new Pelicula(resultado.getInt("p.id"),resultado.getString("p.titulo"),
-						resultado.getString("p.fecha"), resultado.getString("p.director"),
-						resultado.getString("p.sinopsis"), resultado.getInt("p.duracion"),
-						resultado.getDouble("p.valoracion"), resultado.getString("c.nombre"),
-						resultado.getString("pub.nombre")));
+				array.add(pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
+						resultado.getString(3), resultado.getString(4),
+						resultado.getString(7), resultado.getInt(5),
+						resultado.getDouble(6), resultado.getString(8),
+						resultado.getString(9)));
 			}
 		} catch(Exception e) {
 			//Si se produce un error devuelve null.
@@ -164,7 +161,7 @@ public class DBPelicula {
 		}
 		//Devuelve la lista de peliculas.
 		return array;
-	}*/
+	}
 
 	/**
 	 * Elimina una pelicula de la base de datos.
@@ -179,7 +176,7 @@ public class DBPelicula {
 	/**
 	 * Obtiene todas las peliculas almacenadas en la base de datos.
 	 */
-	/*public ArrayList<Pelicula> obtenerTodas(){
+	public ArrayList<Pelicula> obtenerTodas(){
 		//Realiza la consulta.
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
@@ -191,11 +188,11 @@ public class DBPelicula {
 		try {
 			//Añade las peliculas a la lista.
 			while(resultado.next()) {
-				array.add(new Pelicula(resultado.getInt("p.id"),resultado.getString("p.titulo"),
-						resultado.getString("p.fecha"), resultado.getString("p.director"),
-						resultado.getString("p.sinopsis"), resultado.getInt("p.duracion"),
-						resultado.getDouble("p.valoracion"), resultado.getString("c.nombre"),
-						resultado.getString("pub.nombre")));
+				array.add(pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
+						resultado.getString(3), resultado.getString(4),
+						resultado.getString(7), resultado.getInt(5),
+						resultado.getDouble(6), resultado.getString(8),
+						resultado.getString(9)));
 			}
 		} catch(Exception e) {
 			//Si hay algun error devuelve null.
@@ -203,5 +200,5 @@ public class DBPelicula {
 		}
 		//Devuelve el array.
 		return array;
-	}*/
+	}
 }

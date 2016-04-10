@@ -50,10 +50,10 @@ public class Sistema {
 	* Método que devuelve una lista con las películas que coinciden
 	* con unos ciertos parámetros.
 	*/
-    public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha,
-												String director,String sinopsis,int duracion,
+   public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha,
+												String director,int duracion,
                                                String categoria,double valoracion, String publico){
-        return dbpelicula.buscarPeliculas(titulo,fecha,director, sinopsis,duracion,valoracion,categoria,publico);
+        return dbpelicula.buscarPeliculas(titulo,fecha,director,duracion,valoracion,categoria,publico);
     }
 
 	/*
@@ -90,7 +90,7 @@ public class Sistema {
 	/*
 	* Método que crea un nuevo usuario.
 	*/
-    /*public boolean newUser(String mail, String pass, String nick, String nacimiento){
+    public boolean newUser(String mail, String pass, String nick, String nacimiento){
         return dbusuario.newUser(mail,pass,nick,nacimiento);
-    }*/
+    }
 }
