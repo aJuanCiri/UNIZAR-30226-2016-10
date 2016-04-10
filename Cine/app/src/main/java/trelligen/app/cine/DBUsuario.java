@@ -37,4 +37,8 @@ public class DBUsuario {
 	public boolean borrarUsuario(String mail){
 	    return false;
 	}
+
+    public boolean newUser(String mail, String pass, String nick, String nacimiento){
+        return false;
+    }
 }

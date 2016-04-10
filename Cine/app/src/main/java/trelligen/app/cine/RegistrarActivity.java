@@ -33,12 +33,10 @@ public class RegistrarActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prueba);
+        setContentView(R.layout.registrarpantalla);
 
 
-        boton = (Button)findViewById(R.id.main_button);
-        edit = (EditText)findViewById(R.id.main_editText);
-        text = (TextView)findViewById(R.id.main_textview);
+        boton = (Button)findViewById(R.id.registrarse);
 
 
         boton.setOnClickListener( new OnClickListener() {

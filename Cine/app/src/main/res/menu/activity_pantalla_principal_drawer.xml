@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <item android:title="Perfil:">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/perfil"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Perfil" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/mi_coleccion"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+            android:title="Mi colección" />
+    </item>
 
-    <item android:title="Communicate">
+    <item android:title="Búsqueda:">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
+                android:id="@+id/mejor_valoradas"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Mejor valoradas" />
+            <item
+                android:id="@+id/ult_busquedas"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Últimas búsquedas" />
+            <item
+                android:id="@+id/bus_avanzada"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Búsqueda avanzada" />
+            <item
+                android:id="@+id/categorias"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Categorías" />
         </menu>
     </item>
 
