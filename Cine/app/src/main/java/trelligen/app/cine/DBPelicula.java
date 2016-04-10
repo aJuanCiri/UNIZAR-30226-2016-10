@@ -118,26 +118,27 @@ public class DBPelicula {
 		//Comprueba que parametros son validos y construye la consulta.
 		String condiciones = "";
 		if (titulo!=null) {
-			condiciones = condiciones+ " AND titulo=" + titulo;
+			condiciones = condiciones+ " AND p.titulo='" + titulo+"'";
 		}
 		if(fecha!=null) {
-			condiciones = condiciones+" AND fecha=" + fecha;
+			condiciones = condiciones+" AND p.fecha='" + fecha+"'";
 		}
 		if(director!=null) {
-			condiciones = condiciones+" AND director=" + director;
+			condiciones = condiciones+" AND p.director='" + director+"'";
 		}
-		if(duracion!=null) {
-			condiciones = condiciones+" AND duracion=" + duracion;
+		if(duracion>0) {
+			condiciones = condiciones+" AND p.duracion='" + duracion+"'";
 		}
-		if(valoracion!=null) {
-			condiciones = condiciones+" AND valoracion=" + valoracion;
+		if(valoracion>0) {
+			condiciones = condiciones+" AND p.valoracion='" + valoracion+"'";
 		}
 		if(categoria!=null) {
-			condiciones = condiciones+" AND categoria=" + categoria;
+			condiciones = condiciones+" AND e.categoria='" + categoria+"'";
 		}
 		if(publico!=null) {
-			condiciones = condiciones+" AND publico=" + publico;
+			condiciones = condiciones+" AND d.publico='" + publico+"'";
 		}
+		Log.d("CONDICIONES",condiciones);
 		//Realiza la consulta.
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
@@ -146,14 +147,18 @@ public class DBPelicula {
 				"d.publico=pub.nombre"+condiciones);
 
 		ArrayList<Pelicula> array = new ArrayList<Pelicula>();
+		Cursor cursor = new Cursor(resultado);
 		try {
+			avanzar(cursor);
 			//Añade las consultas al array.
-			while(resultado.next()) {
+			while(cursor.hasNext()) {
+				resultado = cursor.getRst();
 				array.add(pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
 						resultado.getString(3), resultado.getString(4),
 						resultado.getString(7), resultado.getInt(5),
 						resultado.getDouble(6), resultado.getString(8),
 						resultado.getString(9)));
+				avanzar(cursor);
 			}
 		} catch(Exception e) {
 			//Si se produce un error devuelve null.
@@ -178,27 +183,48 @@ public class DBPelicula {
 	 */
 	public ArrayList<Pelicula> obtenerTodas(){
 		//Realiza la consulta.
+
+
+		ArrayList<Pelicula> array = new ArrayList<Pelicula>();
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre");
-
-		ArrayList<Pelicula> array = new ArrayList<Pelicula>();
+		Cursor cursor = new Cursor(resultado);
 		try {
+			avanzar(cursor);
 			//Añade las peliculas a la lista.
-			while(resultado.next()) {
-				array.add(pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
+			while(cursor.hasNext()) {
+				resultado = cursor.getRst();
+				array.add(new Pelicula(resultado.getInt(1),resultado.getString(2),
 						resultado.getString(3), resultado.getString(4),
 						resultado.getString(7), resultado.getInt(5),
 						resultado.getDouble(6), resultado.getString(8),
 						resultado.getString(9)));
+				avanzar(cursor);
+			}
+			if (cursor.hasNext()) {
+				Log.d("CURSOR","TRUE");
+			} else {
+				Log.d("CURSOR","FALSE");
 			}
 		} catch(Exception e) {
 			//Si hay algun error devuelve null.
+			Log.d("DATOS",e.toString());
 			return null;
 		}
 		//Devuelve el array.
 		return array;
+	}
+
+	private void avanzar(Cursor cursor) {
+		try {
+			Thread t = new Thread(cursor);
+			t.start();
+			t.join();
+		} catch (Exception e) {
+
+		}
 	}
 }
