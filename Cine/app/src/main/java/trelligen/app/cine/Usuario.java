@@ -7,12 +7,18 @@ public class Usuario {
     private String email;
     private String nick;
     private String fecha_nacimiento;
+	private String pass;
+	private String nombre;
 
 	/*
 	* Constructor de un objeto usuario.
 	*/
-    public Usuario(){
-
+    public Usuario(String email, String pass, String nick, String nombre, String fecha){
+		this.email = email;
+		this.nick = nick;
+		fecha_nacimiento = fecha;
+		this.pass = pass;
+		this.nombre = nombre;
     }
 
 	/*
