@@ -14,10 +14,17 @@ public class DBUsuario {
     }
 
     public boolean checkLogin(String mail, String password){
-        //String consulta = "SELECT * FROM USUARIO WHERE mail='...' AND password='...';"
-        //ResultadoConsulta resultado = gestordb.hacerConsulta(consulta);
+        //pass = Hash de pass
+        String consulta = "SELECT * FROM USUARIO WHERE email='"+mail+"' AND contrasena='"+password+"'";
+        ResultSet resultado = gestordb.getRst(consulta);
         //(ResultadosConsulta es una hipotética clase que gestiona los resultados de las consultas sql)
-        //if(resultado.getCantidad()==1) { return true; }
+        try {
+            if (resultado.next()) {
+                return true;
+            }
+        } catch (Exception e){
+
+        }
         return false;
     }
 
@@ -26,14 +33,14 @@ public class DBUsuario {
     */
     public Usuario getInfo(String mail){
         //Consulta a realizar
-        String consulta = "SELECT mail, password, nick, nombre, nacimiento FROM " +
-                "Usuario WHERE mail = "+mail;
+        String consulta = "SELECT email, contrasena, nick, nombre, nacimiento FROM " +
+                "Usuario WHERE email = '"+mail+"'";
         //Obtiene el resultado de la consulta
         ResultSet resultado = gestordb.getRst(consulta);
         try {
             resultado.next();
             //Encapsula la informacion en la clase Usuario.
-            usuario = new Usuario(resultado.getString("mail"),resultado.getString("password"),
+            usuario = new Usuario(resultado.getString("email"),resultado.getString("contrasena"),
                     resultado.getString("nick"), resultado.getString("nombre"),
                     resultado.getString("nacimiento"));
         } catch(Exception e) {
@@ -48,38 +55,41 @@ public class DBUsuario {
      * Asigna un nuevo e-mail al usuario con e-mail=[oldMail].
      */
     public void setMail(String oldMail, String newMail){
-        gestordb.realiza("UPDATE Usuario SET mail="+newMail+" WHERE mail="+oldMail);
+        gestordb.realiza("UPDATE Usuario SET email='"+newMail+"' WHERE email='"+oldMail+"'");
 	}
 	
     /**
      * Asigna una nueva contraseña al usuario con e-mail=[mail].
      */
 	public void setPass(String mail, String pass){
-        gestordb.realiza("UPDATE Usuario SET password="+pass+" WHERE mail="+mail);
+        //pass = Hash de pass
+        gestordb.realiza("UPDATE Usuario SET contrasena='"+pass+"' WHERE email='"+mail+"'");
 	}
 	
     /**
      * Asigna un nuevo nick al usuario con e-mail=[mail].
      */
 	public void setNick(String mail, String nick){
-        gestordb.realiza("UPDATE Usuario SET nick="+nick+" WHERE e-mail="+mail);
+        gestordb.realiza("UPDATE Usuario SET nick='"+nick+"' WHERE email='"+mail+"'");
 	}
 	
     /**
     * Elimina un usuario de la base de datos.
     */
 	public boolean borrarUsuario(String mail){
-        boolean vista = gestordb.realiza("DELETE FROM Vista WHERE mail="+mail);
-        boolean pendiente = gestordb.realiza("DELETE FROM Pendiente WHERE mail="+mail);
-        boolean usuario = gestordb.realiza("DELETE FROM Usuario WHERE mail="+mail);
+        boolean vista = gestordb.realiza("DELETE FROM Vista WHERE email='"+mail+"'");
+        boolean pendiente = gestordb.realiza("DELETE FROM Pendiente WHERE email='"+mail+"'");
+        boolean usuario = gestordb.realiza("DELETE FROM Usuario WHERE email='"+mail+"'");
         return vista && pendiente && usuario;
 	}
 
     /*
     * Introduce un nuevo usuario en la aplicación.
      */
-    public boolean newUser(String mail,String pass,String nick,String nacimiento){
-        // Método por hacer.
-        return false;
+    public boolean newUser(String mail,String pass,String nick, String nombre,String nacimiento){
+        //pass = Hash de pass
+        boolean registro = gestordb.realiza("INSERT INTO Usuario VALUES ('"+mail+"', '"+pass+"', '"+
+                nick+"', '"+nombre+"', '"+nacimiento+"')");
+        return registro;
     }
 }
