@@ -32,7 +32,7 @@
         android:layout_alignRight="@+id/registrarse"
         android:layout_alignEnd="@+id/registrarse" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -40,7 +40,6 @@
         android:id="@+id/editText"
         android:text="Registro vía e-mail"
         android:textSize="30dp"
-        android:layout_below="@+id/imageButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textStyle="bold" />
@@ -53,7 +52,7 @@
         android:id="@+id/email"
         android:singleLine="false"
         android:contextClickable="false"
-        android:text="email"
+        android:hint="E-mail"
         android:layout_below="@+id/editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -71,7 +70,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/email"
         android:layout_alignEnd="@+id/email"
-        android:text="Password" />
+        android:hint="Password" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -82,13 +81,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/password"
         android:layout_alignEnd="@+id/password"
-        android:text="Nick" />
+        android:hint="Nick" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Name"
         android:ems="10"
         android:id="@+id/name"
         android:layout_below="@+id/nick"
@@ -108,15 +107,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/name"
         android:layout_alignEnd="@+id/name"
-        android:text="Date" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:scaleType="fitXY"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/pzzc4" />
+        android:hint="Date" />
 
 
 </RelativeLayout>

@@ -90,7 +90,8 @@ public class Sistema {
 	/*
 	* Método que crea un nuevo usuario.
 	*/
-    public boolean newUser(String mail, String pass, String nick, String nacimiento){
-        return dbusuario.newUser(mail,pass,nick,nacimiento);
+    public boolean newUser(String mail, String pass, String nombre,
+                                        String nick, String nacimiento){
+        return dbusuario.newUser(mail,pass,nick,nombre,nacimiento);
     }
 }

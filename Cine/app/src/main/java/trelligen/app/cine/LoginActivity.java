@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         mail = (EditText) findViewById(R.id.email);
         pass = (EditText) findViewById(R.id.pass);
         Sistema sistema = new Sistema(getApplicationContext());
-        Log.d("Prueba", mail.getText().toString() + pass.getText().toString());
         if(!mail.getText().toString().equals("") && !pass.getText().toString().equals("") &&
                 sistema.login(mail.getText().toString(), pass.getText().toString())){
             mostrarMensaje("Login correcto!");
