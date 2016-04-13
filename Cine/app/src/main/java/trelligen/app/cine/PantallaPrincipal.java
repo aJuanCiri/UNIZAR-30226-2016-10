@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button iniciar_sesion;
@@ -38,7 +40,6 @@ public class PantallaPrincipal extends AppCompatActivity
                 startActivity(new Intent(PantallaPrincipal.this, LoginActivity.class));
             }
         });
-
         //Código de prueba para la bd
         test_bd = (Button) findViewById(R.id.test_bd);
         test_bd.setOnClickListener(new OnClickListener() {
@@ -64,12 +65,16 @@ public class PantallaPrincipal extends AppCompatActivity
 
     //Prueba la BD
     public void test_bd(){
-        //PARTE INTERNA
         Sistema sistema = new Sistema(getApplicationContext());
-        Pelicula pelicula = sistema.getPelicula(1);
+        //PARTE INTERNA
+        ArrayList<Pelicula> pelicula = sistema.listarPeliculas();
         //PARTE INTERFAZ
         test_text = (TextView) findViewById(R.id.test_text);
-        test_text.setText(pelicula.getTitulo());
+        String titulos="";
+        for(int i=0;i<pelicula.size();i++) {
+            titulos = titulos+"\n"+pelicula.get(i).getTitulo();
+        }
+        test_text.setText(titulos);
     }
 
     @Override
