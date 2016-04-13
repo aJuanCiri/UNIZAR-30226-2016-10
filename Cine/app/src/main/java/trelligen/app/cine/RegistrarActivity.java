@@ -58,18 +58,20 @@ public class RegistrarActivity extends Activity {
         date = (EditText) findViewById(R.id.date);
         licencia = (CheckBox) findViewById(R.id.checkBox_condi);
         Sistema sistema = new Sistema(getApplicationContext());
-        if(!mail.getText().toString().equals("") && !pass.getText().toString().equals("") &&
-                !nick.getText().toString().equals("") && !name.getText().toString().equals("") &&
-                !date.getText().toString().equals("") &&
-                sistema.newUser(mail.getText().toString(), pass.getText().toString(),
+        if(mail.getText().toString().equals("") || pass.getText().toString().equals("") ||
+                nick.getText().toString().equals("") || name.getText().toString().equals("") ||
+                date.getText().toString().equals("")){
+            mostrarMensaje("Rellene todos los campos!");
+        }
+        else if(!licencia.isChecked()){
+            mostrarMensaje("Acepte las condiciones de uso!");
+        }
+        else if (sistema.newUser(mail.getText().toString(), pass.getText().toString(),
                         nick.getText().toString(), name.getText().toString(),
                         date.getText().toString())){
-            if(licencia.isChecked()){
-                mostrarMensaje("Registro correcto!");
-            }
-            mostrarMensaje("Acepte las condiciones de uso!");
+            mostrarMensaje("Registro correcto!");
         }else{
-            mostrarMensaje("Registro fallido!");
+            mostrarMensaje("Ya existe un usuario con ese correo!");
         }
     }
 

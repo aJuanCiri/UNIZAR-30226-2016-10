@@ -14,7 +14,6 @@ public class DBUsuario {
     }
 
     public boolean checkLogin(String mail, String password){
-        //pass = Hash de pass
         String consulta = "SELECT * FROM USUARIO WHERE email='"+mail+"' AND contrasena='"+password+"'";
         ResultSet resultado = gestordb.getRst(consulta);
         //(ResultadosConsulta es una hipotética clase que gestiona los resultados de las consultas sql)
@@ -54,8 +53,8 @@ public class DBUsuario {
     /**
      * Asigna un nuevo e-mail al usuario con e-mail=[oldMail].
      */
-    public void setMail(String oldMail, String newMail){
-        gestordb.realiza("UPDATE Usuario SET email='"+newMail+"' WHERE email='"+oldMail+"'");
+    public void setMail(String user, String newMail){
+        gestordb.realiza("UPDATE Usuario SET email='"+newMail+"' WHERE email='"+user+"'");
 	}
 	
     /**

@@ -1,8 +1,11 @@
 package trelligen.app.cine;
 
+import android.app.Activity;
 import android.content.Context;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * La clase encapsula una serie de funciones, que realizan operaciones de lectura y escritura
@@ -19,12 +22,12 @@ public class Sistema {
 	*/
     public Sistema(Context context){
         gestordb = new GestorDB(context);
-        /*dbusuario = new DBUsuario(gestordb);*/
         dbpelicula = new DBPelicula(gestordb);
         dbusuario = new DBUsuario(gestordb);
     }
     public boolean login (String mail, String password){
-        boolean loginOK =  dbusuario.checkLogin(mail,password);
+        int hashPass = password.hashCode();
+        boolean loginOK =  dbusuario.checkLogin(mail,Integer.toString(hashPass));
         if (loginOK){
             // iniciar la sesión
             usuario = dbusuario.getInfo(mail); //Cargar en memoria la información del usuario
@@ -92,6 +95,30 @@ public class Sistema {
 	*/
     public boolean newUser(String mail, String pass, String nombre,
                                         String nick, String nacimiento){
-        return dbusuario.newUser(mail,pass,nick,nombre,nacimiento);
+        int hashPass = pass.hashCode();
+        return dbusuario.newUser(mail,Integer.toString(hashPass),nick,nombre,nacimiento);
+    }
+
+    /*
+    * Método que envía un correo con la nueva contraseña al usuario.
+    */
+    public void enviarCorreo(Activity x, String mail){
+        MailImplementor envioMail = new MailImplementor(x);
+        String newPass = nuevaPass(mail);
+        envioMail.send(mail,newPass);
+    }
+
+    /*
+    * Método que genera de manera aleatoria una nueva contraseña.
+    */
+    private String nuevaPass(String mail){
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder( 12 );
+        for( int i = 0; i < 12; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        String newPass = sb.toString();
+        dbusuario.setPass(mail,newPass);
+        return newPass;
     }
 }

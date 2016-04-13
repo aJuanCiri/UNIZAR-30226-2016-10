@@ -67,9 +67,8 @@ public class LoginActivity extends AppCompatActivity {
         mail = (EditText) findViewById(R.id.email);
         Log.d("Prueba", "recuperar pass");
         if(!mail.getText().toString().equals("")){
-            // Código que haga lo siguiente: (Implementar en clase sistema y bases de datos, no aqui)
-            // 1) Comprobar que existe el mail
-            // 2) Enviar un e-mail con la contraseña a ese correo
+            Sistema sistema = new Sistema(getApplicationContext());
+            sistema.enviarCorreo(this,mail.getText().toString());
         }else{
             mostrarMensaje("Introduce tu e-mail para recuperarla");
         }
