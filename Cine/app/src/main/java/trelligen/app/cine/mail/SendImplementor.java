@@ -1,4 +1,4 @@
-package trelligen.app.cine;
+package trelligen.app.cine.mail;
 
 import android.app.Activity;
 

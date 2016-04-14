@@ -1,4 +1,4 @@
-package trelligen.app.cine;
+package trelligen.app.cine.objeto;
 
 /**
  * Encapsula toda la información sobre una película

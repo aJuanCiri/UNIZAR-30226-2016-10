@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="trelligen.app.cine.PantallaPrincipal"
+    tools:context=".pantalla.PantallaPrincipal"
     tools:showIn="@layout/app_bar_pantalla_principal">
 
     <TextView
@@ -36,12 +36,4 @@
         android:layout_alignRight="@+id/button"
         android:layout_alignEnd="@+id/button" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MI PERFIL"
-        android:id="@+id/miperfil"
-        android:layout_below="@+id/test_bd"
-        android:layout_alignLeft="@+id/test_bd"
-        android:layout_alignStart="@+id/test_bd" />
 </RelativeLayout>

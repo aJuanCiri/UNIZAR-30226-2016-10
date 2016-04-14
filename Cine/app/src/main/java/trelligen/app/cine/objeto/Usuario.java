@@ -1,4 +1,4 @@
-package trelligen.app.cine;
+package trelligen.app.cine.objeto;
 
 /**
  * Encapsula toda la información sobre un usuario
@@ -48,7 +48,14 @@ public class Usuario {
 	public String getNacimiento(){
 		return fecha_nacimiento;
 	}
-	
+
+	/*
+	* Método que devuelve el hash de la contraseña de un usuario.
+	*/
+	public String getPass(){
+		return pass;
+	}
+
 	/*
 	* Método que cambia el email de un usuario.
 	*/

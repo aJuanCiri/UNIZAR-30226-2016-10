@@ -1,4 +1,4 @@
-package trelligen.app.cine;
+package trelligen.app.cine.base;
 
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -6,11 +6,11 @@ import java.sql.Statement;
 /**
  * Proceso encargado de realizar las operaciones del gestor de la base de datos
  */
-public class procesoBD implements Runnable{
+public class ProcesoDB implements Runnable{
     private final int CONSULTA=1,CONEXION=0,UPDATE=2;
-    private datosCompartidosGestorDB datos;
+    private CompartidosGestorDB datos;
 
-    public procesoBD(datosCompartidosGestorDB datos){
+    public ProcesoDB(CompartidosGestorDB datos){
         this.datos = datos;
     }
 

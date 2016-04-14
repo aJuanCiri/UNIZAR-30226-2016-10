@@ -1,6 +1,8 @@
-package trelligen.app.cine;
+package trelligen.app.cine.base;
 
 import java.sql.ResultSet;
+
+import trelligen.app.cine.objeto.Usuario;
 
 /**
  * Encapsula las consultas y funciones necesarias para la gestión de la base de datos de usuarios
@@ -68,7 +70,6 @@ public class DBUsuario {
      * Asigna una nueva contraseña al usuario con e-mail=[mail].
      */
 	public void setPass(String mail, String pass){
-        //pass = Hash de pass
         gestordb.realiza("UPDATE Usuario SET contrasena='"+pass+"' WHERE email='"+mail+"'");
 	}
 	
@@ -78,6 +79,13 @@ public class DBUsuario {
 	public void setNick(String mail, String nick){
         gestordb.realiza("UPDATE Usuario SET nick='"+nick+"' WHERE email='"+mail+"'");
 	}
+
+    /**
+     * Asigna unqa nueva fecha de nacimiento al usuario con e-mail=[mail].
+     */
+    public void setNacimiento(String mail, String nacimiento){
+        gestordb.realiza("UPDATE Usuario SET namimiento='"+nacimiento+"' WHERE email='"+mail+"'");
+    }
 	
     /**
     * Elimina un usuario de la base de datos.
@@ -93,9 +101,8 @@ public class DBUsuario {
     * Introduce un nuevo usuario en la aplicación.
      */
     public boolean newUser(String mail,String pass,String nick, String nombre,String nacimiento){
-        //pass = Hash de pass
-        boolean registro = gestordb.realiza("INSERT INTO Usuario VALUES ('"+mail+"', '"+pass+"', '"+
-                nick+"', '"+nombre+"', '"+nacimiento+"')");
+        boolean registro = gestordb.realiza("INSERT INTO Usuario VALUES ('"+
+                    mail+"', '"+pass+"', '"+nick+"', '"+nombre+"', '"+nacimiento+"')");
         return registro;
     }
 }

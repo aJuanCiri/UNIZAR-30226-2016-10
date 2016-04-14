@@ -1,9 +1,7 @@
-package trelligen.app.cine;
+package trelligen.app.cine.pantalla;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.support.design.widget.NavigationView;
@@ -19,11 +17,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import trelligen.app.cine.R;
+import trelligen.app.cine.objeto.Pelicula;
+import trelligen.app.cine.objeto.Sistema;
+
 public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button iniciar_sesion;
     Button test_bd;
-    Button miperfil;
     TextView test_text;
     Sistema sistema;
 
@@ -38,7 +39,7 @@ public class PantallaPrincipal extends AppCompatActivity
         iniciar_sesion.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View vw) {
-                startActivity(new Intent(PantallaPrincipal.this, LoginActivity.class));
+                startActivity(new Intent(PantallaPrincipal.this, Login.class));
             }
         });
         //Código de prueba para la bd
@@ -47,15 +48,6 @@ public class PantallaPrincipal extends AppCompatActivity
             @Override
             public void onClick(View vw){
                 test_bd();
-            }
-        });
-
-        //Código de prueba para ver mi perfil
-        miperfil = (Button) findViewById(R.id.miperfil);
-        miperfil.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View vw){
-                startActivity(new Intent(PantallaPrincipal.this, MyprofileActivity.class));
             }
         });
 
@@ -126,7 +118,7 @@ public class PantallaPrincipal extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.perfil) {
-            System.out.println("Hola");
+            startActivity(new Intent(PantallaPrincipal.this, Perfil.class));
         } else if (id == R.id.mi_coleccion) {
 
         } else if (id == R.id.mejor_valoradas) {

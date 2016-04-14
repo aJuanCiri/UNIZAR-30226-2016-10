@@ -1,13 +1,9 @@
-package trelligen.app.cine;
+package trelligen.app.cine.base;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Properties;
 
 /**
@@ -19,7 +15,7 @@ public class GestorDB{
     //Se define el nombre y la clave de usuario de la base de datos y la @basededatos
     private String pass,usr,url;
     private final int CONSULTA=1,CONEXION=0,UPDATE=2;
-    datosCompartidosGestorDB datos;
+    CompartidosGestorDB datos;
 
     public GestorDB(Context context) {
         this.context = context;
@@ -30,7 +26,7 @@ public class GestorDB{
             url = propiedades.getProperty("basedatos");
             usr = propiedades.getProperty("usuario");
             pass = propiedades.getProperty("contrasena");
-            datos = new datosCompartidosGestorDB(
+            datos = new CompartidosGestorDB(
                     "jdbc:oracle:thin:@hendrix-oracle.cps.unizar.es:1521:vicious","a679184","hola1234");
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +40,7 @@ public class GestorDB{
     public void getConex() {
         datos.setAccion(CONEXION);
         try {
-            Thread t = new Thread(new procesoBD(datos));
+            Thread t = new Thread(new ProcesoDB(datos));
             t.start();
             t.join();
         } catch (Exception e) {
@@ -59,7 +55,7 @@ public class GestorDB{
         datos.setConsulta(consulta);
         datos.setAccion(CONSULTA);
         try {
-            Thread t = new Thread(new procesoBD(datos));
+            Thread t = new Thread(new ProcesoDB(datos));
                 t.start();
                 t.join();
         } catch (Exception e) {
@@ -75,7 +71,7 @@ public class GestorDB{
         datos.setConsulta(consulta);
         datos.setAccion(UPDATE);
         try {
-            Thread t = new Thread(new procesoBD(datos));
+            Thread t = new Thread(new ProcesoDB(datos));
             t.start();
             t.join();
         } catch (Exception e) {

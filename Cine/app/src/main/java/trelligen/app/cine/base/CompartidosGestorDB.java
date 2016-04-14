@@ -1,4 +1,4 @@
-package trelligen.app.cine;
+package trelligen.app.cine.base;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 /**
  * Datos comunes entre el gestor de la base de datos y su proceso encargado de realizar las operaciones
  */
-public class datosCompartidosGestorDB {
+public class CompartidosGestorDB {
     //String que contiene el texto de consultas a realizar
     private String consulta;
     //Referencia la conexion con la Base de Datos
@@ -16,8 +16,8 @@ public class datosCompartidosGestorDB {
     //Indica si se va a realizar una consulta o se va realizar la conexion
     private int accion = 1;
     private String url,usr,pass;
-    
-    public datosCompartidosGestorDB(String url, String usr, String pass){
+
+    public CompartidosGestorDB(String url, String usr, String pass){
         this.url=url;
         this.usr=usr;
         this.pass=pass;

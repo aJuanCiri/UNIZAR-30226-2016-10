@@ -1,4 +1,4 @@
-package trelligen.app.cine;
+package trelligen.app.cine.pantalla;
 
 /**
  * Actividad que muestra por pantalla la información de perfil de un usuario
@@ -9,26 +9,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EditprofileActivity extends Activity {
+import trelligen.app.cine.R;
+import trelligen.app.cine.objeto.Sistema;
+import trelligen.app.cine.objeto.Usuario;
+
+public class EditarPerfil extends Activity {
 
     private Button save;
     private TextView nick, mail, name, date;
+    private EditText pass, newPass1, newPass2;
     private Sistema sistema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.editar_perfil);
+        setContentView(R.layout.activity_editar_perfil);
         sistema = new Sistema(getApplicationContext());
         cargarInformacionPerfil("usuario@gmail.com");
         save = (Button)findViewById(R.id.profile_editbutton);
         save.setOnClickListener( new OnClickListener() {
             public void onClick(View view){
                 sistema.updateUser(mail.toString(),nick.toString(),name.toString(),date.toString());
-                mostrarMensaje("guardando...");
+                if(!pass.getText().toString().equals("")){
+                    actualizarPass(sistema,pass.getText().toString(),
+                            newPass1.getText().toString(),newPass2.getText().toString());
+                } else{
+                    mostrarMensaje("guardando1...");
+                }
             }
         });
     }
@@ -38,6 +49,9 @@ public class EditprofileActivity extends Activity {
         mail = (TextView) findViewById(R.id.profile_mail);
         name = (TextView) findViewById(R.id.profile_nombre);
         date = (TextView) findViewById(R.id.profile_fnacimiento);
+        pass = (EditText) findViewById(R.id.profile_pass);
+        newPass1 = (EditText) findViewById(R.id.profile_newPass1);
+        newPass2 = (EditText) findViewById(R.id.profile_newPass2);
 
         Usuario usuario = sistema.getUserInfo(user_mail);
         nick.setText(usuario.getNick());
@@ -46,7 +60,15 @@ public class EditprofileActivity extends Activity {
         date.setText(usuario.getNacimiento());
     }
 
+    private void actualizarPass(Sistema sis, String mail, String newPass1, String newPass2){
+        if(!newPass1.equals("") && sis.updatePass(mail,newPass1,newPass2)){
+            mostrarMensaje("guardando2...");
+        } else{
+            mostrarMensaje("Las contraseñas no coinciden.");
+        }
+    }
+
     private void mostrarMensaje(String mensaje){
-        Toast.makeText(EditprofileActivity.this,mensaje,Toast.LENGTH_LONG).show();
+        Toast.makeText(EditarPerfil.this,mensaje,Toast.LENGTH_LONG).show();
     }
 }

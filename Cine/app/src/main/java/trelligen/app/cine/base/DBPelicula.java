@@ -1,9 +1,12 @@
-package trelligen.app.cine;
+package trelligen.app.cine.base;
 
 import android.util.Log;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import trelligen.app.cine.objeto.Cursor;
+import trelligen.app.cine.objeto.Pelicula;
 
 /**
  * Encapsula las consultas y funciones necesarias para la gestión de la base de datos de películas

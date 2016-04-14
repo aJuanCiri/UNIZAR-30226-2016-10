@@ -1,11 +1,15 @@
-package trelligen.app.cine;
+package trelligen.app.cine.objeto;
 
 import android.app.Activity;
 import android.content.Context;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
+
+import trelligen.app.cine.base.GestorDB;
+import trelligen.app.cine.base.DBPelicula;
+import trelligen.app.cine.base.DBUsuario;
+import trelligen.app.cine.mail.MailImplementor;
 
 /**
  * La clase encapsula una serie de funciones, que realizan operaciones de lectura y escritura
@@ -93,8 +97,8 @@ public class Sistema {
 	/*
 	* Método que crea un nuevo usuario.
 	*/
-    public boolean newUser(String mail, String pass, String nombre,
-                                        String nick, String nacimiento){
+    public boolean newUser(String mail, String pass, String nick,
+                                        String nombre, String nacimiento){
         int hashPass = pass.hashCode();
         return dbusuario.newUser(mail,Integer.toString(hashPass),nick,nombre,nacimiento);
     }
@@ -116,7 +120,7 @@ public class Sistema {
     }
 
     /*
-    Actualiza la información de un usuario
+    * Actualiza la información de un usuario
      */
     public void updateUser(String mail, String nick, String name, String fnacimiento){
         if(!nick.equals("")){
@@ -126,7 +130,22 @@ public class Sistema {
             dbusuario.setName(mail,name);
         }
         if(!fnacimiento.equals("")){
-            //dbusuario.setfnacimiento(mail, fnacimiento);
+            dbusuario.setNacimiento(mail, fnacimiento);
+        }
+    }
+
+    /*
+    Actualiza la información de un usuario
+     */
+    public boolean updatePass(String mail, String newPass1, String newPass2){
+        Usuario user = dbusuario.getInfo(mail);
+        int hash = newPass1.hashCode();
+        String nuevaPass = Integer.toString(hash);
+        if(newPass1.equals(newPass2) && user.getPass().equals(newPass1)){
+            dbusuario.setPass(mail,nuevaPass);
+            return true;
+        } else{
+            return false;
         }
     }
 

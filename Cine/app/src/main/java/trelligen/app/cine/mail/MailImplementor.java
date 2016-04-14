@@ -1,12 +1,14 @@
-package trelligen.app.cine;
+package trelligen.app.cine.mail;
 
 import android.app.Activity;
 import android.content.Intent;
 
+import trelligen.app.cine.mail.SendImplementor;
+
 /**
  * Created by Javier on 13/04/16.
  */
-public class MailImplementor implements SendImplementor{
+public class MailImplementor implements SendImplementor {
 
     /** actividad desde la cual se abrira la actividad de gestión de correo */
     private Activity sourceActivity;
