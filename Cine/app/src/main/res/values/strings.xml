@@ -9,6 +9,7 @@
     <string name="title_activity_myprofile">Mi perfil</string>
     <string name="title_activity_editprofile">Editar perfil</string>
     <string name="title_activity_register">Registrarse</string>
+    <string name="title_activity_infopelicula">Info pelicula</string>
 
 
     <!-- Strings related to login -->

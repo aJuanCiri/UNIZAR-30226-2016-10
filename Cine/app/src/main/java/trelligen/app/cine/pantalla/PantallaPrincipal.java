@@ -28,6 +28,7 @@ public class PantallaPrincipal extends AppCompatActivity
     Button iniciar_sesion;
     Button test_bd;
     Button test_imagen;
+    Button test_infopelicula;
     TextView test_text;
     Sistema sistema;
 
@@ -59,6 +60,14 @@ public class PantallaPrincipal extends AppCompatActivity
             @Override
             public void onClick(View vw){
                 test_imagen();
+            }
+        });
+
+        test_infopelicula = (Button) findViewById(R.id.test_infopelicula);
+        test_infopelicula.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View vw){
+                startActivity(new Intent(PantallaPrincipal.this, InfoPelicula.class));
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -33,13 +33,12 @@ public class EditarPerfil extends Activity {
         save = (Button)findViewById(R.id.profile_editbutton);
         save.setOnClickListener( new OnClickListener() {
             public void onClick(View view){
-                sistema.updateUser(mail.getText().toString(),nick.getText().toString(),
-                        name.getText().toString(),date.getText().toString());
+                sistema.updateUser(mail.toString(),nick.toString(),name.toString(),date.toString());
                 if(!pass.getText().toString().equals("")){
-                    actualizarPass(sistema, mail.getText().toString(),pass.getText().toString(),
+                    actualizarPass(sistema,pass.getText().toString(),
                             newPass1.getText().toString(),newPass2.getText().toString());
                 } else{
-                    mostrarMensaje("guardando1...");
+                    mostrarMensaje("guardando...");
                 }
             }
         });
@@ -61,9 +60,9 @@ public class EditarPerfil extends Activity {
         date.setText(usuario.getNacimiento());
     }
 
-    private void actualizarPass(Sistema sis, String mail, String pass, String newPass1, String newPass2){
-        if(!newPass1.equals("") && sis.updatePass(mail, pass,newPass1,newPass2)){
-            mostrarMensaje("guardando2...");
+    private void actualizarPass(Sistema sis, String mail, String newPass1, String newPass2){
+        if(!newPass1.equals("") && sis.updatePass(mail,newPass1,newPass2)){
+            mostrarMensaje("guardando...");
         } else{
             mostrarMensaje("Las contraseñas no coinciden.");
         }

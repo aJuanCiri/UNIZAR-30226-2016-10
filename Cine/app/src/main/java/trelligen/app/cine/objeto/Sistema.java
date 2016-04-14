@@ -2,7 +2,6 @@ package trelligen.app.cine.objeto;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -138,13 +137,11 @@ public class Sistema {
     /*
     Actualiza la información de un usuario
      */
-    public boolean updatePass(String mail, String pass, String newPass1, String newPass2){
+    public boolean updatePass(String mail, String newPass1, String newPass2){
         Usuario user = dbusuario.getInfo(mail);
         int hash = newPass1.hashCode();
         String nuevaPass = Integer.toString(hash);
-        hash = pass.hashCode();
-        String viejaPass = Integer.toString(hash);
-        if(newPass1.equals(newPass2) && user.getPass().equals(viejaPass)){
+        if(newPass1.equals(newPass2) && user.getPass().equals(newPass1)){
             dbusuario.setPass(mail,nuevaPass);
             return true;
         } else{

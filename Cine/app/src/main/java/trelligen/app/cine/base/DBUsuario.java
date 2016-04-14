@@ -84,7 +84,7 @@ public class DBUsuario {
      * Asigna unqa nueva fecha de nacimiento al usuario con e-mail=[mail].
      */
     public void setNacimiento(String mail, String nacimiento){
-        gestordb.realiza("UPDATE Usuario SET nacimiento='"+nacimiento+"' WHERE email='"+mail+"'");
+        gestordb.realiza("UPDATE Usuario SET namimiento='"+nacimiento+"' WHERE email='"+mail+"'");
     }
 	
     /**
