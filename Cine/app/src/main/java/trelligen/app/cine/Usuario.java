@@ -34,7 +34,14 @@ public class Usuario {
 	public String getNick(){
 		return nick;
 	}
-	
+
+	/*
+	* Método que devuelve el nombre de un usuario
+	*/
+	public String getName(){
+		return nombre;
+	}
+
 	/*
 	* Método que devuelve la fecha de nacimiento de un usuario.
 	*/

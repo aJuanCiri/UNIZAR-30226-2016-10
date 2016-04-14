@@ -56,6 +56,13 @@ public class DBUsuario {
     public void setMail(String user, String newMail){
         gestordb.realiza("UPDATE Usuario SET email='"+newMail+"' WHERE email='"+user+"'");
 	}
+
+    /**
+     * Asigna un nuevo nombre al usuario con e-mail=[mail].
+     */
+    public void setName(String mail, String name){
+        gestordb.realiza("UPDATE Usuario SET nombre='"+name+"' WHERE email='"+mail+"'");
+    }
 	
     /**
      * Asigna una nueva contraseña al usuario con e-mail=[mail].

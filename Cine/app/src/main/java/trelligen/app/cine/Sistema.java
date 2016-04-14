@@ -109,6 +109,28 @@ public class Sistema {
     }
 
     /*
+    Devuelve la información asociada a un usuario
+     */
+    public Usuario getUserInfo(String mail){
+        return dbusuario.getInfo(mail);
+    }
+
+    /*
+    Actualiza la información de un usuario
+     */
+    public void updateUser(String mail, String nick, String name, String fnacimiento){
+        if(!nick.equals("")){
+            dbusuario.setNick(mail,nick);
+        }
+        if(!name.equals("")){
+            dbusuario.setName(mail,name);
+        }
+        if(!fnacimiento.equals("")){
+            //dbusuario.setfnacimiento(mail, fnacimiento);
+        }
+    }
+
+    /*
     * Método que genera de manera aleatoria una nueva contraseña.
     */
     private String nuevaPass(String mail){

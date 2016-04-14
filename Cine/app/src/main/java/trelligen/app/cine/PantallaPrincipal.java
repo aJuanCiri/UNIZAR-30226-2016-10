@@ -23,6 +23,7 @@ public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button iniciar_sesion;
     Button test_bd;
+    Button miperfil;
     TextView test_text;
     Sistema sistema;
 
@@ -46,6 +47,15 @@ public class PantallaPrincipal extends AppCompatActivity
             @Override
             public void onClick(View vw){
                 test_bd();
+            }
+        });
+
+        //Código de prueba para ver mi perfil
+        miperfil = (Button) findViewById(R.id.miperfil);
+        miperfil.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View vw){
+                startActivity(new Intent(PantallaPrincipal.this, MyprofileActivity.class));
             }
         });
 

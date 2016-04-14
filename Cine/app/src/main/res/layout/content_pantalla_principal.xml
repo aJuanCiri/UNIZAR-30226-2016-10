@@ -35,4 +35,13 @@
         android:layout_below="@+id/button"
         android:layout_alignRight="@+id/button"
         android:layout_alignEnd="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MI PERFIL"
+        android:id="@+id/miperfil"
+        android:layout_below="@+id/test_bd"
+        android:layout_alignLeft="@+id/test_bd"
+        android:layout_alignStart="@+id/test_bd" />
 </RelativeLayout>
