@@ -13,11 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import trelligen.app.cine.R;
+import trelligen.app.cine.objeto.MostrarImagen;
 import trelligen.app.cine.objeto.Pelicula;
 import trelligen.app.cine.objeto.Sistema;
 
@@ -25,6 +27,7 @@ public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button iniciar_sesion;
     Button test_bd;
+    Button test_imagen;
     TextView test_text;
     Sistema sistema;
 
@@ -51,6 +54,13 @@ public class PantallaPrincipal extends AppCompatActivity
             }
         });
 
+        test_imagen = (Button) findViewById(R.id.test_imagen);
+        test_imagen.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View vw){
+                test_imagen();
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -77,6 +87,21 @@ public class PantallaPrincipal extends AppCompatActivity
             titulos = titulos+"\n"+pelicula.get(i).getTitulo();
         }
         test_text.setText(titulos);
+    }
+
+    //Muestra una imagen
+    public void test_imagen() {
+        Sistema sistema = new Sistema(getApplicationContext());
+        MostrarImagen mostrar = new MostrarImagen(sistema.getPelicula(1).getURL());
+        Thread t = new Thread(mostrar);
+        t.start();
+        try {
+            t.join();
+        }catch(Exception e) {
+
+        }
+        ImageView prueba = (ImageView) findViewById(R.id.imagenPrueba);
+        prueba.setImageBitmap(mostrar.getImagen());
     }
 
     @Override
