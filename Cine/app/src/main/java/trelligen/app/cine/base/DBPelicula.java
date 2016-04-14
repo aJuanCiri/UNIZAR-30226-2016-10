@@ -25,7 +25,7 @@ public class DBPelicula {
     public Pelicula getInformacion(int id){
 		//Consulta a realizar
         String consulta = "SELECT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
-				"p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
+				"p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE p.id="+id+" AND " +
 				"p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre";
@@ -38,7 +38,7 @@ public class DBPelicula {
 					resultado.getString(3), resultado.getString(4),
 					resultado.getString(7), resultado.getInt(5),
 					resultado.getDouble(6), resultado.getString(8),
-					resultado.getString(9));
+					resultado.getString(9), resultado.getString(10));
 
 		} catch(Exception e) {
 			Log.d("RST","Error al obtener el datos");
@@ -144,7 +144,7 @@ public class DBPelicula {
 		Log.d("CONDICIONES",condiciones);
 		//Realiza la consulta.
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
-				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
+				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre"+condiciones);
@@ -160,7 +160,7 @@ public class DBPelicula {
 						resultado.getString(3), resultado.getString(4),
 						resultado.getString(7), resultado.getInt(5),
 						resultado.getDouble(6), resultado.getString(8),
-						resultado.getString(9)));
+						resultado.getString(9), resultado.getString(10)));
 				avanzar(cursor);
 			}
 		} catch(Exception e) {
@@ -190,7 +190,7 @@ public class DBPelicula {
 
 		ArrayList<Pelicula> array = new ArrayList<Pelicula>();
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
-				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre FROM Pelicula p, " +
+				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre");
@@ -204,7 +204,7 @@ public class DBPelicula {
 						resultado.getString(3), resultado.getString(4),
 						resultado.getString(7), resultado.getInt(5),
 						resultado.getDouble(6), resultado.getString(8),
-						resultado.getString(9)));
+						resultado.getString(9), resultado.getString(10)));
 				avanzar(cursor);
 			}
 			if (cursor.hasNext()) {

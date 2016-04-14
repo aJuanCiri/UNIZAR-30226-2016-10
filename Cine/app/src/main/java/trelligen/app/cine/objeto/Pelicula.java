@@ -13,12 +13,13 @@ public class Pelicula {
     private double valoracion;
     private String categoria;
     private String publico;
+    private String imagenURL;
 
 	/*
 	* Constructor de un objeto película.
 	*/
     public Pelicula(int id, String titulo, String fecha, String director, String sinopsis, int duracion,
-                    double valoracion, String categoria, String publico){
+                    double valoracion, String categoria, String publico, String imagenURL){
         this.id = id;
         this.titulo = titulo;
         this.fecha = fecha;
@@ -28,6 +29,7 @@ public class Pelicula {
         this.valoracion = valoracion;
         this.categoria = categoria;
         this.publico = publico;
+        this.imagenURL = imagenURL;
     }
 
 	/*
@@ -85,4 +87,6 @@ public class Pelicula {
 	public String getCategoria(){
 		return categoria;
 	}
+
+    public String getURL() { return imagenURL; }
 }
