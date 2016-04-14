@@ -36,4 +36,21 @@
         android:layout_alignRight="@+id/button"
         android:layout_alignEnd="@+id/button" />
 
-</RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PROBAR IMAGEN"
+        android:id="@+id/test_imagen"
+        android:layout_below="@+id/test_bd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imagenPrueba"
+        android:scaleType="fitXY"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/test_bd"
+        android:layout_alignEnd="@+id/test_bd" />
+    2</RelativeLayout>
