@@ -27,7 +27,7 @@ public class EditarPerfil extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_perfil);
+        setContentView(R.layout.activity_perfil_editar);
         sistema = new Sistema(getApplicationContext());
         cargarInformacionPerfil("usuario@gmail.com");
         save = (Button)findViewById(R.id.profile_editbutton);
@@ -38,7 +38,7 @@ public class EditarPerfil extends Activity {
                     actualizarPass(sistema,pass.getText().toString(),
                             newPass1.getText().toString(),newPass2.getText().toString());
                 } else{
-                    mostrarMensaje("guardando1...");
+                    mostrarMensaje("guardando...");
                 }
             }
         });
@@ -62,7 +62,7 @@ public class EditarPerfil extends Activity {
 
     private void actualizarPass(Sistema sis, String mail, String newPass1, String newPass2){
         if(!newPass1.equals("") && sis.updatePass(mail,newPass1,newPass2)){
-            mostrarMensaje("guardando2...");
+            mostrarMensaje("guardando...");
         } else{
             mostrarMensaje("Las contraseñas no coinciden.");
         }
