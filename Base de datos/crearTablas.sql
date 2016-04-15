@@ -16,7 +16,7 @@ CREATE TABLE Pelicula
 	director	VARCHAR(40),
 	duracion	NUMBER(3),
 	valoracion	NUMBER(1),
-	sinopsis	VARCHAR(700),
+	sinopsis	VARCHAR(1500),
 	url			VARCHAR(600),
 	CONSTRAINT pelicula_pk PRIMARY KEY (id)
 );
