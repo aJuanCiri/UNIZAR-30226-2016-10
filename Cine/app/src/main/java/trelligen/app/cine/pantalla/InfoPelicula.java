@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import trelligen.app.cine.R;
+import trelligen.app.cine.objeto.MostrarImagen;
 import trelligen.app.cine.objeto.Pelicula;
 import trelligen.app.cine.objeto.Sistema;
 
@@ -47,6 +48,20 @@ public class InfoPelicula extends Activity {
         director.setText(pelicula.getDirector());
         sinopsis.setText(pelicula.getSinopsis());
         valoracion.setNumStars((int) Math.round(pelicula.getValoracion()));
-        //imagen.setImageURI(pelicula.getURL());
+
+        mostrarImagen(pelicula.getURL());
+
+    }
+
+    private void mostrarImagen(String url){
+        MostrarImagen mostrar = new MostrarImagen(url);
+        Thread t = new Thread(mostrar);
+        t.start();
+        try {
+            t.join();
+        }catch(Exception e) {
+
+        }
+        imagen.setImageBitmap(mostrar.getImagen());
     }
 }
