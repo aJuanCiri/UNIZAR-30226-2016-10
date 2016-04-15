@@ -153,9 +153,14 @@ public class PantallaPrincipal extends AppCompatActivity
 
         if (id == R.id.perfil) {
             startActivity(new Intent(PantallaPrincipal.this, Perfil.class));
-        } else if (id == R.id.mi_coleccion) {
+        }
+        else if (id == R.id.cerrar_sesion) {
 
-        } else if (id == R.id.mejor_valoradas) {
+        }
+        else if (id == R.id.pantalla_principal) {
+            startActivity(new Intent(PantallaPrincipal.this, PantallaPrincipal.class));
+        }
+        else if (id == R.id.mejor_valoradas) {
 
         } else if (id == R.id.ult_busquedas) {
 
@@ -164,7 +169,6 @@ public class PantallaPrincipal extends AppCompatActivity
         } else if (id == R.id.categorias) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

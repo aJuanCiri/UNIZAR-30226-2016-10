@@ -137,11 +137,12 @@ public class Sistema {
     /*
     Actualiza la información de un usuario
      */
-    public boolean updatePass(String mail, String newPass1, String newPass2){
+    public boolean updatePass(String mail, String pass, String newPass1, String newPass2){
         Usuario user = dbusuario.getInfo(mail);
-        int hash = newPass1.hashCode();
-        String nuevaPass = Integer.toString(hash);
-        if(newPass1.equals(newPass2) && user.getPass().equals(newPass1)){
+        String viejaPass = Integer.toString(pass.hashCode());
+        if(newPass1.equals(newPass2) && user.getPass().equals(viejaPass)){
+            int hash = newPass1.hashCode();
+            String nuevaPass = Integer.toString(hash);
             dbusuario.setPass(mail,nuevaPass);
             return true;
         } else{

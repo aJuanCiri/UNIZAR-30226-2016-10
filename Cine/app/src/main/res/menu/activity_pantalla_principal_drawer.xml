@@ -3,6 +3,10 @@
 
     <item android:title="Perfil:">
         <item
+            android:id="@+id/pantalla_principal"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Pantalla principal" />
+        <item
             android:id="@+id/perfil"
             android:icon="@drawable/ic_menu_send"
             android:title="Perfil" />
@@ -10,6 +14,10 @@
             android:id="@+id/mi_coleccion"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Mi colección" />
+        <item
+            android:id="@+id/cerrar_sesion"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Cerrar sesión" />
     </item>
 
     <item android:title="Búsqueda:">
