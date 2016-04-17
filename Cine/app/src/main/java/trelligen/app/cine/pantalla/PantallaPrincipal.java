@@ -125,7 +125,7 @@ public class PantallaPrincipal extends AppCompatActivity
         } else if (id == R.id.ult_busquedas) {
 
         } else if (id == R.id.bus_avanzada) {
-
+            startActivity(new Intent(PantallaPrincipal.this, BusquedaAvanzada.class));
         } else if (id == R.id.categorias) {
 
         }
