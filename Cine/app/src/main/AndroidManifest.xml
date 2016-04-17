@@ -43,6 +43,10 @@
             android:name=".pantalla.Registrar"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pantalla.BusquedaAvanzada"
+            android:label="@string/title_activity_busqueda_avanzada"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".pantalla.ListaPeliculas">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
