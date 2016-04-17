@@ -10,6 +10,9 @@
     <string name="title_activity_editprofile">Editar perfil</string>
     <string name="title_activity_register">Registrarse</string>
     <string name="title_activity_infopelicula">Info pelicula</string>
+    <string name="hint_search">HintSearch</string>
+    <string name="inicio">Iniciar Sesión</string>
+    <string name="registro">Registrar Usuario</string>
 
 
     <!-- Strings related to login -->
