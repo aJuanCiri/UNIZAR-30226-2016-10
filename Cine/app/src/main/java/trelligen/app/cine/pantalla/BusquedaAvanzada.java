@@ -2,11 +2,8 @@ package trelligen.app.cine.pantalla;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -66,7 +63,7 @@ public class BusquedaAvanzada extends Activity {
      */
     private void asignarParametros() {
         titulo = ((TextView) findViewById(R.id.titulo)).getText().toString();
-        if(titulo.equals("") || titulo.equals("Titulo")) {
+        if(titulo.equals("")) {
             titulo = null;
         }
         director = ((TextView) findViewById(R.id.director)).getText().toString();
@@ -94,27 +91,43 @@ public class BusquedaAvanzada extends Activity {
     private void obtenerGenero() {
         generoGR = (RadioGroup)findViewById(R.id.genero);
         int id = generoGR.getCheckedRadioButtonId();
+       /* if(id!=-1) {
+            genero = ((RadioButton) findViewById(id))
+                    .getText().toString();
+        } else {
+            genero = null;
+        }*/
         switch(id) {
             case R.id.accion:
                 genero = "Accion";
+                break;
             case R.id.drama:
                 genero = "Drama";
+                break;
             case R.id.lucha:
                 genero = "Lucha";
+                break;
             case R.id.terror:
                 genero = "Terror";
+                break;
             case R.id.comedia:
                 genero = "Comedia";
+                break;
             case R.id.fantasia:
                 genero = "Fantasia";
+                break;
             case R.id.suspense:
                 genero = "Suspense";
+                break;
             case R.id.musical:
                 genero = "Musical";
+                break;
             case R.id.cficcion:
                 genero = "C.Ficcion";
+                break;
             default:
                 genero = null;
+                break;
         }
     }
 
@@ -127,14 +140,19 @@ public class BusquedaAvanzada extends Activity {
         switch(id) {
             case R.id.infantil:
                 publico = "Infantil";
+                break;
             case R.id.juvenil:
                 publico = "Juvenil";
+                break;
             case R.id.familiar:
                 publico = "Familiar";
+                break;
             case R.id.adulto:
                 publico = "Adulto";
+                break;
             default:
                 publico = null;
+                break;
         }
     }
 }
