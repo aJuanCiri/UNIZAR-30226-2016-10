@@ -18,8 +18,9 @@ public class Pelicula {
 	/*
 	* Constructor de un objeto película.
 	*/
-    public Pelicula(int id, String titulo, String fecha, String director, String sinopsis, int duracion,
-                    double valoracion, String categoria, String publico, String imagenURL){
+    public Pelicula(int id, String titulo, String fecha, String director,
+                    String sinopsis, int duracion, double valoracion,
+                            String categoria, String publico, String imagenURL){
         this.id = id;
         this.titulo = titulo;
         this.fecha = fecha;
@@ -88,5 +89,8 @@ public class Pelicula {
 		return categoria;
 	}
 
+    /*
+	* Método que devuelve la url de la imagen de la película.
+	*/
     public String getURL() { return imagenURL; }
 }
