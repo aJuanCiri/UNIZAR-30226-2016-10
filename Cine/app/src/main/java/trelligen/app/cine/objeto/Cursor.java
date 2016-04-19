@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.xml.transform.Result;
 
 /**
- * Created by Jorge on 10/04/2016.
+ * Clase que encapsula una serie de información vista como un cursor.
  */
 public class Cursor implements Runnable {
     private ResultSet rst;

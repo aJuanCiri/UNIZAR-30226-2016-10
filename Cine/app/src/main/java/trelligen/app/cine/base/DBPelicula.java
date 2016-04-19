@@ -1,20 +1,22 @@
 package trelligen.app.cine.base;
 
 import android.util.Log;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import trelligen.app.cine.objeto.Cursor;
 import trelligen.app.cine.objeto.Pelicula;
 
 /**
- * Encapsula las consultas y funciones necesarias para la gestión de la base de datos de películas
+ * Encapsula las consultas y funciones necesarias para la
+ * gestión de la base de datos de películas.
  */
 public class DBPelicula {
     private GestorDB gestordb;	//Gestor que conecta con la base de datos.
-    private Pelicula pelicula;
+    private Pelicula pelicula;	// Objeto de una película.
 
+	/*
+	* Constructor del objeto.
+	 */
     public DBPelicula(GestorDB gestorDB){
         this.gestordb = gestorDB;
     }
@@ -23,13 +25,13 @@ public class DBPelicula {
 	 * Devuelve la información de una pelicula.
 	 */
     public Pelicula getInformacion(int id){
-		//Consulta a realizar
+		//Consulta a realizar.
         String consulta = "SELECT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
 				"p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE p.id="+id+" AND " +
 				"p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre";
-		//Obtiene el resultado de la consulta
+		//Obtiene el resultado de la consulta.
         ResultSet resultado = gestordb.getRst(consulta);
 		try {
 			resultado.next();

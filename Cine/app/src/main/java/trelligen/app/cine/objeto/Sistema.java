@@ -2,10 +2,8 @@ package trelligen.app.cine.objeto;
 
 import android.app.Activity;
 import android.content.Context;
-
 import java.security.SecureRandom;
 import java.util.ArrayList;
-
 import trelligen.app.cine.base.GestorDB;
 import trelligen.app.cine.base.DBPelicula;
 import trelligen.app.cine.base.DBUsuario;
@@ -29,6 +27,10 @@ public class Sistema {
         dbpelicula = new DBPelicula(gestordb);
         dbusuario = new DBUsuario(gestordb);
     }
+
+    /*
+    * Método que gestiona el login de un usuario.
+     */
     public boolean login (String mail, String password){
         int hashPass = password.hashCode();
         boolean loginOK =  dbusuario.checkLogin(mail,Integer.toString(hashPass));
@@ -60,7 +62,8 @@ public class Sistema {
    public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha,
 												String director,int duracion,
                                                String categoria,double valoracion, String publico){
-        return dbpelicula.buscarPeliculas(titulo,fecha,director,duracion,valoracion,categoria,publico);
+        return dbpelicula.buscarPeliculas(titulo,fecha,director,
+                            duracion,valoracion,categoria,publico);
     }
 
 	/*
@@ -113,14 +116,14 @@ public class Sistema {
     }
 
     /*
-    Devuelve la información asociada a un usuario
+    * Devuelve la información asociada a un usuario.
      */
     public Usuario getUserInfo(String mail){
         return dbusuario.getInfo(mail);
     }
 
     /*
-    * Actualiza la información de un usuario
+    * Actualiza la información de un usuario.
      */
     public void updateUser(String mail, String nick, String name, String fnacimiento){
         if(!nick.equals("")){
@@ -135,7 +138,7 @@ public class Sistema {
     }
 
     /*
-    Actualiza la información de un usuario
+    * Actualiza la contraseña de un usuario.
      */
     public boolean updatePass(String mail, String pass, String newPass1, String newPass2){
         Usuario user = dbusuario.getInfo(mail);
