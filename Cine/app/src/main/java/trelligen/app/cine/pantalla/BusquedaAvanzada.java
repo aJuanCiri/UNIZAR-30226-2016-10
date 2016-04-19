@@ -34,6 +34,7 @@ public class BusquedaAvanzada extends Activity {
 
     private RadioGroup generoGR;
     private RadioGroup publicoGR;
+    int pulsadoId=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,21 @@ public class BusquedaAvanzada extends Activity {
                 text.setText(titulo);
             }
         });
+        Button borrarG = (Button)findViewById(R.id.eliminarG);
+        borrarG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((RadioGroup)findViewById(R.id.genero)).clearCheck();
+            }
+        });
 
+        Button borrarP = (Button)findViewById(R.id.eliminarP);
+        borrarP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((RadioGroup)findViewById(R.id.publico)).clearCheck();
+            }
+        });
     }
 
     /*
