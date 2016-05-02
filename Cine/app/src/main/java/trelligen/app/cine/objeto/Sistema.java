@@ -61,7 +61,8 @@ public class Sistema {
 	*/
    public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha,
 												String director,int duracion,
-                                               String categoria,double valoracion, String publico){
+                                               ArrayList<String> categoria,double valoracion,
+                                              String publico){
         return dbpelicula.buscarPeliculas(titulo,fecha,director,
                             duracion,valoracion,categoria,publico);
     }

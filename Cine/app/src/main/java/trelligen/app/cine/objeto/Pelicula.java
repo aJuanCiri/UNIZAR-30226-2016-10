@@ -1,5 +1,7 @@
 package trelligen.app.cine.objeto;
 
+import java.util.ArrayList;
+
 /**
  * Encapsula toda la información sobre una película
  */
@@ -11,7 +13,7 @@ public class Pelicula {
     private String sinopsis;
     private int duracion;
     private double valoracion;
-    private String categoria;
+    private ArrayList<String> categoria;
     private String publico;
     private String imagenURL;
 
@@ -20,7 +22,7 @@ public class Pelicula {
 	*/
     public Pelicula(int id, String titulo, String fecha, String director,
                     String sinopsis, int duracion, double valoracion,
-                            String categoria, String publico, String imagenURL){
+                            ArrayList<String> categoria, String publico, String imagenURL){
         this.id = id;
         this.titulo = titulo;
         this.fecha = fecha;
@@ -85,7 +87,7 @@ public class Pelicula {
 	/*
 	* Método que devuelve la categoría de una película.
 	*/
-	public String getCategoria(){
+	public ArrayList<String> getCategoria(){
 		return categoria;
 	}
 

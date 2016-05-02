@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ import trelligen.app.cine.objeto.Sistema;
 public class BusquedaAvanzada extends Activity {
 
     private double valoracion;
-    private String genero;
     private String publico;
     private String titulo;
     private String fecha;
@@ -32,20 +32,19 @@ public class BusquedaAvanzada extends Activity {
     private Button busqueda;
     private Sistema sistema;
 
-    private RadioGroup generoGR;
     private RadioGroup publicoGR;
-    int pulsadoId=-1;
+    ArrayList<String> genero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_avanzada);
         sistema = new Sistema(getApplicationContext());
-
         busqueda = (Button)findViewById(R.id.busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                genero = new ArrayList<String>();
                 asignarParametros();
                 ArrayList<Pelicula> array=sistema.buscarPeliculas(titulo,fecha,director,duracion,genero,valoracion,publico);
                 TextView text = (TextView)findViewById(R.id.result);
@@ -54,13 +53,6 @@ public class BusquedaAvanzada extends Activity {
                     titulo = titulo+"\n"+array.get(i).getTitulo();
                 }
                 text.setText(titulo);
-            }
-        });
-        Button borrarG = (Button)findViewById(R.id.eliminarG);
-        borrarG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((RadioGroup)findViewById(R.id.genero)).clearCheck();
             }
         });
 
@@ -104,45 +96,42 @@ public class BusquedaAvanzada extends Activity {
      * Obtiene el genero introducido
      */
     private void obtenerGenero() {
-        generoGR = (RadioGroup)findViewById(R.id.genero);
-        int id = generoGR.getCheckedRadioButtonId();
-       /* if(id!=-1) {
-            genero = ((RadioButton) findViewById(id))
-                    .getText().toString();
-        } else {
-            genero = null;
-        }*/
-        switch(id) {
-            case R.id.accion:
-                genero = "Accion";
-                break;
-            case R.id.drama:
-                genero = "Drama";
-                break;
-            case R.id.lucha:
-                genero = "Lucha";
-                break;
-            case R.id.terror:
-                genero = "Terror";
-                break;
-            case R.id.comedia:
-                genero = "Comedia";
-                break;
-            case R.id.fantasia:
-                genero = "Fantasia";
-                break;
-            case R.id.suspense:
-                genero = "Suspense";
-                break;
-            case R.id.musical:
-                genero = "Musical";
-                break;
-            case R.id.cficcion:
-                genero = "C.Ficcion";
-                break;
-            default:
-                genero = null;
-                break;
+        CheckBox accion = (CheckBox)findViewById(R.id.accion);
+        CheckBox drama = (CheckBox)findViewById(R.id.drama);
+        CheckBox lucha = (CheckBox)findViewById(R.id.lucha);
+        CheckBox terror = (CheckBox)findViewById(R.id.terror);
+        CheckBox comedia = (CheckBox)findViewById(R.id.comedia);
+        CheckBox fantasia = (CheckBox)findViewById(R.id.fantasia);
+        CheckBox suspense = (CheckBox)findViewById(R.id.suspense);
+        CheckBox musical = (CheckBox)findViewById(R.id.musical);
+        CheckBox cficcion = (CheckBox)findViewById(R.id.cficcion);
+
+        if(accion.isChecked()) {
+            genero.add("Accion");
+        }
+        if(drama.isChecked()) {
+            genero.add("Drama");
+        }
+        if(lucha.isChecked()) {
+            genero.add("Lucha");
+        }
+        if(terror.isChecked()) {
+            genero.add("Terror");
+        }
+        if(comedia.isChecked()) {
+            genero.add("Comedia");
+        }
+        if(fantasia.isChecked()) {
+            genero.add("Fantasia");
+        }
+        if(suspense.isChecked()) {
+            genero.add("Suspense");
+        }
+        if(musical.isChecked()) {
+            genero.add("Musical");
+        }
+        if(cficcion.isChecked()) {
+            genero.add("C.Ficcion");
         }
     }
 

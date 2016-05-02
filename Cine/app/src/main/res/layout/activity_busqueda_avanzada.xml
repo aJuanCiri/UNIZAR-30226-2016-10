@@ -97,82 +97,90 @@
             android:elegantTextHeight="false"
             android:layout_marginLeft="10dp" />
 
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
-            <RadioGroup
-                android:layout_width="106dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:id="@+id/genero">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Acción"
-                    android:id="@+id/accion" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Drama"
-                    android:id="@+id/drama" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lucha"
-                    android:id="@+id/lucha" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Terror"
-                    android:id="@+id/terror" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comedia"
-                    android:id="@+id/comedia" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fantasía"
-                    android:id="@+id/fantasia" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Suspense"
-                    android:id="@+id/suspense" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musical"
-                    android:id="@+id/musical" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="C.Ficción"
-                    android:id="@+id/cficcion" />
-            </RadioGroup>
-
-            <Button
+            <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eliminar Genero"
-                android:id="@+id/eliminarG"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="110dp"
-                android:layout_marginLeft="50dp" />
+                android:text="Acción"
+                android:id="@+id/accion"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drama"
+                android:id="@+id/drama"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lucha"
+                android:id="@+id/lucha"
+                android:layout_marginLeft="17dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terror"
+                android:id="@+id/terror"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comedia"
+                android:id="@+id/comedia"
+                android:layout_marginLeft="26dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fantasia"
+                android:id="@+id/fantasia"
+                android:layout_marginLeft="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suspense"
+                android:id="@+id/suspense"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Musical"
+                android:id="@+id/musical"
+                android:layout_marginLeft="3dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C.Ficción"
+                android:id="@+id/cficcion"
+                android:layout_marginLeft="9dp" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

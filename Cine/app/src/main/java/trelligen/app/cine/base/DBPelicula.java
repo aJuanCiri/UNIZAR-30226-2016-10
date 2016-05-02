@@ -3,7 +3,7 @@ package trelligen.app.cine.base;
 import android.util.Log;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import trelligen.app.cine.objeto.Cursor;
+import trelligen.app.cine.objeto.CursorPelicula;
 import trelligen.app.cine.objeto.Pelicula;
 
 /**
@@ -33,19 +33,15 @@ public class DBPelicula {
 				"d.publico=pub.nombre";
 		//Obtiene el resultado de la consulta.
         ResultSet resultado = gestordb.getRst(consulta);
+		CursorPelicula cursor = new CursorPelicula(resultado,gestordb);
+		Thread t = new Thread(cursor);
+		t.start();
 		try {
-			resultado.next();
-			//Encapsula la informacion en la clase Pelicula.
-			pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
-					resultado.getString(3), resultado.getString(4),
-					resultado.getString(7), resultado.getInt(5),
-					resultado.getDouble(6), resultado.getString(8),
-					resultado.getString(9), resultado.getString(10));
-
+			t.join();
 		} catch(Exception e) {
-			Log.d("RST","Error al obtener el datos");
-			//Si ocurre un error devuelve null.
+
 		}
+		pelicula = cursor.getArray().get(0);
 		//Devuelve la pelicula.
         return pelicula;
     }
@@ -119,12 +115,9 @@ public class DBPelicula {
 	 */
 	public ArrayList<Pelicula> buscarPeliculas(String titulo, String fecha, String director,
 											   Integer duracion,
-											Double valoracion, String categoria, String publico){
+											Double valoracion, ArrayList<String> categoria, String publico){
 		//Comprueba que parametros son validos y construye la consulta.
 		String condiciones = "";
-		if (titulo!=null) {
-			condiciones = condiciones+ " AND p.titulo='" + titulo+"'";
-		}
 		if(fecha!=null) {
 			condiciones = condiciones+" AND p.fecha='" + fecha+"'";
 		}
@@ -137,34 +130,37 @@ public class DBPelicula {
 		if(valoracion>0) {
 			condiciones = condiciones+" AND p.valoracion='" + valoracion+"'";
 		}
-		if(categoria!=null) {
-			condiciones = condiciones+" AND e.categoria='" + categoria+"'";
-		}
 		if(publico!=null) {
 			condiciones = condiciones+" AND d.publico='" + publico+"'";
 		}
+		if(!categoria.isEmpty()) {
+			condiciones = condiciones+" AND (e.categoria='" +
+					categoria.get(0)+"'";
+			for(int i = 1; i<categoria.size(); i++) {
+				condiciones = condiciones+" OR e.categoria='" +
+						categoria.get(i)+"'";
+			}
+			condiciones = condiciones+")";
+		}
 		Log.d("CONDICIONES",condiciones);
 		//Realiza la consulta.
-		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
+		ResultSet resultado = gestordb.getRst("SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
-				"d.publico=pub.nombre"+condiciones);
-
-		ArrayList<Pelicula> array = new ArrayList<Pelicula>();
-		Cursor cursor = new Cursor(resultado);
+				"d.publico=pub.nombre"+condiciones+" ORDER BY p.id");
+		CursorPelicula cursor = null;
+		if(titulo == null) {
+			cursor = new CursorPelicula(resultado,gestordb);
+		} else {
+			cursor = new CursorPelicula(resultado,gestordb,titulo);
+		}
+		ArrayList<Pelicula> array = null;
 		try {
-			avanzar(cursor);
-			//Añade las consultas al array.
-			while(cursor.hasNext()) {
-				resultado = cursor.getRst();
-				array.add(pelicula = new Pelicula(resultado.getInt(1),resultado.getString(2),
-						resultado.getString(3), resultado.getString(4),
-						resultado.getString(7), resultado.getInt(5),
-						resultado.getDouble(6), resultado.getString(8),
-						resultado.getString(9), resultado.getString(10)));
-				avanzar(cursor);
-			}
+			Thread t = new Thread(cursor);
+			t.start();
+			t.join();
+			array = cursor.getArray();
 		} catch(Exception e) {
 			//Si se produce un error devuelve null.
 			return null;
@@ -190,30 +186,18 @@ public class DBPelicula {
 		//Realiza la consulta.
 
 
-		ArrayList<Pelicula> array = new ArrayList<Pelicula>();
+		ArrayList<Pelicula> array = null;
 		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre");
-		Cursor cursor = new Cursor(resultado);
+		CursorPelicula cursor = new CursorPelicula(resultado,gestordb);
 		try {
-			avanzar(cursor);
-			//Añade las peliculas a la lista.
-			while(cursor.hasNext()) {
-				resultado = cursor.getRst();
-				array.add(new Pelicula(resultado.getInt(1),resultado.getString(2),
-						resultado.getString(3), resultado.getString(4),
-						resultado.getString(7), resultado.getInt(5),
-						resultado.getDouble(6), resultado.getString(8),
-						resultado.getString(9), resultado.getString(10)));
-				avanzar(cursor);
-			}
-			if (cursor.hasNext()) {
-				Log.d("CURSOR","TRUE");
-			} else {
-				Log.d("CURSOR","FALSE");
-			}
+			Thread t = new Thread(cursor);
+			t.start();
+			t.join();
+			array = cursor.getArray();
 		} catch(Exception e) {
 			//Si hay algun error devuelve null.
 			Log.d("DATOS",e.toString());
@@ -221,15 +205,5 @@ public class DBPelicula {
 		}
 		//Devuelve el array.
 		return array;
-	}
-
-	private void avanzar(Cursor cursor) {
-		try {
-			Thread t = new Thread(cursor);
-			t.start();
-			t.join();
-		} catch (Exception e) {
-
-		}
 	}
 }

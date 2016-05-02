@@ -110,7 +110,7 @@ public class PantallaPrincipal extends AppCompatActivity
             startActivity(new Intent(PantallaPrincipal.this,InfoPelicula.class));
         }
         else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(PantallaPrincipal.this,Registrar.class));
+            startActivity(new Intent(PantallaPrincipal.this,BusquedaAvanzada.class));
         }
         else if (id == R.id.categorias) {
 
