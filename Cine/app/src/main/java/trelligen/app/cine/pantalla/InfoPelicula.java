@@ -136,26 +136,15 @@ public class InfoPelicula extends AppCompatActivity
 
         if (id == R.id.perfil) {
             startActivity(new Intent(InfoPelicula.this, Perfil.class));
-        }
-        else if (id == R.id.cerrar_sesion) {
+        } else if (id == R.id.cerrar_sesion) {
             startActivity(new Intent(InfoPelicula.this, Login.class));
-        }
-        else if (id == R.id.pantalla_principal) {
+        } else if (id == R.id.pantalla_principal) {
             startActivity(new Intent(InfoPelicula.this, PantallaPrincipal.class));
-        }
-        else if (id == R.id.mejor_valoradas) {
-            startActivity(new Intent(InfoPelicula.this, EditarPerfil.class));
-        }
-        else if (id == R.id.ult_busquedas) {
-            startActivity(new Intent(InfoPelicula.this,InfoPelicula.class));
-        }
-        else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(InfoPelicula.this,Registrar.class));
-        }
-        else if (id == R.id.categorias) {
+        } else if (id == R.id.bus_avanzada) {
+            startActivity(new Intent(InfoPelicula.this, BusquedaAvanzada.class));
+        } else if (id == R.id.mis_vistas) {
 
-        }
-        else if (id == R.id.mi_coleccion) {
+        } else if (id == R.id.mis_pendientes) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

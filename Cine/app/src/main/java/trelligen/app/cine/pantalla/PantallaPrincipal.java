@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.app.SearchManager;
+import android.support.v7.widget.SearchView;
+import android.content.Context;
 
 import java.util.ArrayList;
 
@@ -105,7 +108,32 @@ public class PantallaPrincipal extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.pantalla_principal, menu);
-        return true;
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search)
+                .getActionView();
+        if (null != searchView) {
+            searchView.setSearchableInfo(searchManager
+                    .getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(false);
+        }
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+                // this is your adapter that will be filtered
+                return true;
+            }
+
+            public boolean onQueryTextSubmit(String query) {
+                //Here u can get the value "query" which is entered in the search box.
+                Intent i = new Intent(PantallaPrincipal.this, InfoPelicula.class);
+                i.putExtra("pelicula",query);
+                startActivity(i);
+                return true;
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     /*
@@ -123,15 +151,11 @@ public class PantallaPrincipal extends AppCompatActivity
             startActivity(new Intent(PantallaPrincipal.this, Login.class));
         } else if (id == R.id.pantalla_principal) {
             startActivity(new Intent(PantallaPrincipal.this, PantallaPrincipal.class));
-        } else if (id == R.id.mejor_valoradas) {
-            startActivity(new Intent(PantallaPrincipal.this, EditarPerfil.class));
-        } else if (id == R.id.ult_busquedas) {
-            startActivity(new Intent(PantallaPrincipal.this, InfoPelicula.class));
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(PantallaPrincipal.this, BusquedaAvanzada.class));
-        } else if (id == R.id.categorias) {
+        } else if (id == R.id.mis_vistas) {
 
-        } else if (id == R.id.mi_coleccion) {
+        } else if (id == R.id.mis_pendientes) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

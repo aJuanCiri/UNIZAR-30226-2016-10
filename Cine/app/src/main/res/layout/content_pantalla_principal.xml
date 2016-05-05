@@ -31,7 +31,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/pelicula_imagen2"
+                android:layout_alignRight="@+id/pelicula_imagen3"
+                android:layout_alignEnd="@+id/pelicula_imagen3" />
 
             <TextView
                 android:layout_width="wrap_content"

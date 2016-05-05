@@ -116,26 +116,15 @@ public class Perfil extends AppCompatActivity
 
         if (id == R.id.perfil) {
             startActivity(new Intent(Perfil.this, Perfil.class));
-        }
-        else if (id == R.id.cerrar_sesion) {
+        } else if (id == R.id.cerrar_sesion) {
             startActivity(new Intent(Perfil.this, Login.class));
-        }
-        else if (id == R.id.pantalla_principal) {
+        } else if (id == R.id.pantalla_principal) {
             startActivity(new Intent(Perfil.this, PantallaPrincipal.class));
-        }
-        else if (id == R.id.mejor_valoradas) {
-            startActivity(new Intent(Perfil.this, EditarPerfil.class));
-        }
-        else if (id == R.id.ult_busquedas) {
-            startActivity(new Intent(Perfil.this,InfoPelicula.class));
-        }
-        else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(Perfil.this,Registrar.class));
-        }
-        else if (id == R.id.categorias) {
+        } else if (id == R.id.bus_avanzada) {
+            startActivity(new Intent(Perfil.this, BusquedaAvanzada.class));
+        } else if (id == R.id.mis_vistas) {
 
-        }
-        else if (id == R.id.mi_coleccion) {
+        } else if (id == R.id.mis_pendientes) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

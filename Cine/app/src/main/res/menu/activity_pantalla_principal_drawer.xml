@@ -11,34 +11,20 @@
             android:icon="@drawable/ic_menu_send"
             android:title="Perfil" />
         <item
-            android:id="@+id/mi_coleccion"
+            android:id="@+id/mis_vistas"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Mi colección" />
+            android:title="Mis vistas" />
+        <item
+            android:id="@+id/mis_pendientes"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Mis pendientes" />
         <item
             android:id="@+id/cerrar_sesion"
             android:icon="@drawable/ic_menu_send"
             android:title="Cerrar sesión" />
+        <item
+            android:id="@+id/bus_avanzada"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Búsqueda avanzada" />
     </item>
-
-    <item android:title="Búsqueda:">
-        <menu>
-            <item
-                android:id="@+id/mejor_valoradas"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Mejor valoradas" />
-            <item
-                android:id="@+id/ult_busquedas"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Últimas búsquedas" />
-            <item
-                android:id="@+id/bus_avanzada"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Búsqueda avanzada" />
-            <item
-                android:id="@+id/categorias"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Categorías" />
-        </menu>
-    </item>
-
 </menu>
