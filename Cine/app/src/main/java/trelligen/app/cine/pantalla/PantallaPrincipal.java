@@ -10,8 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
 import trelligen.app.cine.R;
 import trelligen.app.cine.objeto.MostrarImagen;
 import trelligen.app.cine.objeto.Pelicula;
@@ -23,10 +27,11 @@ import trelligen.app.cine.objeto.Sistema;
  */
 public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    TextView test_text;
     private Sistema sistema;
     private TextView titulo;
     private ImageView imagen;
+    ArrayList<Integer> pelis = new ArrayList<Integer>();
+    ArrayList<Integer> layaout = new ArrayList<Integer>();
 
     /*
     * Mñetodo que se activa al abrir la aplicación para mostrar la pantalla
@@ -41,6 +46,38 @@ public class PantallaPrincipal extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        titulo = (TextView) findViewById(R.id.pelicula_titulo1);
+        titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                infoPelicula(R.id.pelicula_titulo1);
+            }
+        });
+
+        titulo = (TextView) findViewById(R.id.pelicula_titulo2);
+        titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                infoPelicula(R.id.pelicula_titulo2);
+            }
+        });
+
+        titulo = (TextView) findViewById(R.id.pelicula_titulo3);
+        titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                infoPelicula(R.id.pelicula_titulo3);
+            }
+        });
+
+        titulo = (TextView) findViewById(R.id.pelicula_titulo4);
+        titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                infoPelicula(R.id.pelicula_titulo4);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,19 +108,6 @@ public class PantallaPrincipal extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -93,29 +117,21 @@ public class PantallaPrincipal extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.perfil) {
             startActivity(new Intent(PantallaPrincipal.this, Perfil.class));
-        }
-        else if (id == R.id.cerrar_sesion) {
+        } else if (id == R.id.cerrar_sesion) {
             startActivity(new Intent(PantallaPrincipal.this, Login.class));
-        }
-        else if (id == R.id.pantalla_principal) {
+        } else if (id == R.id.pantalla_principal) {
             startActivity(new Intent(PantallaPrincipal.this, PantallaPrincipal.class));
-        }
-        else if (id == R.id.mejor_valoradas) {
+        } else if (id == R.id.mejor_valoradas) {
             startActivity(new Intent(PantallaPrincipal.this, EditarPerfil.class));
-        }
-        else if (id == R.id.ult_busquedas) {
-            startActivity(new Intent(PantallaPrincipal.this,InfoPelicula.class));
-        }
-        else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(PantallaPrincipal.this,BusquedaAvanzada.class));
-        }
-        else if (id == R.id.categorias) {
+        } else if (id == R.id.ult_busquedas) {
+            startActivity(new Intent(PantallaPrincipal.this, InfoPelicula.class));
+        } else if (id == R.id.bus_avanzada) {
+            startActivity(new Intent(PantallaPrincipal.this, BusquedaAvanzada.class));
+        } else if (id == R.id.categorias) {
 
-        }
-        else if (id == R.id.mi_coleccion) {
+        } else if (id == R.id.mi_coleccion) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -127,36 +143,25 @@ public class PantallaPrincipal extends AppCompatActivity
     * Método que carga la información de todas las películas por pantalla.
      */
     private void cargarPeliculas(){
-        cargarInformacionPelicula(R.id.pelicula_titulo1,R.id.pelicula_imagen1,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo2,R.id.pelicula_imagen2,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo3,R.id.pelicula_imagen3,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo4,R.id.pelicula_imagen4,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo5,R.id.pelicula_imagen5,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo6,R.id.pelicula_imagen6,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo7,R.id.pelicula_imagen7,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo8,R.id.pelicula_imagen8,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo9,R.id.pelicula_imagen9,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo10,R.id.pelicula_imagen10,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo11,R.id.pelicula_imagen11,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo12,R.id.pelicula_imagen12,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo13,R.id.pelicula_imagen13,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo14,R.id.pelicula_imagen14,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo15,R.id.pelicula_imagen15,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo16,R.id.pelicula_imagen16,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo17,R.id.pelicula_imagen17,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo18,R.id.pelicula_imagen18,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo19,R.id.pelicula_imagen19,1);
-        cargarInformacionPelicula(R.id.pelicula_titulo20,R.id.pelicula_imagen20,1);
+        cargarInformacionPelicula(R.id.pelicula_titulo1,R.id.pelicula_imagen1,1,0);
+        layaout.add(0,new Integer(R.id.pelicula_titulo1));
+        cargarInformacionPelicula(R.id.pelicula_titulo2,R.id.pelicula_imagen2,1,1);
+        layaout.add(1,new Integer(R.id.pelicula_titulo2));
+        cargarInformacionPelicula(R.id.pelicula_titulo3,R.id.pelicula_imagen3,1,2);
+        layaout.add(2,new Integer(R.id.pelicula_titulo3));
+        cargarInformacionPelicula(R.id.pelicula_titulo4,R.id.pelicula_imagen4,1,3);
+        layaout.add(3,new Integer(R.id.pelicula_titulo4));
     }
 
     /*
     * Método que muestra la información de la película solicitada por pantalla.
      */
-    private void cargarInformacionPelicula(int id_titulo,int id_imagen,int peli){
+    private void cargarInformacionPelicula(int id_titulo,int id_imagen,int peli,int indice){
         titulo = (TextView) findViewById(id_titulo);
         imagen = (ImageView) findViewById(id_imagen);
 
-        Pelicula pelicula = sistema.getPelicula(1);
+        Pelicula pelicula = sistema.getPelicula(peli);
+        pelis.add(indice,pelicula.getId());
 
         titulo.setText(pelicula.getTitulo());
 
@@ -176,5 +181,16 @@ public class PantallaPrincipal extends AppCompatActivity
 
         }
         imagen.setImageBitmap(mostrar.getImagen());
+    }
+
+    /*
+    * Obtiene la película seleccionada y muestra una pantalla con su
+    * información.
+     */
+    private void infoPelicula(int id_titulo){
+        Intent i = new Intent(PantallaPrincipal.this, InfoPelicula.class);
+        int indice = layaout.indexOf(new Integer(id_titulo));
+        i.putExtra("pelicula",pelis.get(indice));
+        startActivity(i);
     }
 }

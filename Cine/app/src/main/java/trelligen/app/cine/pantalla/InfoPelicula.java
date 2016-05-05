@@ -44,7 +44,7 @@ public class InfoPelicula extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_pelicula);
         sistema = new Sistema(getApplicationContext());
-        cargarInformacionPelicula(1);
+        cargarInformacionPelicula(getIntent().getExtras().getString("pelicula"));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,7 +62,7 @@ public class InfoPelicula extends AppCompatActivity
     /*
     * Método que carga la información de la película por pantalla.
      */
-    private void cargarInformacionPelicula(int id_pelicula){
+    private void cargarInformacionPelicula(String title){
         titulo = (TextView) findViewById(R.id.pelicula_titulo);
         fecha = (TextView) findViewById(R.id.pelicula_fecha);
         duracion = (TextView) findViewById(R.id.pelicula_duracion);
@@ -71,7 +71,7 @@ public class InfoPelicula extends AppCompatActivity
         valoracion = (RatingBar) findViewById(R.id.pelicula_valoracion);
         imagen = (ImageView) findViewById(R.id.pelicula_imagen);
 
-        Pelicula pelicula = sistema.getPelicula(id_pelicula);
+        Pelicula pelicula = sistema.getPelicula(getIntent().getExtras().getInt("pelicula"));
 
         titulo.setText(pelicula.getTitulo());
         fecha.setText(pelicula.getFecha());
