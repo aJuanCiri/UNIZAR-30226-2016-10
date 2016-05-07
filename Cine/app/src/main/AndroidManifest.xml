@@ -47,6 +47,10 @@
             android:name=".pantalla.BusquedaAvanzada"
             android:label="@string/title_activity_busquedaavanzada"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pantalla.Resultados"
+            android:label="@string/title_activity_resultados"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

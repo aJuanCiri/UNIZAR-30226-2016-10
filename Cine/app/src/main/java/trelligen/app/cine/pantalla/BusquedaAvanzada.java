@@ -1,6 +1,7 @@
 package trelligen.app.cine.pantalla;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,6 @@ public class BusquedaAvanzada extends Activity {
 
 
     private Button busqueda;
-    private Sistema sistema;
 
     private RadioGroup publicoGR;
     ArrayList<String> genero;
@@ -39,20 +39,21 @@ public class BusquedaAvanzada extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_avanzada);
-        sistema = new Sistema(getApplicationContext());
         busqueda = (Button)findViewById(R.id.busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 genero = new ArrayList<String>();
                 asignarParametros();
-                ArrayList<Pelicula> array=sistema.buscarPeliculas(titulo,fecha,director,duracion,genero,valoracion,publico);
-                TextView text = (TextView)findViewById(R.id.result);
-                titulo="";
-                for(int i=0;i<array.size();i++) {
-                    titulo = titulo+"\n"+array.get(i).getTitulo();
-                }
-                text.setText(titulo);
+                Intent i = new Intent(BusquedaAvanzada.this, Resultados.class);
+                i.putExtra("titulo",titulo);
+                i.putExtra("fecha",fecha);
+                i.putExtra("director",director);
+                i.putExtra("duracion",duracion);
+                i.putExtra("valoracion",valoracion);
+                i.putExtra("publico",publico);
+                i.putExtra("genero",genero);
+                startActivity(i);
             }
         });
 

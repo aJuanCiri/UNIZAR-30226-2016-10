@@ -133,7 +133,7 @@ public class DBPelicula {
 		if(publico!=null) {
 			condiciones = condiciones+" AND d.publico='" + publico+"'";
 		}
-		if(!categoria.isEmpty()) {
+		if(categoria != null && !categoria.isEmpty()) {
 			condiciones = condiciones+" AND (e.categoria='" +
 					categoria.get(0)+"'";
 			for(int i = 1; i<categoria.size(); i++) {

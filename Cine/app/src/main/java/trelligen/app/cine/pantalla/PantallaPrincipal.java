@@ -125,8 +125,14 @@ public class PantallaPrincipal extends AppCompatActivity
 
             public boolean onQueryTextSubmit(String query) {
                 //Here u can get the value "query" which is entered in the search box.
-                Intent i = new Intent(PantallaPrincipal.this, InfoPelicula.class);
-                i.putExtra("pelicula",query);
+                Intent i = new Intent(PantallaPrincipal.this, Resultados.class);
+                i.putExtra("titulo",query);
+                /*i.putExtra("fecha",null);
+                i.putExtra("director",null);
+                i.putExtra("duracion",duracion);
+                i.putExtra("valoracion",valoracion);
+                i.putExtra("publico",publico);
+                i.putExtra("genero",genero);*/
                 startActivity(i);
                 return true;
             }
