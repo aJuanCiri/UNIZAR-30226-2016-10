@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="210dp"
+        android:padding="1dp"
+        android:background="@android:color/darker_gray"
+        android:scaleType="fitXY"
+        android:id="@+id/resultado_imagen1"
+        android:src="@drawable/noimglg"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Titulo"
+        android:id="@+id/resultado_titulo1"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_below="@+id/resultado_imagen1"
+        android:layout_alignLeft="@+id/resultado_imagen1"
+        android:layout_alignStart="@+id/resultado_imagen1" />
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="210dp"
+        android:padding="1dp"
+        android:background="@android:color/darker_gray"
+        android:scaleType="fitXY"
+        android:id="@+id/resultado_imagen2"
+        android:src="@drawable/noimglg"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="190dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Titulo"
+        android:id="@+id/resultado_titulo2"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_below="@+id/resultado_imagen2"
+        android:layout_alignLeft="@+id/resultado_imagen2"
+        android:layout_alignStart="@+id/resultado_imagen2" />
+
+</RelativeLayout>
