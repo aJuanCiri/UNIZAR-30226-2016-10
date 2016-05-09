@@ -26,8 +26,8 @@ public class DBPelicula {
 	 */
     public Pelicula getInformacion(int id){
 		//Consulta a realizar.
-        String consulta = "SELECT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
-				"p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
+        String consulta = "SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
+				"p.valoracion, p.sinopsis, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE p.id="+id+" AND " +
 				"p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre";
@@ -145,7 +145,7 @@ public class DBPelicula {
 		Log.d("CONDICIONES",condiciones);
 		//Realiza la consulta.
 		ResultSet resultado = gestordb.getRst("SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, " +
-				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
+				"p.duracion,p.valoracion, p.sinopsis, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre"+condiciones+" ORDER BY p.id");
@@ -187,8 +187,8 @@ public class DBPelicula {
 
 
 		ArrayList<Pelicula> array = null;
-		ResultSet resultado = gestordb.getRst("SELECT p.id, p.titulo, p.fecha, p.director, " +
-				"p.duracion,p.valoracion, p.sinopsis, c.nombre, pub.nombre, p.URL FROM Pelicula p, " +
+		ResultSet resultado = gestordb.getRst("SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, " +
+				"p.duracion,p.valoracion, p.sinopsis, pub.nombre, p.URL FROM Pelicula p, " +
 				"Categoria c, Publico pub, Dirigida d, Es e WHERE"+
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre");

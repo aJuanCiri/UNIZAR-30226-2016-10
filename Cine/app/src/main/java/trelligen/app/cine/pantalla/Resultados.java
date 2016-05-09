@@ -27,9 +27,14 @@ public class Resultados extends Activity{
     private Button anterior, siguiente;
     private ArrayList<Pelicula> listaRecibida;
     private int numResultados;
-    private final int RESULTADOS_POR_PAGINA = 2;
+    private final int RESULTADOS_POR_PAGINA = 4;
     private ListView lista;
     private int paginaActual = 0;
+
+    private String nombrePeli, fecha, director,publico;
+    private int duracion;
+    private double valoracion;
+    private ArrayList<String> categoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +47,20 @@ public class Resultados extends Activity{
         siguiente = (Button) findViewById(R.id.resultados_siguiente);
         anterior.setVisibility(View.INVISIBLE); //Al estar en la primera página, no debe mostrarse
 
+        obtenerDatos();
         listaRecibida = solicitarPeliculas();
 
         numResultados = listaRecibida.size();
         //Si hay menos resultados que los que se muestran por página, desaparece el botón siguiente
-        if(numResultados<=RESULTADOS_POR_PAGINA)siguiente.setVisibility(View.INVISIBLE);
-        ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
-                listaRecibida.subList(0,RESULTADOS_POR_PAGINA));
+        ArrayList<Pelicula> resultados_pagina = null;
+        if(numResultados<=RESULTADOS_POR_PAGINA){
+            siguiente.setVisibility(View.INVISIBLE);
+            resultados_pagina = new ArrayList<Pelicula>(
+                    listaRecibida.subList(0,listaRecibida.size()));
+        } else {
+            resultados_pagina = new ArrayList<Pelicula>(
+                    listaRecibida.subList(0,RESULTADOS_POR_PAGINA));
+        }
 
         adapter = new ListViewAdapter(this,resultados_pagina);
         lista.setAdapter(adapter);
@@ -111,16 +123,8 @@ public class Resultados extends Activity{
         Función provisional (Reemplazar por el Array recibido)
      */
     private ArrayList<Pelicula> solicitarPeliculas(){
-        ArrayList<Pelicula> resultadoTest = new ArrayList<Pelicula>();
-        resultadoTest.add(new Pelicula(0,"Holmes",null,null,null,0,0,null,null,"http://www.elmulticine.com/imagenes/carteles/Sherlock-Holmes-b.jpg"));
-        resultadoTest.add(new Pelicula(1,"Harry Potter",null,null,null,0,0,null,null,"http://www.elmulticine.com/imagenes/carteles/2/harry-reliq-2-pos-b.jpg"));
-        resultadoTest.add(new Pelicula(2,"Iron Man",null,null,null,0,0,null,null,"http://i.blogs.es/71ed48/iron-20man-203-20poster-20final/original.jpg"));
-        resultadoTest.add(new Pelicula(3,"Intocable",null,null,null,0,0,null,null,"http://www.labutaca.net/imagenes/wp-content/original/2012_03/intocable-cartel-1.jpg"));
-        resultadoTest.add(new Pelicula(4,"Shutter Island",null,null,null,0,0,null,null,"http://www.labutaca.net/peliculas/wp-content/uploads/2010/01/shutter-island-cartel.jpg"));
-        resultadoTest.add(new Pelicula(5,"Atrápame si puedes",null,null,null,0,0,null,null,"http://es.web.img3.acsta.net/medias/nmedia/18/68/88/61/20071858.jpg"));
-        resultadoTest.add(new Pelicula(6,"Torrente 4",null,null,null,0,0,null,null,"http://images2.coveralia.com/dvd/t/Torrente_4_Crisis_Letal-Cartel.jpg"));
-        /*ArrayList<Pelicula> resultadoTest = sistema.buscarPeliculas(nombrePeli,fecha, director,
-                duracion,categoria,valoracion,publico);*/
+         ArrayList<Pelicula> resultadoTest = sistema.buscarPeliculas(nombrePeli,fecha, director,
+                duracion,categoria,valoracion,publico);
         return resultadoTest;
     }
 
@@ -129,5 +133,15 @@ public class Resultados extends Activity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.pantalla_principal, menu);
         return true;
+    }
+
+    private void obtenerDatos() {
+        nombrePeli = getIntent().getExtras().getString("titulo");
+        fecha = getIntent().getExtras().getString("fecha");
+        director = getIntent().getExtras().getString("director");
+        publico = getIntent().getExtras().getString("publico");
+        duracion = getIntent().getExtras().getInt("duracion");
+        valoracion = getIntent().getExtras().getDouble("valoracion");
+        categoria = getIntent().getExtras().getStringArrayList("genero");
     }
 }
