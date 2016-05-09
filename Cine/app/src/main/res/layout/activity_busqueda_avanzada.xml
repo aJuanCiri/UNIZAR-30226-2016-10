@@ -21,11 +21,9 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/titulo"
-            android:textColor="@color/abc_input_method_navigation_guard"
             android:layout_marginRight="70dp"
             android:layout_marginLeft="10dp"
-            android:hint="Titulo"
-            android:textColorHint="@color/abc_color_highlight_material" />
+            android:hint="Titulo" />
 
         <EditText
             android:layout_width="300dp"
@@ -33,9 +31,7 @@
             android:id="@+id/fecha"
             android:layout_weight="1"
             android:layout_marginRight="70dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
             android:layout_marginLeft="10dp"
-            android:textColorHint="@color/abc_color_highlight_material"
             android:hint="Fecha" />
 
         <EditText
@@ -44,11 +40,9 @@
             android:id="@+id/director"
             android:layout_weight="0.12"
             android:layout_marginRight="70dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
             android:layout_marginLeft="10dp"
             android:autoText="false"
-            android:hint="Director"
-            android:textColorHint="@color/abc_color_highlight_material" />
+            android:hint="Director" />
 
         <EditText
             android:layout_width="300dp"
@@ -58,8 +52,6 @@
             android:id="@+id/duracion"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="70dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
-            android:textColorHint="@color/abc_color_highlight_material"
             android:hint="Duración" />
 
         <TextView
@@ -185,50 +177,44 @@
             android:textSize="25dp"
             android:layout_marginLeft="10dp" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/publico"
+            android:layout_marginLeft="40dp">
 
-            <RadioGroup
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/publico"
-                android:layout_marginLeft="40dp">
+                android:text="Cualquiera"
+                android:id="@+id/cualquiera"
+                android:checked="true" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Infantil"
-                    android:id="@+id/infantil" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juvenil"
-                    android:id="@+id/juvenil" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Familiar"
-                    android:id="@+id/familiar" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Adulto"
-                    android:id="@+id/adulto" />
-
-            </RadioGroup>
-
-            <Button
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eliminar Publico"
-                android:id="@+id/eliminarP"
-                android:layout_marginLeft="90dp" />
-        </LinearLayout>
+                android:text="Infantil"
+                android:id="@+id/infantil" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Juvenil"
+                android:id="@+id/juvenil" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Familiar"
+                android:id="@+id/familiar" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adulto"
+                android:id="@+id/adulto" />
+
+        </RadioGroup>
 
 
         <Button

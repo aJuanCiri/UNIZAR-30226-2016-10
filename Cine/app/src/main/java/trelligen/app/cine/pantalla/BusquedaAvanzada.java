@@ -56,14 +56,6 @@ public class BusquedaAvanzada extends Activity {
                 startActivity(i);
             }
         });
-
-        Button borrarP = (Button)findViewById(R.id.eliminarP);
-        borrarP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((RadioGroup)findViewById(R.id.publico)).clearCheck();
-            }
-        });
     }
 
     /*
