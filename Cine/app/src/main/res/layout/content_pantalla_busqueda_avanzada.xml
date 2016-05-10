@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="BUSQUEDA AVANZADA"
+            android:id="@+id/textView3"
+            android:elegantTextHeight="false"
+            android:textSize="30dp" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/titulo"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:hint="Titulo" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/fecha"
+            android:layout_weight="1"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Fecha" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/director"
+            android:layout_weight="0.12"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="10dp"
+            android:autoText="false"
+            android:hint="Director" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/duracion"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="70dp"
+            android:hint="Duración" />
+
+        <TextView
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="GÉNERO"
+            android:id="@+id/textView4"
+            android:textSize="25dp"
+            android:layout_marginTop="20dp"
+            android:elegantTextHeight="false"
+            android:layout_marginLeft="10dp" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acción"
+                android:id="@+id/accion"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drama"
+                android:id="@+id/drama"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lucha"
+                android:id="@+id/lucha"
+                android:layout_marginLeft="17dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terror"
+                android:id="@+id/terror"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comedia"
+                android:id="@+id/comedia"
+                android:layout_marginLeft="26dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fantasia"
+                android:id="@+id/fantasia"
+                android:layout_marginLeft="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suspense"
+                android:id="@+id/suspense"
+                android:layout_marginLeft="20dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Musical"
+                android:id="@+id/musical"
+                android:layout_marginLeft="3dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C.Ficción"
+                android:id="@+id/cficcion"
+                android:layout_marginLeft="9dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="VALORACIÓN"
+            android:id="@+id/textView6"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:textSize="25dp" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/valoracion"
+            android:layout_marginLeft="50dp"
+            android:clickable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="PÚBLICO"
+            android:id="@+id/textView8"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/publico"
+            android:layout_marginLeft="40dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cualquiera"
+                android:id="@+id/cualquiera"
+                android:checked="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infantil"
+                android:id="@+id/infantil" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Juvenil"
+                android:id="@+id/juvenil" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Familiar"
+                android:id="@+id/familiar" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adulto"
+                android:id="@+id/adulto" />
+
+        </RadioGroup>
+
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="BUSCAR"
+            android:id="@+id/busqueda"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp" />
+    </LinearLayout>
+</ScrollView>

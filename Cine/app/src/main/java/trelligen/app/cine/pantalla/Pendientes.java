@@ -3,8 +3,15 @@ package trelligen.app.cine.pantalla;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,7 +29,8 @@ import trelligen.app.cine.objeto.Sistema;
 /**
  * Muestra los resultados a partir de un Array de películas enviado.
  */
-public class Pendientes extends Activity{
+public class Pendientes extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListViewAdapter adapter;
     private Sistema sistema;    // Instancia de la clase sistema.
@@ -39,7 +47,7 @@ public class Pendientes extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_pantalla_pendientes);
+        setContentView(R.layout.activity_pantalla_pendientes);
 
         sistema = new Sistema(getApplicationContext()); // Obtiene la instancia de la clase sistema.
         lista = (ListView) findViewById(R.id.listView1);    // Lista de las películas a mostrar.
@@ -84,6 +92,18 @@ public class Pendientes extends Activity{
                 anterior_pagina();
             }
         });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     /*
@@ -159,13 +179,6 @@ public class Pendientes extends Activity{
         return resultadoTest;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.pantalla_principal, menu);
-        return true;
-    }
-
     /*
     * Método que obtiene la información del usuario.
      */
@@ -182,5 +195,52 @@ public class Pendientes extends Activity{
         Intent i = new Intent(Pendientes.this, InfoPelicula.class);
         i.putExtra("pelicula",listaRecibida.get(id).getId());
         startActivity(i);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*
+    * Método que muestra las opciones del menú desplegable y obtiene
+    * la seleccionada.
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.perfil) {
+            startActivity(new Intent(Pendientes.this, Perfil.class));
+        } else if (id == R.id.cerrar_sesion) {
+            startActivity(new Intent(Pendientes.this, Login.class));
+        } else if (id == R.id.pantalla_principal) {
+            startActivity(new Intent(Pendientes.this, PantallaPrincipal.class));
+        } else if (id == R.id.bus_avanzada) {
+            startActivity(new Intent(Pendientes.this, BusquedaAvanzada.class));
+        } else if (id == R.id.mis_vistas) {
+            startActivity(new Intent(Pendientes.this, Vistas.class));
+        } else if (id == R.id.mis_pendientes) {
+            startActivity(new Intent(Pendientes.this, Pendientes.class));
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
