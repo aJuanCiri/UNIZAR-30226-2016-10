@@ -37,7 +37,7 @@ public class PantallaPrincipal extends AppCompatActivity
     ArrayList<Integer> layaout = new ArrayList<Integer>();
 
     /*
-    * Mñetodo que se activa al abrir la aplicación para mostrar la pantalla
+    * Método que se activa al abrir la aplicación para mostrar la pantalla
     * principal e interactuar con el usuario.
      */
     @Override
@@ -160,9 +160,9 @@ public class PantallaPrincipal extends AppCompatActivity
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(PantallaPrincipal.this, BusquedaAvanzada.class));
         } else if (id == R.id.mis_vistas) {
-
+            startActivity(new Intent(PantallaPrincipal.this, Vistas.class));
         } else if (id == R.id.mis_pendientes) {
-
+            startActivity(new Intent(PantallaPrincipal.this, Pendientes.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

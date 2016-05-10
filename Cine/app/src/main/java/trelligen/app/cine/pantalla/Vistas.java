@@ -22,7 +22,7 @@ import trelligen.app.cine.objeto.Sistema;
 /**
  * Muestra los resultados a partir de un Array de películas enviado.
  */
-public class Resultados extends Activity{
+public class Vistas extends Activity{
 
     private ListViewAdapter adapter;
     private Sistema sistema;    // Instancia de la clase sistema.
@@ -34,15 +34,12 @@ public class Resultados extends Activity{
     private int paginaActual = 0;   // Número de página actual.
 
     // Datos de las búsqueda efectuada.
-    private String nombrePeli, fecha, director,publico;
-    private int duracion;
-    private double valoracion;
-    private ArrayList<String> categoria;
+    private String usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_pantalla_resultados);
+        setContentView(R.layout.content_pantalla_vistas);
 
         sistema = new Sistema(getApplicationContext()); // Obtiene la instancia de la clase sistema.
         lista = (ListView) findViewById(R.id.listView1);    // Lista de las películas a mostrar.
@@ -157,8 +154,8 @@ public class Resultados extends Activity{
      */
     private ArrayList<Pelicula> solicitarPeliculas(){
         // Obtiene el listado de las películas.
-         ArrayList<Pelicula> resultadoTest = sistema.buscarPeliculas(nombrePeli,fecha, director,
-                duracion,categoria,valoracion,publico);
+        usuario="javi@hotmail.com";
+        ArrayList<Pelicula> resultadoTest = sistema.obtenerVistas(usuario);
         return resultadoTest;
     }
 
@@ -170,16 +167,11 @@ public class Resultados extends Activity{
     }
 
     /*
-    * Método que obtiene la información de la película.
+    * Método que obtiene la información del usuario.
      */
     private void obtenerDatos() {
-        nombrePeli = getIntent().getExtras().getString("titulo");
-        fecha = getIntent().getExtras().getString("fecha");
-        director = getIntent().getExtras().getString("director");
-        publico = getIntent().getExtras().getString("publico");
-        duracion = getIntent().getExtras().getInt("duracion");
-        valoracion = getIntent().getExtras().getDouble("valoracion");
-        categoria = getIntent().getExtras().getStringArrayList("genero");
+        // Meter aqui la lectura del usuario en curso.
+        //usuario = getIntent().getExtras().getString("usuario");
     }
 
     /*
@@ -187,7 +179,7 @@ public class Resultados extends Activity{
     * información.
      */
     private void infoPelicula(int id){
-        Intent i = new Intent(Resultados.this, InfoPelicula.class);
+        Intent i = new Intent(Vistas.this, InfoPelicula.class);
         i.putExtra("pelicula",listaRecibida.get(id).getId());
         startActivity(i);
     }

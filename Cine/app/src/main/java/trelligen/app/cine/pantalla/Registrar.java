@@ -142,9 +142,9 @@ public class Registrar extends AppCompatActivity
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(Registrar.this, BusquedaAvanzada.class));
         } else if (id == R.id.mis_vistas) {
-
+            startActivity(new Intent(Registrar.this, Vistas.class));
         } else if (id == R.id.mis_pendientes) {
-
+            startActivity(new Intent(Registrar.this, Pendientes.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

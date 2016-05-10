@@ -117,7 +117,7 @@ public class DBPelicula {
 											   Integer duracion,
 											Double valoracion, ArrayList<String> categoria, String publico){
 		//Comprueba que parametros son validos y construye la consulta.
-		String condiciones = " AND p.valoracion>='" + valoracion+"'";
+		String condiciones = "";
 		if(fecha!=null) {
 			condiciones = condiciones+" AND p.fecha='" + fecha+"'";
 		}
@@ -125,7 +125,10 @@ public class DBPelicula {
 			condiciones = condiciones+" AND p.director='" + director+"'";
 		}
 		if(duracion>0) {
-			condiciones = condiciones+" AND p.duracion>=" + (duracion-15)+" AND p.duracion<=" + (duracion+15);
+			condiciones = condiciones+" AND p.duracion='" + duracion+"'";
+		}
+		if(valoracion>0) {
+			condiciones = condiciones+" AND p.valoracion='" + valoracion+"'";
 		}
 		if(publico!=null) {
 			condiciones = condiciones+" AND d.publico='" + publico+"'";
@@ -139,6 +142,7 @@ public class DBPelicula {
 			}
 			condiciones = condiciones+")";
 		}
+		Log.d("CONDICIONES",condiciones);
 		//Realiza la consulta.
 		ResultSet resultado = gestordb.getRst("SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, " +
 				"p.duracion,p.valoracion, p.sinopsis, pub.nombre, p.URL FROM Pelicula p, " +
@@ -173,6 +177,62 @@ public class DBPelicula {
 		boolean pub = gestordb.realiza("DELETE FROM Dirigida WHERE pelicula="+id);
 		boolean peli = gestordb.realiza("DELETE FROM Pelicula WHERE id="+id);
 		return cat && pub && peli;
+	}
+
+	/**
+	 * Obtiene las películas vistas por un usuario.
+	 */
+	public ArrayList<Pelicula> obtenerVistas(String usuario){
+		//Realiza la consulta.
+		ArrayList<Pelicula> array = null;
+		String consulta = "SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
+				"p.valoracion, p.sinopsis, pub.nombre, p.URL FROM Pelicula p, " +
+				"Categoria c, Publico pub, Dirigida d, Es e, Pendiente pen" +
+				" WHERE p.id=pen.pelicula AND " +
+				"p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
+				"d.publico=pub.nombre AND pen.usuario='"+usuario+"' ORDER BY p.titulo";
+		ResultSet resultado = gestordb.getRst(consulta);
+		CursorPelicula cursor = new CursorPelicula(resultado,gestordb);
+		try {
+			Thread t = new Thread(cursor);
+			t.start();
+			t.join();
+			array = cursor.getArray();
+		} catch(Exception e) {
+			//Si hay algun error devuelve null.
+			Log.d("DATOS",e.toString());
+			return null;
+		}
+		//Devuelve el array.
+		return array;
+	}
+
+	/**
+	 * Obtiene las películas pendientes de un usuario.
+	*/
+	public ArrayList<Pelicula> obtenerPendientes(String usuario){
+		//Realiza la consulta.
+		ArrayList<Pelicula> array = null;
+		String consulta = "SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
+				"p.valoracion, p.sinopsis, pub.nombre, p.URL FROM Pelicula p, " +
+				"Categoria c, Publico pub, Dirigida d, Es e, Vista v" +
+				" WHERE p.id=v.pelicula AND " +
+				"p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
+				"d.publico=pub.nombre AND v.usuario='"+usuario+"' ORDER BY p.titulo";
+		ResultSet resultado = gestordb.getRst(consulta);
+		CursorPelicula cursor = new CursorPelicula(resultado,gestordb);
+		try {
+			Thread t = new Thread(cursor);
+			t.start();
+			t.join();
+			array = cursor.getArray();
+		} catch(Exception e) {
+			//Si hay algun error devuelve null.
+			Log.d("DATOS",e.toString());
+			return null;
+		}
+		//Devuelve el array.
+		return array;
 	}
 
 	/**

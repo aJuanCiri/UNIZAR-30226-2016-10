@@ -155,6 +155,20 @@ public class Sistema {
     }
 
     /*
+    * Método que obtiene las películas vistas por un usuario.
+     */
+    public ArrayList<Pelicula> obtenerVistas(String usuario){
+        return dbpelicula.obtenerVistas(usuario);
+    }
+
+    /*
+    * Método que obtiene las películas pendientes de un usuario.
+     */
+    public ArrayList<Pelicula> obtenerPendientes(String usuario){
+        return dbpelicula.obtenerPendientes(usuario);
+    }
+
+    /*
     * Método que genera de manera aleatoria una nueva contraseña.
     */
     private String nuevaPass(String mail){

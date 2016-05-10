@@ -155,9 +155,9 @@ public class EditarPerfil extends AppCompatActivity
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(EditarPerfil.this, BusquedaAvanzada.class));
         } else if (id == R.id.mis_vistas) {
-
+            startActivity(new Intent(EditarPerfil.this, Vistas.class));
         } else if (id == R.id.mis_pendientes) {
-
+            startActivity(new Intent(EditarPerfil.this, Pendientes.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

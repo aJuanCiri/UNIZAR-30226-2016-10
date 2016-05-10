@@ -51,6 +51,14 @@
             android:name=".pantalla.Resultados"
             android:label="@string/title_activity_resultados"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pantalla.Vistas"
+            android:label="@string/title_activity_vistas"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pantalla.Pendientes"
+            android:label="@string/title_activity_pendientes"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
