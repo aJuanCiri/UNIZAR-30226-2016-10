@@ -14,6 +14,7 @@
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_vistas">Vistas</string>
     <string name="title_activity_pendientes">Pendientes</string>
+    <string name="title_activity_infopeliculacoleccion">Info pelicula Coleccion</string>
     <string name="hint_search">HintSearch</string>
     <string name="inicio">Iniciar Sesión</string>
     <string name="registro">Registrar Usuario</string>

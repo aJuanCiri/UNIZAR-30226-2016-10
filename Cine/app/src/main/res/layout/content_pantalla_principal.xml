@@ -122,6 +122,56 @@
                 android:layout_below="@+id/pelicula_imagen4"
                 android:layout_alignLeft="@+id/pelicula_imagen4"
                 android:layout_alignStart="@+id/pelicula_imagen4" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen5"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/pelicula_imagen3"
+                android:layout_alignLeft="@+id/pelicula_imagen3"
+                android:layout_alignStart="@+id/pelicula_imagen3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo4"
+                android:id="@+id/pelicula_titulo5"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen5"
+                android:layout_alignLeft="@+id/pelicula_imagen5"
+                android:layout_alignStart="@+id/pelicula_imagen5" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen6"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/pelicula_imagen4"
+                android:layout_alignLeft="@+id/pelicula_imagen4"
+                android:layout_alignStart="@+id/pelicula_imagen4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo4"
+                android:id="@+id/pelicula_titulo6"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen6"
+                android:layout_alignLeft="@+id/pelicula_imagen6"
+                android:layout_alignStart="@+id/pelicula_imagen6" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

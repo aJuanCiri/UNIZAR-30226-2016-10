@@ -18,6 +18,7 @@ import android.support.v7.widget.SearchView;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import trelligen.app.cine.R;
 import trelligen.app.cine.objeto.MostrarImagen;
@@ -33,6 +34,7 @@ public class PantallaPrincipal extends AppCompatActivity
     private Sistema sistema;
     private TextView titulo;
     private ImageView imagen;
+    ArrayList<Pelicula> todasPelis;
     ArrayList<Integer> pelis = new ArrayList<Integer>();
     ArrayList<Integer> layaout = new ArrayList<Integer>();
 
@@ -45,6 +47,7 @@ public class PantallaPrincipal extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_principal);
         sistema = new Sistema(getApplicationContext());
+        obtenerPeliculas();
         cargarPeliculas();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,6 +82,22 @@ public class PantallaPrincipal extends AppCompatActivity
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo4);
+            }
+        });
+
+        titulo = (TextView) findViewById(R.id.pelicula_titulo5);
+        titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                infoPelicula(R.id.pelicula_titulo5);
+            }
+        });
+
+        titulo = (TextView) findViewById(R.id.pelicula_titulo6);
+        titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                infoPelicula(R.id.pelicula_titulo6);
             }
         });
 
@@ -127,12 +146,6 @@ public class PantallaPrincipal extends AppCompatActivity
                 //Here u can get the value "query" which is entered in the search box.
                 Intent i = new Intent(PantallaPrincipal.this, Resultados.class);
                 i.putExtra("titulo",query);
-                /*i.putExtra("fecha",null);
-                i.putExtra("director",null);
-                i.putExtra("duracion",duracion);
-                i.putExtra("valoracion",valoracion);
-                i.putExtra("publico",publico);
-                i.putExtra("genero",genero);*/
                 startActivity(i);
                 return true;
             }
@@ -173,14 +186,33 @@ public class PantallaPrincipal extends AppCompatActivity
     * Método que carga la información de todas las películas por pantalla.
      */
     private void cargarPeliculas(){
-        cargarInformacionPelicula(R.id.pelicula_titulo1,R.id.pelicula_imagen1,1,0);
+        Random rand = new Random(); // Obtenemos el objeto de números aleatorios.
+        int total = todasPelis.size();  // Obtenemos el rango.
+        int [] peliMostrar = new int[6];    // Creamos el array de índices a mostrar.
+        for(int i=0; i<peliMostrar.length; i++){    // Rellenamos el array.
+            boolean repetido = true;       // Booleano para que no haya películas repetidas.
+            while(repetido) {
+                repetido = false;
+                peliMostrar[i] = rand.nextInt(total);
+                for(int j=0; j<i; j++){
+                    if(peliMostrar[j]==peliMostrar[i]){
+                        repetido = true;
+                    }
+                }
+            }
+        }
+        cargarInformacionPelicula(R.id.pelicula_titulo1,R.id.pelicula_imagen1,peliMostrar[0],0);
         layaout.add(0,new Integer(R.id.pelicula_titulo1));
-        cargarInformacionPelicula(R.id.pelicula_titulo2,R.id.pelicula_imagen2,1,1);
+        cargarInformacionPelicula(R.id.pelicula_titulo2,R.id.pelicula_imagen2,peliMostrar[1],1);
         layaout.add(1,new Integer(R.id.pelicula_titulo2));
-        cargarInformacionPelicula(R.id.pelicula_titulo3,R.id.pelicula_imagen3,1,2);
+        cargarInformacionPelicula(R.id.pelicula_titulo3,R.id.pelicula_imagen3,peliMostrar[2],2);
         layaout.add(2,new Integer(R.id.pelicula_titulo3));
-        cargarInformacionPelicula(R.id.pelicula_titulo4,R.id.pelicula_imagen4,1,3);
+        cargarInformacionPelicula(R.id.pelicula_titulo4,R.id.pelicula_imagen4,peliMostrar[3],3);
         layaout.add(3,new Integer(R.id.pelicula_titulo4));
+        cargarInformacionPelicula(R.id.pelicula_titulo5,R.id.pelicula_imagen5,peliMostrar[4],4);
+        layaout.add(4,new Integer(R.id.pelicula_titulo5));
+        cargarInformacionPelicula(R.id.pelicula_titulo6,R.id.pelicula_imagen6,peliMostrar[5],5);
+        layaout.add(5,new Integer(R.id.pelicula_titulo6));
     }
 
     /*
@@ -189,13 +221,18 @@ public class PantallaPrincipal extends AppCompatActivity
     private void cargarInformacionPelicula(int id_titulo,int id_imagen,int peli,int indice){
         titulo = (TextView) findViewById(id_titulo);
         imagen = (ImageView) findViewById(id_imagen);
-
-        Pelicula pelicula = sistema.getPelicula(peli);
+        Pelicula pelicula = todasPelis.get(peli);
         pelis.add(indice,pelicula.getId());
-
         titulo.setText(pelicula.getTitulo());
 
         mostrarImagen(pelicula.getURL());
+    }
+
+    /*
+    * Método que obtiene todas las películas de la base.
+     */
+    private void obtenerPeliculas(){
+        todasPelis = sistema.listarPeliculas();
     }
 
     /*

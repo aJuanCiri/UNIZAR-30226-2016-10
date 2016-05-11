@@ -23,7 +23,7 @@ import trelligen.app.cine.objeto.Sistema;
 /**
  * Actividad que muestra por pantalla la información asociada a una película.
  */
-public class InfoPelicula extends AppCompatActivity
+public class InfoPeliculaColeccion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button editbutton;  // Botón para editar la información.
@@ -123,17 +123,17 @@ public class InfoPelicula extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.perfil) {
-            startActivity(new Intent(InfoPelicula.this, Perfil.class));
+            startActivity(new Intent(InfoPeliculaColeccion.this, Perfil.class));
         } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(InfoPelicula.this, Login.class));
+            startActivity(new Intent(InfoPeliculaColeccion.this, Login.class));
         } else if (id == R.id.pantalla_principal) {
-            startActivity(new Intent(InfoPelicula.this, PantallaPrincipal.class));
+            startActivity(new Intent(InfoPeliculaColeccion.this, PantallaPrincipal.class));
         } else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(InfoPelicula.this, BusquedaAvanzada.class));
+            startActivity(new Intent(InfoPeliculaColeccion.this, BusquedaAvanzada.class));
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(InfoPelicula.this, Vistas.class));
+            startActivity(new Intent(InfoPeliculaColeccion.this, Vistas.class));
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(InfoPelicula.this, Pendientes.class));
+            startActivity(new Intent(InfoPeliculaColeccion.this, Pendientes.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
