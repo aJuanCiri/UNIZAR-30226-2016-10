@@ -10,14 +10,15 @@ CREATE TABLE Usuario
 
 CREATE TABLE Pelicula
 (
-	id			NUMBER(5),
+	id		NUMBER(5),
 	titulo		VARCHAR(50),
 	fecha		VARCHAR(4),
 	director	VARCHAR(40),
 	duracion	NUMBER(3),
 	valoracion	NUMBER(1),
 	sinopsis	VARCHAR(1500),
-	url			VARCHAR(600),
+	url		VARCHAR(600),
+	valoracion	NUMBER(10),
 	CONSTRAINT pelicula_pk PRIMARY KEY (id)
 );
 
