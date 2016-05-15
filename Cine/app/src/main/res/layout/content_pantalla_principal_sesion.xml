@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="800dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp">
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen1"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/pelicula_imagen2"
+                android:layout_alignRight="@+id/pelicula_imagen3"
+                android:layout_alignEnd="@+id/pelicula_imagen3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo1"
+                android:id="@+id/pelicula_titulo1"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen1"
+                android:layout_alignLeft="@+id/pelicula_imagen1"
+                android:layout_alignStart="@+id/pelicula_imagen1" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen2"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="180dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo2"
+                android:id="@+id/pelicula_titulo2"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen2"
+                android:layout_alignLeft="@+id/pelicula_imagen2"
+                android:layout_alignStart="@+id/pelicula_imagen2" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen3"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/pelicula_imagen1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo3"
+                android:id="@+id/pelicula_titulo3"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen3"
+                android:layout_alignLeft="@+id/pelicula_imagen3"
+                android:layout_alignStart="@+id/pelicula_imagen3" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen4"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/pelicula_imagen2"
+                android:layout_alignLeft="@+id/pelicula_imagen2"
+                android:layout_alignStart="@+id/pelicula_imagen2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo4"
+                android:id="@+id/pelicula_titulo4"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen4"
+                android:layout_alignLeft="@+id/pelicula_imagen4"
+                android:layout_alignStart="@+id/pelicula_imagen4" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen5"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/pelicula_imagen3"
+                android:layout_alignLeft="@+id/pelicula_imagen3"
+                android:layout_alignStart="@+id/pelicula_imagen3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo4"
+                android:id="@+id/pelicula_titulo5"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen5"
+                android:layout_alignLeft="@+id/pelicula_imagen5"
+                android:layout_alignStart="@+id/pelicula_imagen5" />
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:padding="1dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="fitXY"
+                android:id="@+id/pelicula_imagen6"
+                android:src="@drawable/noimglg"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/pelicula_imagen4"
+                android:layout_alignLeft="@+id/pelicula_imagen4"
+                android:layout_alignStart="@+id/pelicula_imagen4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Titulo4"
+                android:id="@+id/pelicula_titulo6"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@+id/pelicula_imagen6"
+                android:layout_alignLeft="@+id/pelicula_imagen6"
+                android:layout_alignStart="@+id/pelicula_imagen6" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
