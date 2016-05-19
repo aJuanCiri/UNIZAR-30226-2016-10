@@ -231,7 +231,7 @@ public class Resultados extends AppCompatActivity
             Intent i = new Intent(Resultados.this, PantallaPrincipal.class);
             i.putExtra("usuario",usuario);
             startActivity(i);
-        } else if (id == R.id.registrarse) {
+        } else if (id == R.id.registrar) {
             startActivity(new Intent(Resultados.this, Registrar.class));
         } else if (id == R.id.perfil) {
             Intent i = new Intent(Resultados.this, Perfil.class);

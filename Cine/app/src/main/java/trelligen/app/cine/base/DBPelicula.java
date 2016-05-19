@@ -180,9 +180,9 @@ public class DBPelicula {
 	}
 
 	/**
-	 * Obtiene las películas vistas por un usuario.
+	 * Obtiene las películas pendientes por un usuario.
 	 */
-	public ArrayList<Pelicula> obtenerVistas(String usuario){
+	public ArrayList<Pelicula> obtenerPendientes(String usuario){
 		//Realiza la consulta.
 		ArrayList<Pelicula> array = null;
 		String consulta = "SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, p.duracion, " +
@@ -208,9 +208,9 @@ public class DBPelicula {
 	}
 
 	/**
-	 * Obtiene las películas pendientes de un usuario.
+	 * Obtiene las películas vistas de un usuario.
 	*/
-	public ArrayList<Pelicula> obtenerPendientes(String usuario){
+	public ArrayList<Pelicula> obtenerVistas(String usuario){
 		//Realiza la consulta.
 		ArrayList<Pelicula> array = null;
 		String consulta = "SELECT DISTINCT p.id, p.titulo, p.fecha, p.director, p.duracion, " +

@@ -128,6 +128,8 @@ public class InfoPelicula extends AppCompatActivity
             startActivity(new Intent(InfoPelicula.this, BusquedaAvanzada.class));
         } else if (id == R.id.login) {
             startActivity(new Intent(InfoPelicula.this, Login.class));
+        } else if (id == R.id.registrar) {
+            startActivity(new Intent(InfoPelicula.this, Registrar.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

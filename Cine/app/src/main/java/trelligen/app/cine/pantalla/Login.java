@@ -150,7 +150,7 @@ public class Login extends AppCompatActivity
             startActivity(new Intent(Login.this, BusquedaAvanzada.class));
         } else if (id == R.id.login) {
 
-        } else if (id == R.id.registrarse) {
+        } else if (id == R.id.registrar) {
             startActivity(new Intent(Login.this, Registrar.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

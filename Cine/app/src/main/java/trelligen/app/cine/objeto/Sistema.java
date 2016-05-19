@@ -50,7 +50,7 @@ public class Sistema {
         return dbpelicula.eliminarPelicula(id);
     }
 
-	/*
+    /*
 	* Método que devuelve una lista todas las películas existentes.
 	*/
     public ArrayList<Pelicula> listarPeliculas(){

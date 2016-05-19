@@ -125,7 +125,7 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         if (id == R.id.perfil) {
             startActivity(new Intent(InfoPeliculaColeccion.this, Perfil.class));
         } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(InfoPeliculaColeccion.this, Login.class));
+
         } else if (id == R.id.pantalla_principal) {
             startActivity(new Intent(InfoPeliculaColeccion.this, PantallaPrincipal.class));
         } else if (id == R.id.bus_avanzada) {

@@ -139,7 +139,7 @@ public class Registrar extends AppCompatActivity
             startActivity(new Intent(Registrar.this, BusquedaAvanzada.class));
         } else if (id == R.id.login) {
             startActivity(new Intent(Registrar.this, Login.class));
-        } else if (id == R.id.registrarse) {
+        } else if (id == R.id.registrar) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

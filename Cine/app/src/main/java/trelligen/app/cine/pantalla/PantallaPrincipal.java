@@ -54,7 +54,7 @@ public class PantallaPrincipal extends AppCompatActivity
             setContentView(R.layout.activity_pantalla_principal_sesion);
         }
         sistema = new Sistema(getApplicationContext());
-        obtenerPeliculas();
+        obtenerRandom();
         cargarPeliculas();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -181,7 +181,7 @@ public class PantallaPrincipal extends AppCompatActivity
             startActivity(new Intent(PantallaPrincipal.this, BusquedaAvanzada.class));
         } else if (id == R.id.pantalla_principal_sesion) {
 
-        } else if (id == R.id.registrarse) {
+        } else if (id == R.id.registrar) {
             startActivity(new Intent(PantallaPrincipal.this, Registrar.class));
         } else if (id == R.id.perfil) {
             Intent i = new Intent(PantallaPrincipal.this, Perfil.class);
@@ -208,11 +208,12 @@ public class PantallaPrincipal extends AppCompatActivity
     }
 
     /*
-    * Método que carga la información de todas las películas por pantalla.
+    * Método que obtiene 6 identificadores distintos de películas aleatorias
+    * y las obtiene.
      */
-    private void cargarPeliculas(){
+    private void obtenerRandom(){
         Random rand = new Random(); // Obtenemos el objeto de números aleatorios.
-        int total = todasPelis.size();  // Obtenemos el rango.
+        int total = 47;  // Obtenemos el rango.
         int [] peliMostrar = new int[6];    // Creamos el array de índices a mostrar.
         for(int i=0; i<peliMostrar.length; i++){    // Rellenamos el array.
             boolean repetido = true;       // Booleano para que no haya películas repetidas.
@@ -226,17 +227,26 @@ public class PantallaPrincipal extends AppCompatActivity
                 }
             }
         }
-        cargarInformacionPelicula(R.id.pelicula_titulo1,R.id.pelicula_imagen1,peliMostrar[0],0);
+        for(int i=0; i<peliMostrar.length; i++){    // Obtiene la película.
+            todasPelis.add(sistema.getPelicula(peliMostrar[i]));
+        }
+    }
+
+    /*
+    * Método que carga la información de todas las películas por pantalla.
+     */
+    private void cargarPeliculas(){
+        cargarInformacionPelicula(R.id.pelicula_titulo1,R.id.pelicula_imagen1,0,0);
         layaout.add(0,new Integer(R.id.pelicula_titulo1));
-        cargarInformacionPelicula(R.id.pelicula_titulo2,R.id.pelicula_imagen2,peliMostrar[1],1);
+        cargarInformacionPelicula(R.id.pelicula_titulo2,R.id.pelicula_imagen2,1,1);
         layaout.add(1,new Integer(R.id.pelicula_titulo2));
-        cargarInformacionPelicula(R.id.pelicula_titulo3,R.id.pelicula_imagen3,peliMostrar[2],2);
+        cargarInformacionPelicula(R.id.pelicula_titulo3,R.id.pelicula_imagen3,2,2);
         layaout.add(2,new Integer(R.id.pelicula_titulo3));
-        cargarInformacionPelicula(R.id.pelicula_titulo4,R.id.pelicula_imagen4,peliMostrar[3],3);
+        cargarInformacionPelicula(R.id.pelicula_titulo4,R.id.pelicula_imagen4,3,3);
         layaout.add(3,new Integer(R.id.pelicula_titulo4));
-        cargarInformacionPelicula(R.id.pelicula_titulo5,R.id.pelicula_imagen5,peliMostrar[4],4);
+        cargarInformacionPelicula(R.id.pelicula_titulo5,R.id.pelicula_imagen5,4,4);
         layaout.add(4,new Integer(R.id.pelicula_titulo5));
-        cargarInformacionPelicula(R.id.pelicula_titulo6,R.id.pelicula_imagen6,peliMostrar[5],5);
+        cargarInformacionPelicula(R.id.pelicula_titulo6,R.id.pelicula_imagen6,5,5);
         layaout.add(5,new Integer(R.id.pelicula_titulo6));
     }
 
@@ -251,13 +261,6 @@ public class PantallaPrincipal extends AppCompatActivity
         titulo.setText(pelicula.getTitulo());
 
         mostrarImagen(pelicula.getURL());
-    }
-
-    /*
-    * Método que obtiene todas las películas de la base.
-     */
-    private void obtenerPeliculas(){
-        todasPelis = sistema.listarPeliculas();
     }
 
     /*
