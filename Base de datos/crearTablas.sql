@@ -12,7 +12,7 @@ CREATE TABLE Pelicula
 (
 	id		NUMBER(5),
 	titulo		VARCHAR(50),
-	fecha		VARCHAR(4),
+	fecha		VARCHAR(15),
 	director	VARCHAR(40),
 	duracion	NUMBER(3),
 	valoracion	NUMBER(1),
