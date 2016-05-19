@@ -78,7 +78,9 @@ public class Login extends AppCompatActivity
         sistema = new Sistema(getApplicationContext());
         if(!mail.getText().toString().equals("") && !pass.getText().toString().equals("") &&
                 sistema.login(mail.getText().toString(), pass.getText().toString())){
-            mostrarMensaje("Login correcto!");
+            Intent i = new Intent(Login.this, PantallaPrincipal.class);
+            i.putExtra("usuario",mail.getText().toString());
+            startActivity(i);
         }else{
             mostrarMensaje("Login fallido!");
         }
@@ -142,18 +144,14 @@ public class Login extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.perfil) {
-            startActivity(new Intent(Login.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(Login.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
+        if (id == R.id.pantalla_principal) {
             startActivity(new Intent(Login.this, PantallaPrincipal.class));
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(Login.this, BusquedaAvanzada.class));
-        } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(Login.this, Vistas.class));
-        } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(Login.this, Pendientes.class));
+        } else if (id == R.id.login) {
+
+        } else if (id == R.id.registrarse) {
+            startActivity(new Intent(Login.this, Registrar.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -34,6 +34,7 @@ public class PantallaPrincipal extends AppCompatActivity
     private Sistema sistema;
     private TextView titulo;
     private ImageView imagen;
+    private String usuario = null;
     ArrayList<Pelicula> todasPelis;
     ArrayList<Integer> pelis = new ArrayList<Integer>();
     ArrayList<Integer> layaout = new ArrayList<Integer>();
@@ -45,7 +46,13 @@ public class PantallaPrincipal extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_principal);
+        Bundle extras = getIntent().getExtras();
+        if(extras == null || extras.getString("usuario")==null){
+            setContentView(R.layout.activity_pantalla_principal);
+        } else{
+            usuario = extras.getString("usuario");
+            setContentView(R.layout.activity_pantalla_principal_sesion);
+        }
         sistema = new Sistema(getApplicationContext());
         obtenerPeliculas();
         cargarPeliculas();
@@ -146,6 +153,7 @@ public class PantallaPrincipal extends AppCompatActivity
                 //Here u can get the value "query" which is entered in the search box.
                 Intent i = new Intent(PantallaPrincipal.this, Resultados.class);
                 i.putExtra("titulo",query);
+                i.putExtra("usuario",usuario);
                 startActivity(i);
                 return true;
             }
@@ -164,18 +172,35 @@ public class PantallaPrincipal extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.perfil) {
-            startActivity(new Intent(PantallaPrincipal.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
+
+        if (id == R.id.pantalla_principal) {
+
+        } else if (id == R.id.login) {
             startActivity(new Intent(PantallaPrincipal.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
-            startActivity(new Intent(PantallaPrincipal.this, PantallaPrincipal.class));
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(PantallaPrincipal.this, BusquedaAvanzada.class));
+        } else if (id == R.id.pantalla_principal_sesion) {
+
+        } else if (id == R.id.registrarse) {
+            startActivity(new Intent(PantallaPrincipal.this, Registrar.class));
+        } else if (id == R.id.perfil) {
+            Intent i = new Intent(PantallaPrincipal.this, Perfil.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(PantallaPrincipal.this, Vistas.class));
+            Intent i = new Intent(PantallaPrincipal.this, Vistas.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(PantallaPrincipal.this, Pendientes.class));
+            Intent i = new Intent(PantallaPrincipal.this, Pendientes.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.bus_avanzada_sesion) {
+            Intent i = new Intent(PantallaPrincipal.this, BusquedaAvanzada.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.cerrar_sesion) {
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -255,9 +280,17 @@ public class PantallaPrincipal extends AppCompatActivity
     * información.
      */
     private void infoPelicula(int id_titulo){
-        Intent i = new Intent(PantallaPrincipal.this, InfoPelicula.class);
-        int indice = layaout.indexOf(new Integer(id_titulo));
-        i.putExtra("pelicula",pelis.get(indice));
-        startActivity(i);
+        if(usuario==null){
+            Intent i = new Intent(PantallaPrincipal.this, InfoPelicula.class);
+            int indice = layaout.indexOf(new Integer(id_titulo));
+            i.putExtra("pelicula",pelis.get(indice));
+            startActivity(i);
+        } else{
+            Intent i = new Intent(PantallaPrincipal.this, InfoPeliculaColeccion.class);
+            i.putExtra("usuario",usuario);
+            int indice = layaout.indexOf(new Integer(id_titulo));
+            i.putExtra("pelicula",pelis.get(indice));
+            startActivity(i);
+        }
     }
 }

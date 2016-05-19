@@ -28,6 +28,7 @@ public class Perfil extends AppCompatActivity
     private Button editbutton;      // Botón para editar el perfil.
     private TextView nick, mail, name, date;    // Información del usuario.
     private Sistema sistema;
+    private String usuario;
 
     /*
     * Método que se activa para mostrar el perfil del usuario e interactuar
@@ -37,12 +38,15 @@ public class Perfil extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_perfil);
+        usuario = getIntent().getExtras().getString("usuario");
         sistema = new Sistema(getApplicationContext());
-        cargarInformacionPerfil("usuario@gmail.com");
+        cargarInformacionPerfil(usuario);
         editbutton = (Button) findViewById(R.id.profile_editbutton);
         editbutton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(Perfil.this, EditarPerfil.class));
+                Intent i = new Intent(Perfil.this, EditarPerfil.class);
+                i.putExtra("usuario",usuario);
+                startActivity(i);
             }
         });
 
@@ -114,18 +118,26 @@ public class Perfil extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.perfil) {
-            startActivity(new Intent(Perfil.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(Perfil.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
-            startActivity(new Intent(Perfil.this, PantallaPrincipal.class));
-        } else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(Perfil.this, BusquedaAvanzada.class));
+        if (id == R.id.pantalla_principal_sesion) {
+            Intent i = new Intent(Perfil.this, PantallaPrincipal.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.bus_avanzada_sesion) {
+            Intent i = new Intent(Perfil.this, BusquedaAvanzada.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(Perfil.this, Vistas.class));
+            Intent i = new Intent(Perfil.this, Vistas.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(Perfil.this, Pendientes.class));
+            Intent i = new Intent(Perfil.this, Pendientes.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.cerrar_sesion) {
+
+        } else if (id == R.id.perfil) {
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

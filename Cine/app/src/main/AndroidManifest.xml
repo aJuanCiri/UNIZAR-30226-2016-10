@@ -37,6 +37,10 @@
             android:label="@string/title_activity_infopelicula"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".pantalla.InfoPeliculaColeccion"
+            android:label="@string/title_activity_infopelicula"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".pantalla.Registrar"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -55,10 +59,6 @@
         <activity
             android:name=".pantalla.Pendientes"
             android:label="@string/title_activity_pendientes"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".pantalla.InfoPeliculaColeccion"
-            android:label="@string/title_activity_infopeliculacoleccion"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

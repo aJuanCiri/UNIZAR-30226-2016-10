@@ -31,6 +31,7 @@ public class EditarPerfil extends AppCompatActivity
     private TextView nick, mail, name, date;    // Textos a modificar.
     private EditText pass, newPass1, newPass2;  // Textos a modificar.
     private Sistema sistema;    // Objeto sistema para controlar la interacción.
+    private String usuario;
 
     /*
     * Método que carga la información del usuario y guarda los cambios
@@ -41,7 +42,8 @@ public class EditarPerfil extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_editarperfil);
         sistema = new Sistema(getApplicationContext());
-        cargarInformacionPerfil("usuario@gmail.com");
+        usuario = getIntent().getExtras().getString("usuario");
+        cargarInformacionPerfil(usuario);
         save = (Button)findViewById(R.id.profile_editbutton);
         save.setOnClickListener( new OnClickListener() {
             public void onClick(View view){
@@ -146,18 +148,29 @@ public class EditarPerfil extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.perfil) {
-            startActivity(new Intent(EditarPerfil.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(EditarPerfil.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
-            startActivity(new Intent(EditarPerfil.this, PantallaPrincipal.class));
-        } else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(EditarPerfil.this, BusquedaAvanzada.class));
+
+        if (id == R.id.pantalla_principal_sesion) {
+            Intent i = new Intent(EditarPerfil.this, PantallaPrincipal.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.bus_avanzada_sesion) {
+            Intent i = new Intent(EditarPerfil.this, BusquedaAvanzada.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(EditarPerfil.this, Vistas.class));
+            Intent i = new Intent(EditarPerfil.this, Vistas.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(EditarPerfil.this, Pendientes.class));
+            Intent i = new Intent(EditarPerfil.this, Pendientes.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.cerrar_sesion) {
+
+        } else if (id == R.id.perfil) {
+            Intent i = new Intent(EditarPerfil.this, Perfil.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

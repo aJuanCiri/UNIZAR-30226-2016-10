@@ -133,18 +133,14 @@ public class Registrar extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.perfil) {
-            startActivity(new Intent(Registrar.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(Registrar.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
+        if (id == R.id.pantalla_principal) {
             startActivity(new Intent(Registrar.this, PantallaPrincipal.class));
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(Registrar.this, BusquedaAvanzada.class));
-        } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(Registrar.this, Vistas.class));
-        } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(Registrar.this, Pendientes.class));
+        } else if (id == R.id.login) {
+            startActivity(new Intent(Registrar.this, Login.class));
+        } else if (id == R.id.registrarse) {
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

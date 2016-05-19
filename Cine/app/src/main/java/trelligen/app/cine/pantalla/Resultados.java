@@ -47,10 +47,18 @@ public class Resultados extends AppCompatActivity
     private double valoracion;
     private ArrayList<String> categoria;
 
+    private String usuario;     // Usuario en curso.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_resultados);
+        Bundle extras = getIntent().getExtras();
+        if(extras == null || extras.getString("usuario")==null){
+            setContentView(R.layout.activity_pantalla_resultados);
+        } else{
+            usuario = extras.getString("usuario");
+            setContentView(R.layout.activity_pantalla_resultados_sesion);
+        }
 
         sistema = new Sistema(getApplicationContext()); // Obtiene la instancia de la clase sistema.
         lista = (ListView) findViewById(R.id.listView1);    // Lista de las películas a mostrar.
@@ -109,18 +117,6 @@ public class Resultados extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
-    /*
-    * Obtiene el elemento pulsado de la lista.
-     */
-    /*@Override
-    protected void onListItemClick(ListView listView, View vista, int position,
-                                   long id){
-        super.onListItemClick(listView,vista,position,id);
-        Intent i = new Intent(this,ListViewAdapter.class);
-        i.putExtra("id",id);
-        startActivity(i);
-    }*/
 
     /*
     * Método encargado de gestionar la interacción con la siguiente página de resultados.
@@ -196,17 +192,6 @@ public class Resultados extends AppCompatActivity
         categoria = getIntent().getExtras().getStringArrayList("genero");
     }
 
-    /*
-    * Obtiene la película seleccionada y muestra una pantalla con su
-    * información.
-     */
-    private void infoPelicula(int id){
-        Intent i = new Intent(Resultados.this, InfoPelicula.class);
-        i.putExtra("pelicula",listaRecibida.get(id).getId());
-        startActivity(i);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -236,18 +221,36 @@ public class Resultados extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.perfil) {
-            startActivity(new Intent(Resultados.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(Resultados.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
+        if (id == R.id.pantalla_principal) {
             startActivity(new Intent(Resultados.this, PantallaPrincipal.class));
+        } else if (id == R.id.login) {
+            startActivity(new Intent(Resultados.this, Login.class));
         } else if (id == R.id.bus_avanzada) {
             startActivity(new Intent(Resultados.this, BusquedaAvanzada.class));
+        } else if (id == R.id.pantalla_principal_sesion) {
+            Intent i = new Intent(Resultados.this, PantallaPrincipal.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.registrarse) {
+            startActivity(new Intent(Resultados.this, Registrar.class));
+        } else if (id == R.id.perfil) {
+            Intent i = new Intent(Resultados.this, Perfil.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(Resultados.this, Vistas.class));
+            Intent i = new Intent(Resultados.this, Vistas.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(Resultados.this, Pendientes.class));
+            Intent i = new Intent(Resultados.this, Pendientes.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.bus_avanzada_sesion) {
+            Intent i = new Intent(Resultados.this, BusquedaAvanzada.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.cerrar_sesion) {
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

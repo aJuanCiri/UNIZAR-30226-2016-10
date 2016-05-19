@@ -36,8 +36,7 @@ public class BusquedaAvanzada extends AppCompatActivity
     private String fecha;
     private String director;
     private int duracion;
-
-
+    private String usuario;
 
     private Button busqueda;
 
@@ -47,7 +46,13 @@ public class BusquedaAvanzada extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_busqueda_avanzada);
+        Bundle extras = getIntent().getExtras();
+        if(extras == null || extras.getString("usuario")==null){
+            setContentView(R.layout.activity_busqueda_avanzada);
+        } else{
+            usuario = extras.getString("usuario");
+            setContentView(R.layout.activity_busqueda_avanzada_sesion);
+        }
         busqueda = (Button)findViewById(R.id.busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +67,7 @@ public class BusquedaAvanzada extends AppCompatActivity
                 i.putExtra("valoracion",valoracion);
                 i.putExtra("publico",publico);
                 i.putExtra("genero",genero);
+                i.putExtra("usuario",usuario);
                 startActivity(i);
             }
         });
@@ -213,18 +219,35 @@ public class BusquedaAvanzada extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.perfil) {
-            startActivity(new Intent(BusquedaAvanzada.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(BusquedaAvanzada.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
+
+        if (id == R.id.pantalla_principal) {
             startActivity(new Intent(BusquedaAvanzada.this, PantallaPrincipal.class));
+        } else if (id == R.id.login) {
+            startActivity(new Intent(BusquedaAvanzada.this, Login.class));
         } else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(BusquedaAvanzada.this, BusquedaAvanzada.class));
+
+        } else if (id == R.id.pantalla_principal_sesion) {
+            Intent i = new Intent(BusquedaAvanzada.this, PantallaPrincipal.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.registrarse) {
+            startActivity(new Intent(BusquedaAvanzada.this, Registrar.class));
+        } else if (id == R.id.perfil) {
+            Intent i = new Intent(BusquedaAvanzada.this, Perfil.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(BusquedaAvanzada.this, Vistas.class));
+            Intent i = new Intent(BusquedaAvanzada.this, Vistas.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(BusquedaAvanzada.this, Pendientes.class));
+            Intent i = new Intent(BusquedaAvanzada.this, Pendientes.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.bus_avanzada_sesion) {
+
+        } else if (id == R.id.cerrar_sesion) {
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

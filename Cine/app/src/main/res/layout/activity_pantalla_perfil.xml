@@ -20,6 +20,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_pantalla_principal"
-        app:menu="@menu/activity_pantalla_principal_drawer" />
+        app:menu="@menu/activity_sesion_iniciada" />
 
 </android.support.v4.widget.DrawerLayout>

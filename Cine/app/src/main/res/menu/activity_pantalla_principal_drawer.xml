@@ -7,21 +7,13 @@
             android:icon="@drawable/ic_menu_send"
             android:title="Pantalla principal" />
         <item
-            android:id="@+id/perfil"
+            android:id="@+id/login"
             android:icon="@drawable/ic_menu_send"
-            android:title="Perfil" />
+            android:title="Login" />
         <item
-            android:id="@+id/mis_vistas"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Mis vistas" />
-        <item
-            android:id="@+id/mis_pendientes"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Mis pendientes" />
-        <item
-            android:id="@+id/cerrar_sesion"
+            android:id="@+id/registrar"
             android:icon="@drawable/ic_menu_send"
-            android:title="Cerrar sesión" />
+            android:title="Registrarse" />
         <item
             android:id="@+id/bus_avanzada"
             android:icon="@drawable/ic_menu_send"

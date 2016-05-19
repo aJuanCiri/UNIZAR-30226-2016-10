@@ -48,6 +48,7 @@ public class Pendientes extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_pendientes);
+        usuario = getIntent().getExtras().getString("usuario");
 
         sistema = new Sistema(getApplicationContext()); // Obtiene la instancia de la clase sistema.
         lista = (ListView) findViewById(R.id.listView1);    // Lista de las películas a mostrar.
@@ -55,7 +56,6 @@ public class Pendientes extends AppCompatActivity
         siguiente = (Button) findViewById(R.id.resultados_siguiente);   // Botón para la siguiente página.
         anterior.setVisibility(View.INVISIBLE); // Al estar en la primera página, no debe mostrarse.
 
-        obtenerDatos();     // Obtiene los datos de las películas.
         listaRecibida = solicitarPeliculas();   // Solicita las películas de la base de datos.
 
         numResultados = listaRecibida.size();   // Obtiene el número de resultados obtenidos.
@@ -105,18 +105,6 @@ public class Pendientes extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
-    /*
-    * Obtiene el elemento pulsado de la lista.
-     */
-    /*@Override
-    protected void onListItemClick(ListView listView, View vista, int position,
-                                   long id){
-        super.onListItemClick(listView,vista,position,id);
-        Intent i = new Intent(this,ListViewAdapter.class);
-        i.putExtra("id",id);
-        startActivity(i);
-    }*/
 
     /*
     * Método encargado de gestionar la interacción con la siguiente página de resultados.
@@ -174,17 +162,8 @@ public class Pendientes extends AppCompatActivity
      */
     private ArrayList<Pelicula> solicitarPeliculas(){
         // Obtiene el listado de las películas.
-        usuario="javi@hotmail.com";
         ArrayList<Pelicula> resultadoTest = sistema.obtenerPendientes(usuario);
         return resultadoTest;
-    }
-
-    /*
-    * Método que obtiene la información del usuario.
-     */
-    private void obtenerDatos() {
-        // Meter aqui la lectura del usuario en curso.
-        //usuario = getIntent().getExtras().getString("usuario");
     }
 
     /*
@@ -226,18 +205,27 @@ public class Pendientes extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.perfil) {
-            startActivity(new Intent(Pendientes.this, Perfil.class));
-        } else if (id == R.id.cerrar_sesion) {
-            startActivity(new Intent(Pendientes.this, Login.class));
-        } else if (id == R.id.pantalla_principal) {
-            startActivity(new Intent(Pendientes.this, PantallaPrincipal.class));
-        } else if (id == R.id.bus_avanzada) {
-            startActivity(new Intent(Pendientes.this, BusquedaAvanzada.class));
+
+        if (id == R.id.pantalla_principal_sesion) {
+            Intent i = new Intent(Pendientes.this, PantallaPrincipal.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
+        } else if (id == R.id.bus_avanzada_sesion) {
+            Intent i = new Intent(Pendientes.this, BusquedaAvanzada.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_vistas) {
-            startActivity(new Intent(Pendientes.this, Vistas.class));
+            Intent i = new Intent(Pendientes.this, Vistas.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         } else if (id == R.id.mis_pendientes) {
-            startActivity(new Intent(Pendientes.this, Pendientes.class));
+
+        } else if (id == R.id.cerrar_sesion) {
+
+        } else if (id == R.id.perfil) {
+            Intent i = new Intent(Pendientes.this, Perfil.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

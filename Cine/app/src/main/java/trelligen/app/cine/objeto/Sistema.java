@@ -2,6 +2,8 @@ package trelligen.app.cine.objeto;
 
 import android.app.Activity;
 import android.content.Context;
+
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import trelligen.app.cine.base.GestorDB;
