@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import trelligen.app.cine.base.GestorDB;
 import trelligen.app.cine.base.DBPelicula;
 import trelligen.app.cine.base.DBUsuario;
-import trelligen.app.cine.mail.MailImplementor;
 
 /**
- * La clase encapsula una serie de funciones, que realizan operaciones de lectura y escritura
- * a la parte interna del sistema, trata información de los usuarios, películas, colecciones,...
+ * La clase encapsula una serie de funciones, que realizan operaciones
+ * de lectura y escritura a la parte interna del sistema, trata información
+ * de los usuarios, películas, colecciones,...
  */
 public class Sistema {
-    private DBPelicula dbpelicula;
-    private DBUsuario dbusuario;
-    private Usuario usuario;
-    private GestorDB gestordb;
+    private DBPelicula dbpelicula;  // Objeto para gestionar películas.
+    private DBUsuario dbusuario;    // Objeto para gestionar usuarios.
+    private Usuario usuario;    // Objeto de un usuario.
+    private GestorDB gestordb;  // Gestor de la base de datos.
 
 	/*
 	* Constructor de un objeto sistema.
@@ -110,15 +110,6 @@ public class Sistema {
     }
 
     /*
-    * Método que envía un correo con la nueva contraseña al usuario.
-    */
-    public void enviarCorreo(Activity x, String mail){
-        MailImplementor envioMail = new MailImplementor(x);
-        String newPass = nuevaPass(mail);
-        envioMail.send(mail,newPass);
-    }
-
-    /*
     * Devuelve la información asociada a un usuario.
      */
     public Usuario getUserInfo(String mail){
@@ -141,7 +132,7 @@ public class Sistema {
     }
 
     /*
-    * Actualiza la contraseña de un usuario.
+    * Método que actualiza la contraseña de un usuario.
      */
     public boolean updatePass(String mail, String pass, String newPass1, String newPass2){
         Usuario user = dbusuario.getInfo(mail);
@@ -168,19 +159,5 @@ public class Sistema {
      */
     public ArrayList<Pelicula> obtenerPendientes(String usuario){
         return dbpelicula.obtenerPendientes(usuario);
-    }
-
-    /*
-    * Método que genera de manera aleatoria una nueva contraseña.
-    */
-    private String nuevaPass(String mail){
-        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        SecureRandom rnd = new SecureRandom();
-        StringBuilder sb = new StringBuilder( 12 );
-        for( int i = 0; i < 12; i++ )
-            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
-        String newPass = sb.toString();
-        dbusuario.setPass(mail,newPass);
-        return newPass;
     }
 }

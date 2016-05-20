@@ -23,18 +23,22 @@ import trelligen.app.cine.objeto.Sistema;
  */
 public class Login extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Button iniciar_sesion;
-    private TextView no_pass;
-    private TextView no_cuenta;
-    private EditText mail;
-    private TextView pass;
-    private Sistema sistema;
+    private Button iniciar_sesion;      // Botón de iniciar sesión.
+    private TextView no_cuenta; // Texto si no tiene cuenta.
+    private EditText mail;  // Texto para el mail.
+    private TextView pass;  // Texto para el pass.
+    private Sistema sistema;    // Objeto para interactuar con la base.
 
+    /*
+    * Método principal que se lanza al iniciar un activity de este tipo.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Muestra la pantalla.
         setContentView(R.layout.activity_pantalla_login);
 
+        // Botón para iniciar sesión.
         iniciar_sesion = (Button) findViewById(R.id.ini_sesion);
         iniciar_sesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,14 +47,7 @@ public class Login extends AppCompatActivity
             }
         });
 
-        no_pass = (TextView) findViewById(R.id.no_pass);
-        no_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View vw) {
-                recuperar_pass();
-            }
-        });
-
+        // Botón si no tiene cuenta.
         no_cuenta = (TextView) findViewById(R.id.no_cuenta);
         no_cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +56,7 @@ public class Login extends AppCompatActivity
             }
         });
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -72,29 +70,24 @@ public class Login extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /*
+    * Método que verifica la sesión de un usuario.
+     */
     private void verificar_sesion(){
+        // Obtiene el mail.
         mail = (EditText) findViewById(R.id.email);
+        // Obtiene el pass.
         pass = (EditText) findViewById(R.id.pass);
+        // Crea la instancia del objeto sistema.
         sistema = new Sistema(getApplicationContext());
+        // Comprueba si el login es correcto.
         if(!mail.getText().toString().equals("") && !pass.getText().toString().equals("") &&
                 sistema.login(mail.getText().toString(), pass.getText().toString())){
             Intent i = new Intent(Login.this, PantallaPrincipal.class);
             i.putExtra("usuario",mail.getText().toString());
             startActivity(i);
-        }else{
+        }else{  // Si es incorrecto muestra un mensaje.
             mostrarMensaje("Login fallido!");
-        }
-    }
-
-    /*
-    * Método para recuperar la contraseña del usuario.
-     */
-    private void recuperar_pass(){
-        mail = (EditText) findViewById(R.id.email);
-        if(!mail.getText().toString().equals("")){
-            sistema.enviarCorreo(this,mail.getText().toString());
-        }else{
-            mostrarMensaje("Introduce tu e-mail para recuperarla");
         }
     }
 
@@ -105,6 +98,9 @@ public class Login extends AppCompatActivity
         Toast.makeText(Login.this,mensaje,Toast.LENGTH_LONG).show();
     }
 
+    /*
+    * Método que gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,25 +111,6 @@ public class Login extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -141,7 +118,7 @@ public class Login extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal) {

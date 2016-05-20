@@ -58,18 +58,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Has olvidado la contraseña?"
-        android:id="@+id/no_pass"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:layout_above="@+id/no_cuenta"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:clickable="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
         android:id="@+id/textView2"
         android:textStyle="bold"

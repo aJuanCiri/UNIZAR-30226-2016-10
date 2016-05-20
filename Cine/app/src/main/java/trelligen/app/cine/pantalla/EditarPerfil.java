@@ -31,7 +31,7 @@ public class EditarPerfil extends AppCompatActivity
     private TextView nick, mail, name, date;    // Textos a modificar.
     private EditText pass, newPass1, newPass2;  // Textos a modificar.
     private Sistema sistema;    // Objeto sistema para controlar la interacción.
-    private String usuario;
+    private String usuario; // Usuario en curso.
 
     /*
     * Método que carga la información del usuario y guarda los cambios
@@ -40,17 +40,24 @@ public class EditarPerfil extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Muestra la pantalla.
         setContentView(R.layout.activity_pantalla_editarperfil);
+        // Crea una instancia del objeto sistema.
         sistema = new Sistema(getApplicationContext());
+        // Obtiene el usuario en curso.
         usuario = getIntent().getExtras().getString("usuario");
-        cargarInformacionPerfil(usuario);
+        cargarInformacionPerfil(usuario);   // Carga la info del usuario.
+
+        // Botón para guardar la información de un usuario.
         save = (Button)findViewById(R.id.profile_editbutton);
         save.setOnClickListener( new OnClickListener() {
             public void onClick(View view){
+                // Actualiza la información del usuario.
                 sistema.updateUser(mail.getText().toString(),
                         nick.getText().toString(),name.getText().toString(),
                         date.getText().toString());
                 if(!pass.getText().toString().equals("")){
+                    // Actualiza la contraseña del usuario.
                     actualizarPass(sistema,mail.getText().toString(),pass.getText().toString(),
                             newPass1.getText().toString(),newPass2.getText().toString());
                 } else{
@@ -59,6 +66,7 @@ public class EditarPerfil extends AppCompatActivity
             }
         });
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -84,7 +92,10 @@ public class EditarPerfil extends AppCompatActivity
         newPass1 = (EditText) findViewById(R.id.profile_newPass1);
         newPass2 = (EditText) findViewById(R.id.profile_newPass2);
 
+        // Obtiene el usuario.
         Usuario usuario = sistema.getUserInfo(user_mail);
+
+        // Muestra la información del usuario.
         nick.setText(usuario.getNick());
         mail.setText(usuario.getMail());
         name.setText(usuario.getName());
@@ -110,6 +121,9 @@ public class EditarPerfil extends AppCompatActivity
         Toast.makeText(EditarPerfil.this,mensaje,Toast.LENGTH_LONG).show();
     }
 
+    /*
+    * Método que gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -120,25 +134,6 @@ public class EditarPerfil extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -146,7 +141,7 @@ public class EditarPerfil extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal_sesion) {

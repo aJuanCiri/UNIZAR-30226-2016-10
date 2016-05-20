@@ -13,12 +13,16 @@ import trelligen.app.cine.base.GestorDB;
  * Clase que encapsula una serie de información vista como un cursor.
  */
 public class CursorPelicula implements Runnable {
-    private ResultSet rst;
-    private ArrayList<Pelicula> array;
-    private String titulo;
-    private GestorDB gestordb;
+    private ResultSet rst;  // Resultado de una consulta.
+    private ArrayList<Pelicula> array;  // Array de películas.
+    private String titulo;  // Título de la película.
+    private GestorDB gestordb;  // Conexión con la base de datos.
+    // Consulta a realizar.
     private String consulta = "SELECT categoria FROM Es WHERE pelicula=";
 
+    /*
+    * Constructor del objeto.
+     */
     public CursorPelicula(ResultSet rst,GestorDB gestordb) {
         array = new ArrayList<Pelicula>();
         this.rst = rst;
@@ -26,6 +30,9 @@ public class CursorPelicula implements Runnable {
         this.titulo = null;
     }
 
+    /*
+    * Constructor del objeto.
+     */
     public CursorPelicula(ResultSet rst,GestorDB gestordb,String titulo) {
         array = new ArrayList<Pelicula>();
         this.rst = rst;
@@ -33,21 +40,27 @@ public class CursorPelicula implements Runnable {
         this.titulo = titulo.toLowerCase();
     }
 
+    /*
+    * Devuelve el array de peliculas.
+     */
     public ArrayList<Pelicula> getArray(){
         return array;
     }
 
+    /*
+    * Método run que se ejecuta al lanzar un proceso de este objeto.
+     */
     public void run() {
         int id;
         int anterior = -1;
         ArrayList<String> genero = null;
         if(titulo == null) {
             try {
-                while(rst.next()) {
+                while(rst.next()) { // Bucle que transforma los resultados en películas.
                     id = rst.getInt(1);
                     ResultSet generoRst = gestordb.getRst(consulta+id);
                     genero = new ArrayList<String>();
-                    while(generoRst.next()) {
+                    while(generoRst.next()) {   // Bucle que obtiene los géneros.
                         genero.add(generoRst.getString(1));
                     }
                     array.add(new Pelicula(id,rst.getString(2),
@@ -63,13 +76,13 @@ public class CursorPelicula implements Runnable {
         } else {
             try {
                 String tituloRST;
-                while(rst.next()) {
+                while(rst.next()) { // Bucle que transforma los resultados en películas.
                     tituloRST = rst.getString(2).toLowerCase();
                     if(tituloRST.contains(titulo)) {
                         id = rst.getInt(1);
                         ResultSet generoRst = gestordb.getRst(consulta+id);
                         genero = new ArrayList<String>();
-                        while(generoRst.next()) {
+                        while(generoRst.next()) {   // Bucle que obtiene los géneros.
                             genero.add(generoRst.getString(1));
                         }
                         array.add(new Pelicula(id,rst.getString(2),

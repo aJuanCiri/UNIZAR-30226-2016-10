@@ -27,12 +27,12 @@ import trelligen.app.cine.objeto.Pelicula;
 import trelligen.app.cine.objeto.Sistema;
 
 /**
- * Muestra los resultados a partir de un Array de películas enviado.
+ * Clase que gestiona la pantalla de las películas vistas de un usuario.
  */
 public class Vistas extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
-    private ListViewAdapter adapter;
+    private ListViewAdapter adapter;    // ListView para mostrar las películas.
     private Sistema sistema;    // Instancia de la clase sistema.
     private Button anterior, siguiente; // Botones para pasar las páginas.
     private ArrayList<Pelicula> listaRecibida;  // Lista de películas resultado.
@@ -40,14 +40,17 @@ public class Vistas extends AppCompatActivity
     private final int RESULTADOS_POR_PAGINA = 4;    // Número de resultados a mostrar por página.
     private ListView lista; // Lista de películas.
     private int paginaActual = 0;   // Número de página actual.
+    private String usuario;     // Usuario en curso de la sesión.
 
-    // Datos de las búsqueda efectuada.
-    private String usuario;
-
+    /*
+    * Método principal que se lanza al iniciar el activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Muestra el layout.
         setContentView(R.layout.activity_pantalla_vistas);
+        // Obtiene el usuario en curso.
         usuario = getIntent().getExtras().getString("usuario");
 
         sistema = new Sistema(getApplicationContext()); // Obtiene la instancia de la clase sistema.
@@ -93,6 +96,7 @@ public class Vistas extends AppCompatActivity
             }
         });
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -161,38 +165,10 @@ public class Vistas extends AppCompatActivity
      *  Método que obtiene de la base las películas resultado.
      */
     private ArrayList<Pelicula> solicitarPeliculas(){
+
         // Obtiene el listado de las películas.
         ArrayList<Pelicula> resultadoTest = sistema.obtenerVistas(usuario);
         return resultadoTest;
-    }
-
-    /*
-    * Obtiene la película seleccionada y muestra una pantalla con su
-    * información.
-     */
-    private void infoPelicula(int id){
-        Intent i = new Intent(Vistas.this, InfoPelicula.class);
-        i.putExtra("pelicula",listaRecibida.get(id).getId());
-        startActivity(i);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
     }
 
     /*
@@ -202,7 +178,7 @@ public class Vistas extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal_sesion) {

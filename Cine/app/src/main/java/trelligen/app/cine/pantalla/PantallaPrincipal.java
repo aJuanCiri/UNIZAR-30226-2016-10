@@ -31,11 +31,12 @@ import trelligen.app.cine.objeto.Sistema;
  */
 public class PantallaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Sistema sistema;
-    private TextView titulo;
-    private ImageView imagen;
-    private String usuario = null;
-    ArrayList<Pelicula> todasPelis;
+    private Sistema sistema;    // Instancia para interactuar con la base.
+    private TextView titulo;    // Título de la película.
+    private ImageView imagen;   // Imagen de la película.
+    private String usuario = null;  // Usuario en curso.
+    ArrayList<Pelicula> todasPelis; // Películas obtenidas de la base.
+    // Arraylist para gestionar la película pulsada.
     ArrayList<Integer> pelis = new ArrayList<Integer>();
     ArrayList<Integer> layaout = new ArrayList<Integer>();
 
@@ -47,16 +48,21 @@ public class PantallaPrincipal extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
+        // Comprueba si hay un usuario en curso.
         if(extras == null || extras.getString("usuario")==null){
+            // Muestra la pantalla.
             setContentView(R.layout.activity_pantalla_principal);
         } else{
             usuario = extras.getString("usuario");
+            // Muestra la pantalla.
             setContentView(R.layout.activity_pantalla_principal_sesion);
         }
+        // Crea el objeto sistema.
         sistema = new Sistema(getApplicationContext());
-        obtenerRandom();
-        cargarPeliculas();
+        obtenerRandom();    // Obtiene las películas aleatorias de la base.
+        cargarPeliculas();  // Muestra las películas en la pantalla.
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -119,7 +125,9 @@ public class PantallaPrincipal extends AppCompatActivity
 
     }
 
-
+    /*
+    * Gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -130,9 +138,13 @@ public class PantallaPrincipal extends AppCompatActivity
         }
     }
 
+    /*
+    * Menú superior para la búsqueda por título.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
+        // Muestra el botón de búsqueda.
         getMenuInflater().inflate(R.menu.pantalla_principal, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search)
@@ -145,12 +157,15 @@ public class PantallaPrincipal extends AppCompatActivity
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
-                // this is your adapter that will be filtered
+
                 return true;
             }
 
+            /*
+            * Gestiona la búsqueda de una película por título.
+             */
             public boolean onQueryTextSubmit(String query) {
-                //Here u can get the value "query" which is entered in the search box.
+
                 Intent i = new Intent(PantallaPrincipal.this, Resultados.class);
                 i.putExtra("titulo",query);
                 i.putExtra("usuario",usuario);
@@ -170,7 +185,7 @@ public class PantallaPrincipal extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal) {
@@ -283,12 +298,12 @@ public class PantallaPrincipal extends AppCompatActivity
     * información.
      */
     private void infoPelicula(int id_titulo){
-        if(usuario==null){
+        if(usuario==null){  // Si no hay usuario en curso...
             Intent i = new Intent(PantallaPrincipal.this, InfoPelicula.class);
             int indice = layaout.indexOf(new Integer(id_titulo));
             i.putExtra("pelicula",pelis.get(indice));
             startActivity(i);
-        } else{
+        } else{ // SI hay usuario en curso...
             Intent i = new Intent(PantallaPrincipal.this, InfoPeliculaColeccion.class);
             i.putExtra("usuario",usuario);
             int indice = layaout.indexOf(new Integer(id_titulo));

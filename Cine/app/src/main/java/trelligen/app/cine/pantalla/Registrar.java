@@ -20,7 +20,7 @@ import trelligen.app.cine.R;
 import trelligen.app.cine.objeto.Sistema;
 
 /**
- * Actividad que mgestiona el registro de un nuevo usuario.
+ * Clase que gestiona el registro de un nuevo usuario.
  */
 public class Registrar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,7 +28,6 @@ public class Registrar extends AppCompatActivity
     private Button registrarse;     // Botón para registrarse.
     // Campos del registro del usuario.
     private EditText mail, pass, nick, name, date;
-    private CheckBox licencia;
 
     /*
     * Método que se activa al registrar un usuario y que controla las interacciones
@@ -37,8 +36,10 @@ public class Registrar extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Muestra la pantalla.
         setContentView(R.layout.activity_pantalla_registrar);
 
+        // Botón de registrarse.
         registrarse = (Button)findViewById(R.id.registrarse);
         registrarse.setOnClickListener( new OnClickListener() {
             public void onClick(View view){
@@ -46,6 +47,7 @@ public class Registrar extends AppCompatActivity
             }
         });
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,26 +65,27 @@ public class Registrar extends AppCompatActivity
     * Método que verifica el correcto registro del usuario.
      */
     private void verificar_registro(){
-        mail = (EditText) findViewById(R.id.email);
-        pass = (EditText) findViewById(R.id.password);
-        nick = (EditText) findViewById(R.id.nick);
-        name = (EditText) findViewById(R.id.name);
-        date = (EditText) findViewById(R.id.date);
-        licencia = (CheckBox) findViewById(R.id.checkBox_condi);
+        mail = (EditText) findViewById(R.id.email); // Obtiene el email.
+        pass = (EditText) findViewById(R.id.password);  // Obtiene el pass.
+        nick = (EditText) findViewById(R.id.nick);  // obtiene el nick.
+        name = (EditText) findViewById(R.id.name);  // Obtiene el nombre.
+        date = (EditText) findViewById(R.id.date);  // Obtiene la fecha.
+        // Crea una instancia para interactuar con la base.
         Sistema sistema = new Sistema(getApplicationContext());
+        // Comprueba si ha rellenado todos los campos.
         if(mail.getText().toString().equals("") || pass.getText().toString().equals("") ||
                 nick.getText().toString().equals("") || name.getText().toString().equals("") ||
                 date.getText().toString().equals("")){
             mostrarMensaje("Rellene todos los campos!");
-        }
-        else if(!licencia.isChecked()){
-            mostrarMensaje("Acepte las condiciones de uso!");
-        }
-        else if (sistema.newUser(mail.getText().toString(), pass.getText().toString(),
+        }else if (sistema.newUser(mail.getText().toString(), pass.getText().toString(),
                 nick.getText().toString(), name.getText().toString(),
                 date.getText().toString())){
-            mostrarMensaje("Registro correcto!");
+                // Si el login es correcto, vamos a la pantalla principal.
+            Intent i = new Intent(Registrar.this, PantallaPrincipal.class);
+            i.putExtra("usuario",mail.getText().toString());
+            startActivity(i);
         }else{
+            // Si ya hay un usuario registrado, se muestra el mensaje.
             mostrarMensaje("Ya existe un usuario con ese correo!");
         }
     }
@@ -94,6 +97,9 @@ public class Registrar extends AppCompatActivity
         Toast.makeText(Registrar.this,mensaje,Toast.LENGTH_LONG).show();
     }
 
+    /*
+    * Método que gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,25 +110,6 @@ public class Registrar extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -130,7 +117,7 @@ public class Registrar extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal) {

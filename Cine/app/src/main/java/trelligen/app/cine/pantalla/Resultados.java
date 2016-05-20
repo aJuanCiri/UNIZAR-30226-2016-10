@@ -27,12 +27,12 @@ import trelligen.app.cine.objeto.Pelicula;
 import trelligen.app.cine.objeto.Sistema;
 
 /**
- * Muestra los resultados a partir de un Array de películas enviado.
+ * Clase que gestiona la pantalla de las películas buscadas por un usuario.
  */
 public class Resultados extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
-    private ListViewAdapter adapter;
+    private ListViewAdapter adapter;    // ListView para mostrar las películas.
     private Sistema sistema;    // Instancia de la clase sistema.
     private Button anterior, siguiente; // Botones para pasar las páginas.
     private ArrayList<Pelicula> listaRecibida;  // Lista de películas resultado.
@@ -49,14 +49,20 @@ public class Resultados extends AppCompatActivity
 
     private String usuario;     // Usuario en curso.
 
+    /*
+    * Método principal que se lanza al iniciar el activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Comprueba si hay un usuario en curso.
         Bundle extras = getIntent().getExtras();
         if(extras == null || extras.getString("usuario")==null){
+            // Muestra la pantalla.
             setContentView(R.layout.activity_pantalla_resultados);
         } else{
             usuario = extras.getString("usuario");
+            // Muestra la pantalla.
             setContentView(R.layout.activity_pantalla_resultados_sesion);
         }
 
@@ -104,7 +110,7 @@ public class Resultados extends AppCompatActivity
             }
         });
 
-
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -192,25 +198,6 @@ public class Resultados extends AppCompatActivity
         categoria = getIntent().getExtras().getStringArrayList("genero");
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -218,7 +205,7 @@ public class Resultados extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal) {

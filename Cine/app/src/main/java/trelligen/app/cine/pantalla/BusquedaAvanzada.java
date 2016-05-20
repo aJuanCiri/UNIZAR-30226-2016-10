@@ -25,34 +25,41 @@ import trelligen.app.cine.objeto.Pelicula;
 import trelligen.app.cine.objeto.Sistema;
 
 /**
- * Created by Jorge on 15/04/2016.
+ * Clase que gestiona la pantalla de búsqueda avanzada de películas.
  */
 public class BusquedaAvanzada extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
-    private double valoracion;
-    private String publico;
-    private String titulo;
-    private String fecha;
-    private String director;
-    private int duracion;
-    private String usuario;
+    private double valoracion;  // Valoración de una película.
+    private String publico; // Público destino de un película.
+    private String titulo;  // Título de una película.
+    private String fecha;   // Fecha de estreno de una película.
+    private String director;    // Director de una película.
+    private int duracion;   // Duración de una película.
+    private String usuario; // Usuario en curso.
 
-    private Button busqueda;
+    private Button busqueda;    // Botón para comenzar la búsqueda.
+    private RadioGroup publicoGR;   // Botón para el público destino.
+    ArrayList<String> genero;   // Género de la película.
 
-    private RadioGroup publicoGR;
-    ArrayList<String> genero;
-
+    /*
+    * Método principal que se ejecuta al lanzar una actividad de este tipo.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
+        // Comprueba si hay un usuario en curso.
         if(extras == null || extras.getString("usuario")==null){
+            // Muestra la pantalla.
             setContentView(R.layout.activity_busqueda_avanzada);
         } else{
+            // Muestra la patantalla.
             usuario = extras.getString("usuario");
             setContentView(R.layout.activity_busqueda_avanzada_sesion);
         }
+
+        // Botón para la búsqueda.
         busqueda = (Button)findViewById(R.id.busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +67,7 @@ public class BusquedaAvanzada extends AppCompatActivity
                 genero = new ArrayList<String>();
                 asignarParametros();
                 Intent i = new Intent(BusquedaAvanzada.this, Resultados.class);
+                // Pasa los parámetros.
                 i.putExtra("titulo",titulo);
                 i.putExtra("fecha",fecha);
                 i.putExtra("director",director);
@@ -72,6 +80,7 @@ public class BusquedaAvanzada extends AppCompatActivity
             }
         });
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -86,7 +95,8 @@ public class BusquedaAvanzada extends AppCompatActivity
     }
 
     /*
-     * Asigna los valores a las variables en función de los datos introducidos
+     * Método que ssigna los valores a las variables en función
+     * de los datos introducidos.
      */
     private void asignarParametros() {
         titulo = ((TextView) findViewById(R.id.titulo)).getText().toString();
@@ -156,7 +166,7 @@ public class BusquedaAvanzada extends AppCompatActivity
     }
 
     /*
-     * Obtiene el publico introducido
+     * Obtiene el público destino seleccionado.
      */
     private void obtenerPublico() {
         publicoGR = (RadioGroup)findViewById(R.id.publico);
@@ -180,7 +190,9 @@ public class BusquedaAvanzada extends AppCompatActivity
         }
     }
 
-
+    /*
+    * Método que gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -191,25 +203,6 @@ public class BusquedaAvanzada extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -217,7 +210,7 @@ public class BusquedaAvanzada extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal) {

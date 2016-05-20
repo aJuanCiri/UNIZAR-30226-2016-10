@@ -1,14 +1,14 @@
 package trelligen.app.cine.objeto;
 
 /**
- * Encapsula toda la información sobre un usuario
+ * Encapsula toda la información sobre un usuario.
  */
 public class Usuario {
-    private String email;
-    private String nick;
-    private String fecha_nacimiento;
-	private String pass;
-	private String nombre;
+    private String email;	// Email del usuario.
+    private String nick;	// Nick del usuario.
+    private String fecha_nacimiento;	// Fecha de nacimiento del usuario.
+	private String pass;	// Contraseña del usuario.
+	private String nombre;	// Nombre del usuario.
 
 	/*
 	* Constructor de un objeto usuario.

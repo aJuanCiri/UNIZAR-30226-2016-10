@@ -10,9 +10,9 @@ import java.sql.ResultSet;
 public class CompartidosGestorDB {
 
     private String consulta; // String que contiene el texto de consultas a realizar.
-    private Connection conex;  //Referencia la conexión con la Base de Datos.
-    private ResultSet rst; //Contendrá los resultados devueltos por las consultas.
-    //Indica si se va a realizar una consulta o se va realizar la conexión.
+    private Connection conex;  // Referencia la conexión con la Base de Datos.
+    private ResultSet rst; // Contendrá los resultados devueltos por las consultas.
+    // Indica si se va a realizar una consulta o se va realizar la conexión.
     private int accion = 1;
     private String url,usr,pass;
 

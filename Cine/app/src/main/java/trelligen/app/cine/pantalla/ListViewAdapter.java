@@ -23,8 +23,8 @@ import trelligen.app.cine.objeto.Pelicula;
  */
 public class ListViewAdapter extends BaseAdapter {
 
-    Context context;
-    Pelicula[][] peliculas; //Arrat de películas.
+    Context context;    // Contexto.
+    Pelicula[][] peliculas; // Array de películas.
     LayoutInflater inflater;
 
 
@@ -73,7 +73,8 @@ public class ListViewAdapter extends BaseAdapter {
      * Método que muestra las películas por pantalla, indicando dos por fila.
      */
     public View getView(final int position, View convertView, ViewGroup parent) {
-        /* "position" se declara como "final" para poder usarlo dentro de los
+        /*
+         * "position" se declara como "final" para poder usarlo dentro de los
          *  eventos al seleccionar una película
          */
         // Variables para las dos películas de cada fila.
@@ -99,7 +100,7 @@ public class ListViewAdapter extends BaseAdapter {
         } else {
             txtTitle1.setText(peliculas[position][0].getTitulo());
             imgImg1.setImageBitmap(mostrarImagen(peliculas[position][0].getURL()));
-            //Gestiona la pulsación de la imagen del resultado izquierdo
+            // Gestiona la pulsación de la imagen del resultado izquierdo
             imgImg1.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -120,7 +121,7 @@ public class ListViewAdapter extends BaseAdapter {
         } else {
             txtTitle2.setText(peliculas[position][1].getTitulo());
             imgImg2.setImageBitmap(mostrarImagen(peliculas[position][1].getURL()));
-            //Gestiona la pulsación de la imagen del resultado derecho
+            // Gestiona la pulsación de la imagen del resultado derecho
             imgImg2.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -143,6 +144,7 @@ public class ListViewAdapter extends BaseAdapter {
      */
     private Bitmap mostrarImagen(String url) {
         ImageView imagen;
+        // Obtiene la imagen.
         MostrarImagen mostrar = new MostrarImagen(url);
         Thread t = new Thread(mostrar);
         t.start();

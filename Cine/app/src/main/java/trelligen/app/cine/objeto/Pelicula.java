@@ -3,19 +3,19 @@ package trelligen.app.cine.objeto;
 import java.util.ArrayList;
 
 /**
- * Encapsula toda la información sobre una película
+ * Encapsula toda la información sobre una película.
  */
 public class Pelicula {
-    private int id;
-    private String titulo;
-    private String fecha;
-    private String director;
-    private String sinopsis;
-    private int duracion;
-    private double valoracion;
-    private ArrayList<String> categoria;
-    private String publico;
-    private String imagenURL;
+    private int id;     // Número identificativo de la película.
+    private String titulo;  // Título de la película.
+    private String fecha;   // Fecha de la película.
+    private String director;    // Director de la película.
+    private String sinopsis;    // Sinopsis de la película.
+    private int duracion;   // Duración de la película.
+    private double valoracion;  // Valoración de la película.
+    private ArrayList<String> categoria;    // Categorías de la película.
+    private String publico; // Público destino de la película.
+    private String imagenURL;   // Carátula de la película.
 
 	/*
 	* Constructor de un objeto película.

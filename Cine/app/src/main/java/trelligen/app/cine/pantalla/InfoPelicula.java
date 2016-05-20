@@ -42,10 +42,14 @@ public class InfoPelicula extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Muestra la pantalla.
         setContentView(R.layout.activity_pantalla_pelicula);
+        // Crea la instancia del objeto Sistema.
         sistema = new Sistema(getApplicationContext());
+        // Carga la información de la película.
         cargarInformacionPelicula(getIntent().getExtras().getString("pelicula"));
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,19 +75,25 @@ public class InfoPelicula extends AppCompatActivity
         valoracion = (RatingBar) findViewById(R.id.pelicula_valoracion);
         imagen = (ImageView) findViewById(R.id.pelicula_imagen);
 
+        // Obtiene la película.
         Pelicula pelicula = sistema.getPelicula(getIntent().getExtras().getInt("pelicula"));
 
+        // Muestra la información de la película.
         titulo.setText(pelicula.getTitulo());
         fecha.setText(pelicula.getFecha());
         duracion.setText("Duración " + pelicula.getDuracion() + " min");
         director.setText(pelicula.getDirector());
         sinopsis.setText(pelicula.getSinopsis());
         valoracion.setRating((float)pelicula.getValoracion());
-
+        // Muestra la imagen de la película.
         mostrarImagen(pelicula.getURL());
     }
 
+    /*
+    * Método que muestra la imagen de una película.
+     */
     private void mostrarImagen(String url){
+        // Obtiene la imagen.
         MostrarImagen mostrar = new MostrarImagen(url);
         Thread t = new Thread(mostrar);
         t.start();
@@ -95,6 +105,9 @@ public class InfoPelicula extends AppCompatActivity
         imagen.setImageBitmap(mostrar.getImagen());
     }
 
+    /*
+    * Método que gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -105,13 +118,6 @@ public class InfoPelicula extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -119,7 +125,7 @@ public class InfoPelicula extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal) {

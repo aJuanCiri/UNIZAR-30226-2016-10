@@ -27,8 +27,8 @@ public class Perfil extends AppCompatActivity
 
     private Button editbutton;      // Botón para editar el perfil.
     private TextView nick, mail, name, date;    // Información del usuario.
-    private Sistema sistema;
-    private String usuario;
+    private Sistema sistema;    // Instancia para interactuar con la base.
+    private String usuario; // Usuario en curso.
 
     /*
     * Método que se activa para mostrar el perfil del usuario e interactuar
@@ -37,11 +37,15 @@ public class Perfil extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Muestra la pantalla.
         setContentView(R.layout.activity_pantalla_perfil);
+        // Obtiene el usuario en curso.
         usuario = getIntent().getExtras().getString("usuario");
+        // Crea el objeto sistema.
         sistema = new Sistema(getApplicationContext());
-        cargarInformacionPerfil(usuario);
+        cargarInformacionPerfil(usuario);  // Carga la info de un usuario.
         editbutton = (Button) findViewById(R.id.profile_editbutton);
+        // Gestiona la edición del perfil del usuario.
         editbutton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(Perfil.this, EditarPerfil.class);
@@ -50,6 +54,7 @@ public class Perfil extends AppCompatActivity
             }
         });
 
+        // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,6 +84,9 @@ public class Perfil extends AppCompatActivity
 
     }
 
+    /*
+    * Método que gestiona el menú.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -89,25 +97,6 @@ public class Perfil extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /*
     * Método que muestra las opciones del menú desplegable y obtiene
     * la seleccionada.
@@ -115,7 +104,7 @@ public class Perfil extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.pantalla_principal_sesion) {

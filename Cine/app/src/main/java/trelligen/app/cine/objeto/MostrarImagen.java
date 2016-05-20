@@ -13,8 +13,8 @@ import java.net.URL;
  */
 public class MostrarImagen implements Runnable {
 
-    private String url;
-    private Bitmap imagen;
+    private String url; // Url de la imagen.
+    private Bitmap imagen;  // Mapa de bits de la imagen.
 
     /*
     * Constructor del objeto.
@@ -29,16 +29,13 @@ public class MostrarImagen implements Runnable {
      */
     public void run() {
         try {
-            URL enlace = new URL(url);
+            URL enlace = new URL(url);  // Obtiene la url.
             HttpURLConnection conn = (HttpURLConnection)enlace.openConnection();
-            conn.connect();
+            conn.connect(); // realiza la conexión.
+            // Obtiene la imagen.
             imagen = BitmapFactory.decodeStream(conn.getInputStream());
-        } catch(MalformedURLException e) {
-
-
-        } catch(IOException e) {
-
-        }
+        } catch(MalformedURLException e) {}
+        catch(IOException e) {}
     }
 
     /*
