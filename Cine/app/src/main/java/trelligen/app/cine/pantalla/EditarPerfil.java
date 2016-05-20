@@ -161,7 +161,7 @@ public class EditarPerfil extends AppCompatActivity
             i.putExtra("usuario",usuario);
             startActivity(i);
         } else if (id == R.id.cerrar_sesion) {
-
+            startActivity(new Intent(EditarPerfil.this, PantallaPrincipal.class));
         } else if (id == R.id.perfil) {
             Intent i = new Intent(EditarPerfil.this, Perfil.class);
             i.putExtra("usuario",usuario);

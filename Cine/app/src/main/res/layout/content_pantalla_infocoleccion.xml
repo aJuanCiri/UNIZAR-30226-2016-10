@@ -159,6 +159,15 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginStart="24dp"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VALORAR"
+                android:id="@+id/valorar"
+                android:layout_alignTop="@+id/pelicula_valoracion"
+                android:layout_toRightOf="@+id/pelicula_duracion"
+                android:layout_toEndOf="@+id/pelicula_duracion" />
+
         </RelativeLayout>
     </ScrollView>
 

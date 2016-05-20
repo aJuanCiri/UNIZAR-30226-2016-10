@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +36,7 @@ public class PantallaPrincipal extends AppCompatActivity
     private TextView titulo;    // Título de la película.
     private ImageView imagen;   // Imagen de la película.
     private String usuario = null;  // Usuario en curso.
-    ArrayList<Pelicula> todasPelis; // Películas obtenidas de la base.
+    ArrayList<Pelicula> todasPelis = new ArrayList<Pelicula>(); // Películas obtenidas de la base.
     // Arraylist para gestionar la película pulsada.
     ArrayList<Integer> pelis = new ArrayList<Integer>();
     ArrayList<Integer> layaout = new ArrayList<Integer>();
@@ -54,6 +55,7 @@ public class PantallaPrincipal extends AppCompatActivity
             setContentView(R.layout.activity_pantalla_principal);
         } else{
             usuario = extras.getString("usuario");
+            Log.d("USUARIO",extras.getString("usuario"));
             // Muestra la pantalla.
             setContentView(R.layout.activity_pantalla_principal_sesion);
         }
@@ -66,48 +68,48 @@ public class PantallaPrincipal extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        titulo = (TextView) findViewById(R.id.pelicula_titulo1);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        imagen = (ImageView) findViewById(R.id.pelicula_imagen1);
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo1);
             }
         });
 
-        titulo = (TextView) findViewById(R.id.pelicula_titulo2);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        imagen = (ImageView) findViewById(R.id.pelicula_imagen2);
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo2);
             }
         });
 
-        titulo = (TextView) findViewById(R.id.pelicula_titulo3);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        imagen = (ImageView) findViewById(R.id.pelicula_imagen3);
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo3);
             }
         });
 
-        titulo = (TextView) findViewById(R.id.pelicula_titulo4);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        imagen = (ImageView) findViewById(R.id.pelicula_imagen4);
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo4);
             }
         });
 
-        titulo = (TextView) findViewById(R.id.pelicula_titulo5);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        imagen = (ImageView) findViewById(R.id.pelicula_imagen5);
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo5);
             }
         });
 
-        titulo = (TextView) findViewById(R.id.pelicula_titulo6);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        imagen = (ImageView) findViewById(R.id.pelicula_imagen6);
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 infoPelicula(R.id.pelicula_titulo6);
@@ -215,7 +217,7 @@ public class PantallaPrincipal extends AppCompatActivity
             i.putExtra("usuario",usuario);
             startActivity(i);
         } else if (id == R.id.cerrar_sesion) {
-
+            startActivity(new Intent(PantallaPrincipal.this, PantallaPrincipal.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -235,6 +237,7 @@ public class PantallaPrincipal extends AppCompatActivity
             while(repetido) {
                 repetido = false;
                 peliMostrar[i] = rand.nextInt(total);
+                Log.d("RANDOM",String.valueOf(peliMostrar[i]));
                 for(int j=0; j<i; j++){
                     if(peliMostrar[j]==peliMostrar[i]){
                         repetido = true;
@@ -243,7 +246,7 @@ public class PantallaPrincipal extends AppCompatActivity
             }
         }
         for(int i=0; i<peliMostrar.length; i++){    // Obtiene la película.
-            todasPelis.add(sistema.getPelicula(peliMostrar[i]));
+            todasPelis.add(sistema.getPelicula(1));
         }
     }
 

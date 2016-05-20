@@ -3,6 +3,8 @@ package trelligen.app.cine.base;
 import android.util.Log;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import trelligen.app.cine.objeto.CursorObtieneResultados;
 import trelligen.app.cine.objeto.CursorPelicula;
 import trelligen.app.cine.objeto.Pelicula;
 
@@ -262,5 +264,85 @@ public class DBPelicula {
 		}
 		// Devuelve el array.
 		return array;
+	}
+
+	/*
+	 * Devuelve true si la pelicula esta en la lista de pendientes del usuario.
+	 */
+	public boolean esPendiente(int id, String usuario) {
+		ResultSet rst = gestordb.getRst("SELECT pelicula FROM Pendiente WHERE pelicula="+id+" AND usuario='"+usuario+"'");
+		return obtieneResultado(rst);
+	}
+
+	/*
+	 * Devuelve true si la pelicula esta en la lista de pendientes del usuario.
+	 */
+	public boolean esVista(int id, String usuario) {
+		ResultSet rst = gestordb.getRst("SELECT pelicula FROM Vista WHERE pelicula="+id+" AND usuario='"+usuario+"'");
+		return obtieneResultado(rst);
+	}
+
+	/*
+	 * Dada una consulta informa si ha obtenido resultado.
+	 */
+	private boolean obtieneResultado(ResultSet rst) {
+		CursorObtieneResultados cursor = new CursorObtieneResultados(rst);
+		Thread t = new Thread(cursor);
+		t.start();
+		try {
+			t.join();
+		} catch(Exception e) {
+			return false;
+		}
+		return cursor.getEncontrado();
+	}
+
+	/*
+	 * Introduce una pelicula en la lista de Pendientes del usuario.
+	 */
+	public void introducirPendiente(int id, String usuario) {
+		gestordb.realiza("INSERT INTO Pendiente VALUES ('"+usuario+"',"+id+")");
+	}
+
+	/*
+	 * Introduce una pelicula en la lista de Vistas del usuario.
+	 */
+	public void introducirVista(int id, String usuario) {
+		gestordb.realiza("INSERT INTO Vista VALUES ('"+usuario+"',"+id+",0)");
+	}
+
+	/*
+	 * Elimina una pelicula de la lista de Pendientes del usuario.
+	 */
+	public void eliminarPendiente(int id, String usuario) {
+		gestordb.realiza("DELETE FROM Pendiente WHERE usuario='"+usuario+"' AND pelicula="+id);
+	}
+
+	/*
+	 * Introduce una pelicula de la lista de Vistas del usuario.
+	 */
+	public void eliminarVista(int id, String usuario) {
+		gestordb.realiza("DELETE FROM Vista WHERE usuario='"+usuario+"' AND pelicula="+id);
+	}
+
+	public void valorar(int id, String usuario, double valoracion) {
+		gestordb.realiza("UPDATE Vista SET valoracion="+valoracion+" WHERE pelicula="+id
+				+" AND usuario='"+usuario+"'");
+	}
+
+	/*
+     * Obtiene la valoracion de un usuario de una pelicula.
+     */
+	public float obtenerValoracion(int id, String usuario) {
+		ResultSet rst =
+				gestordb.getRst
+						("SELECT valoracion FROM Vista WHERE usuario='"+usuario
+								+"' AND pelicula="+id);
+		try {
+			rst.next();
+			return rst.getFloat(1);
+		} catch(Exception e) {
+			return 0;
+		}
 	}
 }

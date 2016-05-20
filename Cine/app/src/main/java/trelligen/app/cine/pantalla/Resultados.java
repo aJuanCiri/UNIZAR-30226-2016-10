@@ -91,7 +91,7 @@ public class Resultados extends AppCompatActivity
         }
 
         // Muestra las películas en la pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
         lista.setAdapter(adapter);
 
         // Gestiona la interacción con el botón de siguiente página.
@@ -139,7 +139,7 @@ public class Resultados extends AppCompatActivity
         ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
                 listaRecibida.subList(indice_inicio,limite));
         // Muestra las películas por pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
         if(paginaActual==1){
             //Si es la segunda página se activa el boton anterior.
             anterior.setVisibility(View.VISIBLE);
@@ -163,7 +163,7 @@ public class Resultados extends AppCompatActivity
         ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
                 listaRecibida.subList(indice_inicio,limite));
         // Muestra las películas por pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
         if(paginaActual==0){
             //Si es la primera página, se hace invisible el botón anterior.
             anterior.setVisibility(View.INVISIBLE);
@@ -237,7 +237,7 @@ public class Resultados extends AppCompatActivity
             i.putExtra("usuario",usuario);
             startActivity(i);
         } else if (id == R.id.cerrar_sesion) {
-
+            startActivity(new Intent(Resultados.this, PantallaPrincipal.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

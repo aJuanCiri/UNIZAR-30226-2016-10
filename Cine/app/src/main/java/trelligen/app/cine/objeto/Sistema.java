@@ -160,4 +160,60 @@ public class Sistema {
     public ArrayList<Pelicula> obtenerPendientes(String usuario){
         return dbpelicula.obtenerPendientes(usuario);
     }
+
+    /*
+     * Comprueba si una pelicula se encuentra en la lista de pendientes del usuario.
+     */
+    public boolean esPendiente(int id, String usuario) {
+        return dbpelicula.esPendiente(id,usuario);
+    }
+
+    /*
+     * Comprueba si una pelicula se encuentra en la lista de vistas del usuario.
+     */
+    public boolean esVista(int id, String usuario) {
+        return dbpelicula.esVista(id,usuario);
+    }
+
+    /*
+     * Introduce una pelicula en la lista de Pendientes del usuario.
+     */
+    public void introducirPendiente(int id, String usuario) {
+        dbpelicula.introducirPendiente(id,usuario);
+    }
+
+    /*
+     * Introduce una pelicula en la lista de Vistas del usuario.
+     */
+    public void introducirVista(int id, String usuario) {
+        dbpelicula.introducirVista(id,usuario);
+    }
+
+    /*
+     * Introduce una pelicula en la lista de Pendientes del usuario.
+     */
+    public void eliminarPendiente(int id, String usuario) {
+        dbpelicula.eliminarPendiente(id,usuario);
+    }
+
+    /*
+     * Introduce una pelicula en la lista de Vistas del usuario.
+     */
+    public void eliminarVista(int id, String usuario) {
+        dbpelicula.eliminarVista(id,usuario);
+    }
+
+    /*
+     * Valorar una pelicula vista por el usuario.
+     */
+    public void valorar(int id, String usuario, double valoracion) {
+        dbpelicula.valorar(id,usuario,valoracion);
+    }
+
+    /*
+     * Obtiene la valoracion de un usuar
+     */
+    public float obtenerValoracion(int id, String usuario) {
+        return dbpelicula.obtenerValoracion(id,usuario);
+    }
 }

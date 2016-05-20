@@ -77,7 +77,7 @@ public class Pendientes extends AppCompatActivity
         }
 
         // Muestra las películas en la pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
         lista.setAdapter(adapter);
 
         // Gestiona la interacción con el botón de siguiente página.
@@ -125,7 +125,7 @@ public class Pendientes extends AppCompatActivity
         ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
                 listaRecibida.subList(indice_inicio,limite));
         // Muestra las películas por pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
         if(paginaActual==1){
             //Si es la segunda página se activa el boton anterior.
             anterior.setVisibility(View.VISIBLE);
@@ -149,7 +149,7 @@ public class Pendientes extends AppCompatActivity
         ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
                 listaRecibida.subList(indice_inicio,limite));
         // Muestra las películas por pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
         if(paginaActual==0){
             //Si es la primera página, se hace invisible el botón anterior.
             anterior.setVisibility(View.INVISIBLE);
@@ -195,7 +195,7 @@ public class Pendientes extends AppCompatActivity
         } else if (id == R.id.mis_pendientes) {
 
         } else if (id == R.id.cerrar_sesion) {
-
+            startActivity(new Intent(Pendientes.this, PantallaPrincipal.class));
         } else if (id == R.id.perfil) {
             Intent i = new Intent(Pendientes.this, Perfil.class);
             i.putExtra("usuario",usuario);

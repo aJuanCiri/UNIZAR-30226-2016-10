@@ -26,13 +26,15 @@ public class ListViewAdapter extends BaseAdapter {
     Context context;    // Contexto.
     Pelicula[][] peliculas; // Array de películas.
     LayoutInflater inflater;
+    String usuario;
 
 
     /*
 	 * Método que obtiene las películas de cada fila.
      */
-    public ListViewAdapter(Context context, ArrayList<Pelicula> listaRecibida) {
+    public ListViewAdapter(Context context, ArrayList<Pelicula> listaRecibida,String usuario) {
         this.context = context;
+        this.usuario = usuario;
         peliculas = new Pelicula[(listaRecibida.size() + 1) / 2][2];
         int i = 0, j = 0;    // Índices para recorrer el array.
         while (listaRecibida.size() > j) {    // Recorre la lista de películas y las obtiene.
@@ -105,8 +107,14 @@ public class ListViewAdapter extends BaseAdapter {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        Intent i;
                         // Carga la pantalla de información detallada
-                        Intent i = new Intent(context, InfoPelicula.class);
+                        if(usuario==null) {
+                            i = new Intent(context, InfoPelicula.class);
+                        } else {
+                            i = new Intent(context, InfoPeliculaColeccion.class);
+                            i.putExtra("usuario",usuario);
+                        }
                         i.putExtra("pelicula", peliculas[position][0].getId());
                         context.startActivity(i);
                         return true;
@@ -127,7 +135,14 @@ public class ListViewAdapter extends BaseAdapter {
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         // Carga la pantalla de información detallada
-                        Intent i = new Intent(context, InfoPelicula.class);
+                        Intent i;
+                        // Carga la pantalla de información detallada
+                        if(usuario==null) {
+                            i = new Intent(context, InfoPelicula.class);
+                        } else {
+                            i = new Intent(context, InfoPeliculaColeccion.class);
+                            i.putExtra("usuario",usuario);
+                        }
                         i.putExtra("pelicula", peliculas[position][1].getId());
                         context.startActivity(i);
                         return true;

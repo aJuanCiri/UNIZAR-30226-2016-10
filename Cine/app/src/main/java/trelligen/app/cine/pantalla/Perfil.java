@@ -124,7 +124,7 @@ public class Perfil extends AppCompatActivity
             i.putExtra("usuario",usuario);
             startActivity(i);
         } else if (id == R.id.cerrar_sesion) {
-
+            startActivity(new Intent(Perfil.this, PantallaPrincipal.class));
         } else if (id == R.id.perfil) {
 
         }

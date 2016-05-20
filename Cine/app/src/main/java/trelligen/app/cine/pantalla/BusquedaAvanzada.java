@@ -240,7 +240,7 @@ public class BusquedaAvanzada extends AppCompatActivity
         } else if (id == R.id.bus_avanzada_sesion) {
 
         } else if (id == R.id.cerrar_sesion) {
-
+            startActivity(new Intent(BusquedaAvanzada.this, PantallaPrincipal.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
