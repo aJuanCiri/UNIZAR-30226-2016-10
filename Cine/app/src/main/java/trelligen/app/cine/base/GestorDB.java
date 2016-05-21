@@ -14,7 +14,7 @@ public class GestorDB{
     private String configuracion = "oracle.properties"; // Configuración de la base.
     //Se define el nombre y la clave de usuario de la base de datos y la @basededatos
     private String pass,usr,url;
-    private final int CONSULTA=1,CONEXION=0,UPDATE=2;   // Entero que indica el tipo de conexión.
+    private final int CONSULTA=1,CONEXION=0,UPDATE=2,DESCONEXION=3;   // Entero que indica el tipo de conexión.
     CompartidosGestorDB datos;  // Objeto de datos compartidos.
 
     /*
@@ -31,18 +31,16 @@ public class GestorDB{
             url = propiedades.getProperty("basedatos");
             usr = propiedades.getProperty("usuario");
             pass = propiedades.getProperty("contrasena");
-            datos = new CompartidosGestorDB(
-                    "jdbc:oracle:thin:@hendrix-oracle.cps.unizar.es:1521:vicious","a679184","hola1234");
+            datos = new CompartidosGestorDB(url,usr,pass);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.toString();
         }
-        getConex();
     }
 
     /*
      * Método que conecta con la base de datos.
      */
-    public void getConex() {
+    public void conecta() {
         datos.setAccion(CONEXION);  // Conecta con la base de datos.
         try {
             Thread t = new Thread(new ProcesoDB(datos));
@@ -50,6 +48,20 @@ public class GestorDB{
             t.join();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /*
+     * Finaliza conexion con base de datos.
+     */
+    public void desConecta() {
+        datos.setAccion(DESCONEXION);
+        try {
+            Thread t = new Thread(new ProcesoDB(datos));
+            t.start();
+            t.join();
+        } catch (Exception e) {
+
         }
     }
 

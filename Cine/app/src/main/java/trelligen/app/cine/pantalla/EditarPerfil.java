@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,12 +45,14 @@ public class EditarPerfil extends AppCompatActivity
         sistema = new Sistema(getApplicationContext());
         // Obtiene el usuario en curso.
         usuario = getIntent().getExtras().getString("usuario");
+        sistema.conecta();
         cargarInformacionPerfil(usuario);   // Carga la info del usuario.
-
+        sistema.desConecta();
         // Botón para guardar la información de un usuario.
         save = (Button)findViewById(R.id.profile_editbutton);
         save.setOnClickListener( new OnClickListener() {
             public void onClick(View view){
+                sistema.conecta();
                 // Actualiza la información del usuario.
                 sistema.updateUser(mail.getText().toString(),
                         nick.getText().toString(),name.getText().toString(),
@@ -63,6 +64,7 @@ public class EditarPerfil extends AppCompatActivity
                 } else{
                     mostrarMensaje("guardando...");
                 }
+                sistema.desConecta();
             }
         });
 

@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.support.v7.widget.SearchView;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import trelligen.app.cine.R;
 import trelligen.app.cine.objeto.MostrarImagen;
@@ -60,7 +58,9 @@ public class PantallaPrincipal extends AppCompatActivity
         }
         // Crea el objeto sistema.
         sistema = new Sistema(getApplicationContext());
+        sistema.conecta();
         obtenerPelis();    // Obtiene las películas de la base.
+        sistema.desConecta();
         cargarPeliculas();  // Muestra las películas en la pantalla.
 
         // Muestra los distintos menús.

@@ -8,12 +8,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import trelligen.app.cine.R;
@@ -72,6 +70,7 @@ public class Registrar extends AppCompatActivity
         date = (EditText) findViewById(R.id.date);  // Obtiene la fecha.
         // Crea una instancia para interactuar con la base.
         Sistema sistema = new Sistema(getApplicationContext());
+        sistema.conecta();
         // Comprueba si ha rellenado todos los campos.
         if(mail.getText().toString().equals("") || pass.getText().toString().equals("") ||
                 nick.getText().toString().equals("") || name.getText().toString().equals("") ||
@@ -83,11 +82,13 @@ public class Registrar extends AppCompatActivity
                 // Si el login es correcto, vamos a la pantalla principal.
             Intent i = new Intent(Registrar.this, PantallaPrincipal.class);
             i.putExtra("usuario",mail.getText().toString());
+            sistema.desConecta();
             startActivity(i);
         }else{
             // Si ya hay un usuario registrado, se muestra el mensaje.
             mostrarMensaje("Ya existe un usuario con ese correo!");
         }
+        sistema.conecta();
     }
 
     /*

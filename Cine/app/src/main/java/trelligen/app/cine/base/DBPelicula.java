@@ -1,6 +1,5 @@
 package trelligen.app.cine.base;
 
-import android.util.Log;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -121,18 +120,12 @@ public class DBPelicula {
 											Double valoracion, ArrayList<String> categoria, String publico){
 
 		// Comprueba que parametros son validos y construye la consulta.
-		String condiciones = "";
+		String condiciones = " AND p.valoracion>="+valoracion;
 		if(fecha!=null) {
 			condiciones = condiciones+" AND p.fecha='" + fecha+"'";
 		}
-		if(director!=null) {
-			condiciones = condiciones+" AND p.director='" + director+"'";
-		}
 		if(duracion>0) {
-			condiciones = condiciones+" AND p.duracion='" + duracion+"'";
-		}
-		if(valoracion>0) {
-			condiciones = condiciones+" AND p.valoracion='" + valoracion+"'";
+			condiciones = condiciones+" AND p.duracion>=" + (duracion-15)+" AND p.duracion<="+(duracion+15);
 		}
 		if(publico!=null) {
 			condiciones = condiciones+" AND d.publico='" + publico+"'";
@@ -154,11 +147,7 @@ public class DBPelicula {
 				" p.id=e.pelicula AND e.categoria=c.nombre AND p.id=d.pelicula AND " +
 				"d.publico=pub.nombre"+condiciones+" ORDER BY p.titulo");
 		CursorPelicula cursor = null;
-		if(titulo == null) {
-			cursor = new CursorPelicula(resultado,gestordb);
-		} else {
-			cursor = new CursorPelicula(resultado,gestordb,titulo);
-		}
+		cursor = new CursorPelicula(resultado,gestordb,titulo,director);
 		ArrayList<Pelicula> array = null;
 		try {
 			Thread t = new Thread(cursor);

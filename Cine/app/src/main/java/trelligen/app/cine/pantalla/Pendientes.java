@@ -1,6 +1,6 @@
 package trelligen.app.cine.pantalla;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,20 +9,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import trelligen.app.cine.R;
-import trelligen.app.cine.objeto.MostrarImagen;
 import trelligen.app.cine.objeto.Pelicula;
 import trelligen.app.cine.objeto.Sistema;
 
@@ -59,7 +52,9 @@ public class Pendientes extends AppCompatActivity
         siguiente = (Button) findViewById(R.id.resultados_siguiente);   // Botón para la siguiente página.
         anterior.setVisibility(View.INVISIBLE); // Al estar en la primera página, no debe mostrarse.
 
+        sistema.conecta();
         listaRecibida = solicitarPeliculas();   // Solicita las películas de la base de datos.
+        sistema.desConecta();
 
         numResultados = listaRecibida.size();   // Obtiene el número de resultados obtenidos.
 
@@ -77,7 +72,7 @@ public class Pendientes extends AppCompatActivity
         }
 
         // Muestra las películas en la pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario,true);
         lista.setAdapter(adapter);
 
         // Gestiona la interacción con el botón de siguiente página.
@@ -125,7 +120,7 @@ public class Pendientes extends AppCompatActivity
         ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
                 listaRecibida.subList(indice_inicio,limite));
         // Muestra las películas por pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario,true);
         if(paginaActual==1){
             //Si es la segunda página se activa el boton anterior.
             anterior.setVisibility(View.VISIBLE);
@@ -149,7 +144,7 @@ public class Pendientes extends AppCompatActivity
         ArrayList<Pelicula> resultados_pagina = new ArrayList<Pelicula>(
                 listaRecibida.subList(indice_inicio,limite));
         // Muestra las películas por pantalla.
-        adapter = new ListViewAdapter(this,resultados_pagina,usuario);
+        adapter = new ListViewAdapter(this,resultados_pagina,usuario,true);
         if(paginaActual==0){
             //Si es la primera página, se hace invisible el botón anterior.
             anterior.setVisibility(View.INVISIBLE);

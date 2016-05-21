@@ -8,8 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,19 +26,19 @@ import trelligen.app.cine.objeto.Sistema;
 public class InfoPeliculaColeccion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button editbutton;  // Botón para editar la información.
-
     private Button vistas, pendientes, valorar;  // Botones para añadir o eliminar de las colecciones.
 
-    RatingBar estrellas;        // Valoracion de la pelicula.
 
     private int id;     // Identificador de la pelicula.
+    private float valoracion; // Valoración media de la pelicula.
+
+    private boolean desdeColeccion; // Indica si se ha acceddido desde las colecciones del usuario.
 
     /*
     * Textos para mostrar la información de una película.
      */
     private TextView titulo, fecha, duracion, director, sinopsis;
-    private RatingBar valoracion;   // Valoración de la película.
+    private RatingBar estrellas;   // Valoración de la película.
     private ImageView imagen;   // Imagen de la película.
     private Sistema sistema;    // Objeto para gestionar la interacción.
     private String usuario;
@@ -56,8 +54,10 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         // Crea la instancia del objeto sistema.
         sistema = new Sistema(getApplicationContext());
         // Carga la información de una película.
-        cargarInformacionPelicula(getIntent().getExtras().getString("pelicula"));
+        sistema.conecta();
+        cargarInformacionPelicula();
         usuario = getIntent().getExtras().getString("usuario");
+        desdeColeccion = getIntent().getExtras().getBoolean("desdevistas");
         vistas = (Button)findViewById(R.id.botonVistas);
         pendientes = (Button)findViewById(R.id.botonPendientes);
         valorar = (Button)findViewById(R.id.valorar);
@@ -67,10 +67,16 @@ public class InfoPeliculaColeccion extends AppCompatActivity
             pendientes.setVisibility(View.INVISIBLE);
             pendientes.setEnabled(false);
             eliminarVista();
-            activarValoracion();
-            float val = (sistema.obtenerValoracion(id,usuario));
-            estrellas.setRating(val);
+            if(desdeColeccion) {
+                activarValoracion();
+                float val = (sistema.obtenerValoracion(id,usuario));
+                estrellas.setRating(val);
+            } else {
+                desactivarValoracion();
+                estrellas.setRating(valoracion);
+            }
         } else {
+            estrellas.setRating(valoracion);
             if(sistema.esPendiente(id,usuario)) {
                 eliminarPendiente();
             } else {
@@ -79,6 +85,7 @@ public class InfoPeliculaColeccion extends AppCompatActivity
             anadirVista();
             desactivarValoracion();
         }
+        sistema.desConecta();
         // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,7 +103,7 @@ public class InfoPeliculaColeccion extends AppCompatActivity
     /*
     * Método que carga la información de la película por pantalla.
      */
-    private void cargarInformacionPelicula(String title){
+    private void cargarInformacionPelicula(){
         titulo = (TextView) findViewById(R.id.pelicula_titulo);
         fecha = (TextView) findViewById(R.id.pelicula_fecha);
         duracion = (TextView) findViewById(R.id.pelicula_duracion);
@@ -109,6 +116,7 @@ public class InfoPeliculaColeccion extends AppCompatActivity
 
         // Muestra la información de la película.
         id = pelicula.getId();
+        valoracion = (float)pelicula.getValoracion();
         titulo.setText(pelicula.getTitulo());
         fecha.setText(pelicula.getFecha());
         duracion.setText("Duración " + pelicula.getDuracion() + " min");
@@ -193,7 +201,9 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         pendientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sistema.conecta();
                 sistema.introducirPendiente(id,usuario);
+                sistema.desConecta();
                 eliminarPendiente();
             }
         });
@@ -207,7 +217,9 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         pendientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sistema.conecta();
                 sistema.eliminarPendiente(id,usuario);
+                sistema.desConecta();
                 anadirPendiente();
             }
         });
@@ -221,7 +233,9 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         vistas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sistema.conecta();
                 sistema.eliminarVista(id,usuario);
+                sistema.desConecta();
                 desactivarValoracion();
                 pendientes.setVisibility(View.VISIBLE);
                 pendientes.setEnabled(true);
@@ -239,11 +253,15 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         vistas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sistema.conecta();
                 sistema.introducirVista(id,usuario);
-                activarValoracion();
+                if(desdeColeccion) {
+                    activarValoracion();
+                }
                 if(sistema.esPendiente(id,usuario)) {
                     sistema.eliminarPendiente(id,usuario);
                 }
+                sistema.desConecta();
                 pendientes.setVisibility(View.INVISIBLE);
                 pendientes.setEnabled(false);
                 eliminarVista();
@@ -261,7 +279,9 @@ public class InfoPeliculaColeccion extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 double valoracion = estrellas.getRating();
+                sistema.conecta();
                 sistema.valorar(id,usuario,valoracion);
+                sistema.desConecta();
             }
         });
     }

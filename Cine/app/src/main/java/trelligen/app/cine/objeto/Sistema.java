@@ -1,10 +1,7 @@
 package trelligen.app.cine.objeto;
 
-import android.app.Activity;
 import android.content.Context;
 
-import java.io.Serializable;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import trelligen.app.cine.base.GestorDB;
 import trelligen.app.cine.base.DBPelicula;
@@ -151,28 +148,32 @@ public class Sistema {
     * Método que obtiene las películas vistas por un usuario.
      */
     public ArrayList<Pelicula> obtenerVistas(String usuario){
-        return dbpelicula.obtenerVistas(usuario);
+        ArrayList<Pelicula> array = dbpelicula.obtenerVistas(usuario);
+        return array;
     }
 
     /*
     * Método que obtiene las películas pendientes de un usuario.
      */
     public ArrayList<Pelicula> obtenerPendientes(String usuario){
-        return dbpelicula.obtenerPendientes(usuario);
+        ArrayList<Pelicula> array = dbpelicula.obtenerPendientes(usuario);
+        return array;
     }
 
     /*
      * Comprueba si una pelicula se encuentra en la lista de pendientes del usuario.
      */
     public boolean esPendiente(int id, String usuario) {
-        return dbpelicula.esPendiente(id,usuario);
+        boolean es = dbpelicula.esPendiente(id,usuario);
+        return es;
     }
 
     /*
      * Comprueba si una pelicula se encuentra en la lista de vistas del usuario.
      */
     public boolean esVista(int id, String usuario) {
-        return dbpelicula.esVista(id,usuario);
+        boolean es = dbpelicula.esVista(id,usuario);
+        return es;
     }
 
     /*
@@ -214,6 +215,21 @@ public class Sistema {
      * Obtiene la valoracion de un usuar
      */
     public float obtenerValoracion(int id, String usuario) {
-        return dbpelicula.obtenerValoracion(id,usuario);
+        float result = dbpelicula.obtenerValoracion(id,usuario);
+        return result;
+    }
+
+    /*
+     * Inicial la conexión con la base de datos.
+     */
+    public void conecta() {
+        gestordb.conecta();
+    }
+
+    /*
+     * Finaliza la conexión con la base de datos.
+     */
+    public void desConecta() {
+        gestordb.desConecta();
     }
 }

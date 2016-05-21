@@ -1,7 +1,5 @@
 package trelligen.app.cine.objeto;
 
-import android.util.Log;
-
 import java.sql.ResultSet;
 
 /**

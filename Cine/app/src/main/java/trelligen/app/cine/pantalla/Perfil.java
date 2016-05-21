@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,7 +42,9 @@ public class Perfil extends AppCompatActivity
         usuario = getIntent().getExtras().getString("usuario");
         // Crea el objeto sistema.
         sistema = new Sistema(getApplicationContext());
+        sistema.conecta();
         cargarInformacionPerfil(usuario);  // Carga la info de un usuario.
+        sistema.desConecta();
         editbutton = (Button) findViewById(R.id.profile_editbutton);
         // Gestiona la edición del perfil del usuario.
         editbutton.setOnClickListener(new OnClickListener() {

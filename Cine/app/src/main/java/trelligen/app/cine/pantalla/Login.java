@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -80,15 +79,18 @@ public class Login extends AppCompatActivity
         pass = (EditText) findViewById(R.id.pass);
         // Crea la instancia del objeto sistema.
         sistema = new Sistema(getApplicationContext());
+        sistema.conecta();
         // Comprueba si el login es correcto.
         if(!mail.getText().toString().equals("") && !pass.getText().toString().equals("") &&
                 sistema.login(mail.getText().toString(), pass.getText().toString())){
+            sistema.desConecta();
             Intent i = new Intent(Login.this, PantallaPrincipal.class);
             i.putExtra("usuario",mail.getText().toString());
             startActivity(i);
         }else{  // Si es incorrecto muestra un mensaje.
             mostrarMensaje("Login fallido!");
         }
+        sistema.desConecta();
     }
 
     /*

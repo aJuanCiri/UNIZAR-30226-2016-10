@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,8 +45,10 @@ public class InfoPelicula extends AppCompatActivity
         setContentView(R.layout.activity_pantalla_pelicula);
         // Crea la instancia del objeto Sistema.
         sistema = new Sistema(getApplicationContext());
+        sistema.conecta();
         // Carga la información de la película.
-        cargarInformacionPelicula(getIntent().getExtras().getString("pelicula"));
+        cargarInformacionPelicula();
+        sistema.desConecta();
 
         // Muestra los distintos menús.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -66,7 +67,7 @@ public class InfoPelicula extends AppCompatActivity
     /*
     * Método que carga la información de la película por pantalla.
      */
-    private void cargarInformacionPelicula(String title){
+    private void cargarInformacionPelicula(){
         titulo = (TextView) findViewById(R.id.pelicula_titulo);
         fecha = (TextView) findViewById(R.id.pelicula_fecha);
         duracion = (TextView) findViewById(R.id.pelicula_duracion);

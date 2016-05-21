@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class ProcesoDB implements Runnable{
 
     // Tipo de gestión a realizar.
-    private final int CONSULTA=1,CONEXION=0,UPDATE=2;
+    private final int CONSULTA=1,CONEXION=0,UPDATE=2,DESCONEXION=3;
     private CompartidosGestorDB datos;  // Datos compartidos de la base.
 
     /*
@@ -48,6 +48,12 @@ public class ProcesoDB implements Runnable{
                 // Se realiza la actualización.
                 Statement stmt = datos.getConex().createStatement();
                 stmt.executeUpdate(datos.getConsulta());
+            } catch (Exception e) {
+                e.toString();
+            }
+        } else if (datos.getAccion() == DESCONEXION) {
+            try {
+                datos.getConex().close();
             } catch (Exception e) {
                 e.toString();
             }

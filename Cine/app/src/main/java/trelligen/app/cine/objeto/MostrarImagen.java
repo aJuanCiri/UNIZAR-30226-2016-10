@@ -34,6 +34,7 @@ public class MostrarImagen implements Runnable {
             conn.connect(); // realiza la conexión.
             // Obtiene la imagen.
             imagen = BitmapFactory.decodeStream(conn.getInputStream());
+            conn.disconnect();
         } catch(MalformedURLException e) {}
         catch(IOException e) {}
     }

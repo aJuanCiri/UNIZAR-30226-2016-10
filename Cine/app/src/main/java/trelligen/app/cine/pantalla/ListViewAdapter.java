@@ -3,7 +3,6 @@ package trelligen.app.cine.pantalla;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,14 +26,16 @@ public class ListViewAdapter extends BaseAdapter {
     Pelicula[][] peliculas; // Array de películas.
     LayoutInflater inflater;
     String usuario;
+    boolean desdeColeccion; // Indica si se ha accedido desde las colecciones del usuario.
 
 
     /*
 	 * Método que obtiene las películas de cada fila.
      */
-    public ListViewAdapter(Context context, ArrayList<Pelicula> listaRecibida,String usuario) {
+    public ListViewAdapter(Context context, ArrayList<Pelicula> listaRecibida,String usuario,boolean desdeColeccion) {
         this.context = context;
         this.usuario = usuario;
+        this.desdeColeccion = desdeColeccion;
         peliculas = new Pelicula[(listaRecibida.size() + 1) / 2][2];
         int i = 0, j = 0;    // Índices para recorrer el array.
         while (listaRecibida.size() > j) {    // Recorre la lista de películas y las obtiene.
@@ -114,6 +115,7 @@ public class ListViewAdapter extends BaseAdapter {
                         } else {
                             i = new Intent(context, InfoPeliculaColeccion.class);
                             i.putExtra("usuario",usuario);
+                            i.putExtra("desdevistas",desdeColeccion);
                         }
                         i.putExtra("pelicula", peliculas[position][0].getId());
                         context.startActivity(i);
@@ -142,6 +144,7 @@ public class ListViewAdapter extends BaseAdapter {
                         } else {
                             i = new Intent(context, InfoPeliculaColeccion.class);
                             i.putExtra("usuario",usuario);
+                            i.putExtra("desdevistas",desdeColeccion);
                         }
                         i.putExtra("pelicula", peliculas[position][1].getId());
                         context.startActivity(i);
