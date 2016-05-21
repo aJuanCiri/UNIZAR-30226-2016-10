@@ -55,13 +55,12 @@ public class PantallaPrincipal extends AppCompatActivity
             setContentView(R.layout.activity_pantalla_principal);
         } else{
             usuario = extras.getString("usuario");
-            Log.d("USUARIO",extras.getString("usuario"));
             // Muestra la pantalla.
             setContentView(R.layout.activity_pantalla_principal_sesion);
         }
         // Crea el objeto sistema.
         sistema = new Sistema(getApplicationContext());
-        obtenerRandom();    // Obtiene las películas aleatorias de la base.
+        obtenerPelis();    // Obtiene las películas de la base.
         cargarPeliculas();  // Muestra las películas en la pantalla.
 
         // Muestra los distintos menús.
@@ -225,29 +224,15 @@ public class PantallaPrincipal extends AppCompatActivity
     }
 
     /*
-    * Método que obtiene 6 identificadores distintos de películas aleatorias
-    * y las obtiene.
+    * Método que obtiene 6 películas dadas para la página principal.
      */
-    private void obtenerRandom(){
-        Random rand = new Random(); // Obtenemos el objeto de números aleatorios.
-        int total = 47;  // Obtenemos el rango.
-        int [] peliMostrar = new int[6];    // Creamos el array de índices a mostrar.
-        for(int i=0; i<peliMostrar.length; i++){    // Rellenamos el array.
-            boolean repetido = true;       // Booleano para que no haya películas repetidas.
-            while(repetido) {
-                repetido = false;
-                peliMostrar[i] = rand.nextInt(total);
-                Log.d("RANDOM",String.valueOf(peliMostrar[i]));
-                for(int j=0; j<i; j++){
-                    if(peliMostrar[j]==peliMostrar[i]){
-                        repetido = true;
-                    }
-                }
-            }
-        }
-        for(int i=0; i<peliMostrar.length; i++){    // Obtiene la película.
-            todasPelis.add(sistema.getPelicula(1));
-        }
+    private void obtenerPelis(){
+        todasPelis.add(sistema.getPelicula(10));
+        todasPelis.add(sistema.getPelicula(24));
+        todasPelis.add(sistema.getPelicula(33));
+        todasPelis.add(sistema.getPelicula(21));
+        todasPelis.add(sistema.getPelicula(28));
+        todasPelis.add(sistema.getPelicula(44));
     }
 
     /*

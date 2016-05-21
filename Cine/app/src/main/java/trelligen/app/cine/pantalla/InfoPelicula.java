@@ -85,6 +85,7 @@ public class InfoPelicula extends AppCompatActivity
         director.setText(pelicula.getDirector());
         sinopsis.setText(pelicula.getSinopsis());
         valoracion.setRating((float)pelicula.getValoracion());
+        valoracion.setIsIndicator(true);
         // Muestra la imagen de la película.
         mostrarImagen(pelicula.getURL());
     }

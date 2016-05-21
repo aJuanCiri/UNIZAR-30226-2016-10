@@ -58,7 +58,6 @@ public class InfoPeliculaColeccion extends AppCompatActivity
         // Carga la información de una película.
         cargarInformacionPelicula(getIntent().getExtras().getString("pelicula"));
         usuario = getIntent().getExtras().getString("usuario");
-        Log.d("USUARIO",usuario);
         vistas = (Button)findViewById(R.id.botonVistas);
         pendientes = (Button)findViewById(R.id.botonPendientes);
         valorar = (Button)findViewById(R.id.valorar);
@@ -70,7 +69,6 @@ public class InfoPeliculaColeccion extends AppCompatActivity
             eliminarVista();
             activarValoracion();
             float val = (sistema.obtenerValoracion(id,usuario));
-            Log.d("VAL",String.valueOf(val));
             estrellas.setRating(val);
         } else {
             if(sistema.esPendiente(id,usuario)) {
