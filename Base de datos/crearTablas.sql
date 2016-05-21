@@ -15,10 +15,11 @@ CREATE TABLE Pelicula
 	fecha		VARCHAR(15),
 	director	VARCHAR(40),
 	duracion	NUMBER(3),
-	valoracion	NUMBER(1),
+	valoracion	NUMBER(10,5),
 	sinopsis	VARCHAR(1500),
 	url		VARCHAR(600),
-	puntuacion	NUMBER(10),
+	puntuacion	NUMBER(38,5),
+	numVistas	NUMBER DEFAULT 0,
 	CONSTRAINT pelicula_pk PRIMARY KEY (id)
 );
 
@@ -38,7 +39,7 @@ CREATE TABLE Vista
 (
 	usuario		VARCHAR(50),
 	pelicula	NUMBER(5),
-	valoracion	NUMBER(1),
+	valoracion	NUMBER(10,5),
 	CONSTRAINT usuario_fk1 FOREIGN KEY (usuario) REFERENCES usuario(email),
 	CONSTRAINT pelicula_fk1 FOREIGN KEY (pelicula) REFERENCES pelicula(id),
 	CONSTRAINT vista_pk PRIMARY KEY (usuario,pelicula)
