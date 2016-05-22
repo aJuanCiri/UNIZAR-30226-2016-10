@@ -169,6 +169,7 @@ public class PantallaPrincipal extends AppCompatActivity
 
                 Intent i = new Intent(PantallaPrincipal.this, Resultados.class);
                 i.putExtra("titulo",query);
+                i.putExtra("director","");
                 i.putExtra("usuario",usuario);
                 startActivity(i);
                 return true;

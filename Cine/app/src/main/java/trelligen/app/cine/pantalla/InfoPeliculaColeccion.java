@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import trelligen.app.cine.R;
 import trelligen.app.cine.objeto.MostrarImagen;
@@ -282,6 +283,8 @@ public class InfoPeliculaColeccion extends AppCompatActivity
                 sistema.conecta();
                 sistema.valorar(id,usuario,valoracion);
                 sistema.desConecta();
+                Toast.makeText(InfoPeliculaColeccion.this,
+                        "Valoración guardada",Toast.LENGTH_LONG).show();
             }
         });
     }
