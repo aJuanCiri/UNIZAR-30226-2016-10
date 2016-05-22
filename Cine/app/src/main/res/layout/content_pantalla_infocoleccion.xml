@@ -165,8 +165,8 @@
                 android:text="VALORAR"
                 android:id="@+id/valorar"
                 android:layout_alignTop="@+id/pelicula_valoracion"
-                android:layout_toRightOf="@+id/pelicula_duracion"
-                android:layout_toEndOf="@+id/pelicula_duracion" />
+                android:layout_alignRight="@+id/botonPendientes"
+                android:layout_alignEnd="@+id/botonPendientes" />
 
         </RelativeLayout>
     </ScrollView>
