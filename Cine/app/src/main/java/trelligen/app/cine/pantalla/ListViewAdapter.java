@@ -107,7 +107,8 @@ public class ListViewAdapter extends BaseAdapter {
             imgImg1.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if(event.getAction()==MotionEvent.ACTION_DOWN) return true;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
                         Intent i;
                         // Carga la pantalla de información detallada
                         if(usuario==null) {
@@ -135,7 +136,8 @@ public class ListViewAdapter extends BaseAdapter {
             imgImg2.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if(event.getAction()==MotionEvent.ACTION_DOWN) return true;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
                         // Carga la pantalla de información detallada
                         Intent i;
                         // Carga la pantalla de información detallada
